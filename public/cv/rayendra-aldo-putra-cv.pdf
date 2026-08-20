@@ -1,0 +1,39 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 532 >>
+stream
+BT /F1 26 Tf 60 770 Td (RAYENDRA ALDO PUTRA) Tj ET
+BT /F1 11 Tf 60 745 Td (Robotics Engineering student - full-stack and IoT) Tj ET
+BT /F1 11 Tf 60 705 Td (raldoputra.dev@gmail.com) Tj ET
+BT /F1 11 Tf 60 688 Td (github.com/raldoputradev) Tj ET
+BT /F1 11 Tf 60 671 Td (linkedin.com/in/rayendra-aldo-putra-40399b400) Tj ET
+BT /F1 14 Tf 60 620 Td (PLACEHOLDER) Tj ET
+BT /F1 11 Tf 60 598 Td (Berkas ini contoh sementara. Ganti dengan CV asli) Tj ET
+BT /F1 11 Tf 60 581 Td (memakai nama file yang sama, lalu jalankan build ulang.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000823 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+920
+%%EOF

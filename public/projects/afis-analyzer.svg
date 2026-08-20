@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="AFIS fingerprint analyzer concept placeholder">
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0e14"/>
+      <stop offset="1" stop-color="#121924"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#abg)"/>
+  <g opacity="0.12" stroke="#e0c07a">
+    <path d="M0 200H1200M0 400H1200M0 600H1200"/>
+    <path d="M240 0V800M480 0V800M720 0V800M960 0V800"/>
+  </g>
+  <rect x="80" y="90" width="1040" height="620" rx="20" fill="#0e131b" stroke="#232b38" stroke-width="2"/>
+  <rect x="80" y="90" width="1040" height="56" rx="20" fill="#141b26"/>
+  <g fill="#39424f">
+    <circle cx="116" cy="118" r="7"/>
+    <circle cx="140" cy="118" r="7"/>
+    <circle cx="164" cy="118" r="7"/>
+  </g>
+  <rect x="200" y="112" width="220" height="12" rx="6" fill="#4a5566"/>
+  <g fill="#1a2230">
+    <rect x="110" y="176" width="150" height="34" rx="9"/>
+    <rect x="272" y="176" width="150" height="34" rx="9"/>
+    <rect x="434" y="176" width="150" height="34" rx="9"/>
+  </g>
+  <rect x="110" y="176" width="150" height="34" rx="9" fill="#122a25" stroke="#1a4d40"/>
+  <rect x="110" y="240" width="490" height="430" rx="16" fill="#0b1219" stroke="#232b38"/>
+  <g stroke="#e0c07a" fill="none" stroke-width="2.5" opacity="0.85">
+    <path d="M355 300c-52 32-76 84-76 130 0 44 12 82 34 116"/>
+    <path d="M355 300c52 32 76 84 76 130 0 44-12 82-34 116"/>
+    <path d="M355 336c-34 22-50 58-50 92 0 32 8 60 24 86"/>
+    <path d="M355 336c34 22 50 58 50 92 0 32-8 60-24 86"/>
+    <path d="M355 372c-18 14-26 34-26 56s4 42 14 60"/>
+    <path d="M355 372c18 14 26 34 26 56s-4 42-14 60"/>
+    <path d="M355 404v112"/>
+  </g>
+  <rect x="640" y="240" width="440" height="200" rx="16" fill="#0b1219" stroke="#232b38"/>
+  <rect x="666" y="270" width="160" height="12" rx="6" fill="#3ee0b1" opacity="0.8"/>
+  <g font-family="monospace" font-size="14" fill="#5c6675">
+    <text x="666" y="316">0x2A 0x1F 0x84 0xC3 0x09 0x5E 0x77</text>
+    <text x="666" y="344">0x11 0xBD 0x40 0x6A 0xF2 0x38 0x91</text>
+    <text x="666" y="372">0x7C 0x05 0xE8 0x23 0xAB 0x60 0x14</text>
+    <text x="666" y="400">0x9D 0x52 0x33 0xCF 0x08 0x71 0xEA</text>
+  </g>
+  <rect x="640" y="472" width="440" height="198" rx="16" fill="#0b1219" stroke="#232b38"/>
+  <rect x="666" y="502" width="130" height="12" rx="6" fill="#e0c07a" opacity="0.85"/>
+  <text x="666" y="580" font-family="Georgia, serif" font-size="46" fill="#f3eee4">82</text>
+  <text x="722" y="580" font-family="monospace" font-size="16" fill="#5c6675">/ 100</text>
+  <rect x="666" y="608" width="388" height="12" rx="6" fill="#1a2230"/>
+  <rect x="666" y="608" width="318" height="12" rx="6" fill="#3ee0b1" opacity="0.7"/>
+  <text x="666" y="650" font-family="monospace" font-size="13" fill="#5c6675">QUALITY SCORE (CONCEPT)</text>
+  <text x="600" y="760" text-anchor="middle" font-family="monospace" font-size="15" fill="#5c6675">PLACEHOLDER / C# .NET CONCEPT</text>
+</svg>

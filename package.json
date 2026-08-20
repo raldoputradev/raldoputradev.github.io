@@ -1,0 +1,27 @@
+{
+  "name": "portfolio-rayendra-aldo-putra",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "npx --yes serve out",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@eslint/eslintrc": "^3.3.1",
+    "eslint": "^9.34.0",
+    "eslint-config-next": "^15.5.4",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5.9.2"
+  }
+}
