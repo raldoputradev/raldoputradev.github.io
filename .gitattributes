@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+# Jangan pernah normalisasi akhir baris berkas biner: PDF dan gambar rusak kalau
+# byte-nya diubah. PDF sederhana isinya banyak ASCII sehingga mudah salah dikira teks.
+*.pdf -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.webp -text
+*.ico -text
+*.woff -text
+*.woff2 -text
