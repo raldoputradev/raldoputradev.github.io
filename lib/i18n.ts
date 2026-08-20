@@ -110,7 +110,7 @@ const id: Copy = {
   meta: {
     title: "Rayendra Aldo Putra — Portofolio",
     description:
-      "Mahasiswa Teknik Robotika. Membangun sistem end-to-end: Laravel, React, Flutter, ESP32/FreeRTOS, dan ROS2.",
+      "Rayendra Aldo Putra (GitHub raldoputradev) — mahasiswa Teknik Robotika, Politeknik Negeri Batam. Sistem end-to-end: Laravel, Flutter, ESP32/FreeRTOS, ROS2.",
   },
   nav: {
     home: "Beranda",
@@ -360,7 +360,7 @@ const en: Copy = {
   meta: {
     title: "Rayendra Aldo Putra — Portfolio",
     description:
-      "Robotics Engineering student. End-to-end systems: Laravel, React, Flutter, ESP32/FreeRTOS, and ROS2.",
+      "Rayendra Aldo Putra (GitHub raldoputradev) — Robotics Engineering student at Politeknik Negeri Batam. End-to-end systems: Laravel, Flutter, ESP32/FreeRTOS, ROS2.",
   },
   nav: {
     home: "Home",

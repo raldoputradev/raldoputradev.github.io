@@ -25,9 +25,31 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: site.name,
+  metadataBase: new URL("https://raldoputradev.github.io"),
+  title: {
+    default: `${site.name} — Portofolio`,
+    template: "%s",
+  },
   description:
-    "Robotics Engineering student. Laravel, React, Flutter, ESP32/FreeRTOS, ROS2.",
+    "Portofolio Rayendra Aldo Putra (raldoputradev): mahasiswa Teknik Robotika di Politeknik Negeri Batam. Laravel, Flutter, ESP32, ROS2.",
+  keywords: [
+    "Rayendra Aldo Putra",
+    "raldoputradev",
+    "Teknik Robotika",
+    "Politeknik Negeri Batam",
+    "Simalas",
+    "Laravel",
+    "ESP32",
+  ],
+  authors: [{ name: site.name, url: site.github }],
+  creator: site.name,
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    url: "https://raldoputradev.github.io",
+    locale: "id_ID",
+  },
   icons: { icon: "/favicon.svg" },
 };
 
