@@ -30,7 +30,10 @@ jobs:
       - run: npm ci
 
       - name: Ekspor statis
-        run: npm run build
+        run: |
+          npm run build
+          # Tanpa berkas ini GitHub bisa memproses folder _next sebagai Jekyll.
+          touch out/.nojekyll
 
       # enablement menyalakan GitHub Pages sendiri, jadi tidak perlu diatur manual.
       - uses: actions/configure-pages@v5
