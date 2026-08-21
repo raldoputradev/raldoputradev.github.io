@@ -106,10 +106,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <a href="#projects" className="btn btn-primary">
                 {copy.hero.primary}
               </a>
-              <a href={site.cv} download className="btn btn-ghost">
-                <DownloadIcon />
-                {copy.hero.cv}
-              </a>
+              {site.cv ? (
+                <a href={site.cv} download className="btn btn-ghost">
+                  <DownloadIcon />
+                  {copy.hero.cv}
+                </a>
+              ) : null}
               <div className="flex items-center gap-2">
                 {liveChannels.map((channel) => (
                   <a
@@ -370,12 +372,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </Reveal>
 
-        <Reveal delay={140}>
-          <a href={site.cv} download className="btn btn-primary mt-8">
-            <DownloadIcon />
-            {copy.hero.cv}
-          </a>
-        </Reveal>
+        {site.cv ? (
+          <Reveal delay={140}>
+            <a href={site.cv} download className="btn btn-primary mt-8">
+              <DownloadIcon />
+              {copy.hero.cv}
+            </a>
+          </Reveal>
+        ) : null}
       </section>
     </>
   );

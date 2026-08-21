@@ -18,7 +18,7 @@ export const site = {
   githubHandle: "raldoputradev",
   linkedin: "https://www.linkedin.com/in/rayendra-aldo-putra-40399b400",
   linkedinHandle: "rayendra-aldo-putra",
-  cv: "/cv/rayendra-aldo-putra-cv.pdf",
+  cv: null as string | null,
   whatsapp: null as string | null,
   whatsappLabel: null as string | null,
   instagram: null as string | null,

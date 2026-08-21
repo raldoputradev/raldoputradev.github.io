@@ -82,7 +82,7 @@ jadi tidak akan ada link mati:
 `C:\xampp\htdocs\Simalas\export-showcase.ps1` ke folder `C:\xampp\htdocs\simalas-showcase`;
 jalankan skrip itu lagi setiap kode Simalas berubah, lalu commit dan push dari folder tersebut.
 
-`public/cv/rayendra-aldo-putra-cv.pdf` masih PDF contoh. Timpa dengan CV asli, nama file sama.
+Tombol CV disembunyikan selama `cv` di `lib/site.ts` bernilai `null`. Pasang lagi setelah ada PDF asli di `public/cv/rayendra-aldo-putra-cv.pdf`.
 
 ## Catatan pengembangan
 
