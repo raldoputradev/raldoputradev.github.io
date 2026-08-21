@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Portofolio Rayendra Aldo Putra — GitHub https://github.com/raldoputradev. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Laravel, Flutter, ESP32, ROS2.",
+    "Portofolio Rayendra Aldo Putra — GitHub https://github.com/raldoputradev. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Laravel, Flutter, ESP32.",
   keywords: [
     "Rayendra Aldo Putra",
     "raldoputradev",

@@ -222,46 +222,6 @@ const id: Copy = {
         { src: "/projects/simalas-app-welcome.png", caption: "Onboarding dan gerbang masuk aplikasi", tag: "Mobile", width: 460, height: 960 },
       ],
     },
-    {
-      slug: "amr-ros2",
-      name: "AMR · ROS2",
-      role: "Robotika & sensor",
-      status: "study",
-      summary:
-        "Robot mobile otonom di kampus: ROS2 sebagai middleware, LiDAR untuk pemetaan, wheel encoder untuk odometri, dan VL53L0X untuk jarak dekat. Kerja akademik, bukan produk.",
-      features: [
-        "Node ROS2 untuk odometri dan pembacaan sensor",
-        "Pemetaan ruangan dengan LiDAR",
-        "Deteksi halangan jarak dekat (VL53L0X)",
-      ],
-      contributionTitle: "Peran saya",
-      contribution:
-        "Integrasi sensor ke ROS2 dan kalibrasi odometri roda. Fokus pada pemahaman aliran data robot, bukan klaim navigasi penuh.",
-      stack: ["ROS2", "Python", "LiDAR", "Encoder"],
-      images: [
-        { src: "/projects/amr-ros2.svg", caption: "Diagram node ROS2", tag: "Diagram", width: 1200, height: 800, placeholder: true },
-      ],
-    },
-    {
-      slug: "afis-fingerprint-analyzer",
-      name: "AfisFingerprintAnalyzer",
-      role: "Desktop C# .NET",
-      status: "soon",
-      summary:
-        "Aplikasi desktop untuk mendecode byte array sidik jari mentah menjadi visualisasi citra dan menghitung skor kualitas. Direncanakan sebagai proyek pembeda semester ini.",
-      features: [
-        "Decode byte array template menjadi gambar",
-        "Skor kualitas citra sidik jari",
-        "Ekspor hasil analisis",
-      ],
-      contributionTitle: "Rencana",
-      contribution:
-        "Dibangun dengan C# .NET (WinForms/WPF) sebagai pendamping Simalas, supaya template sidik jari bisa diaudit secara visual.",
-      stack: ["C#", ".NET", "WinForms / WPF"],
-      images: [
-        { src: "/projects/afis-analyzer.svg", caption: "Rancangan antarmuka", tag: "Konsep", width: 1200, height: 800, placeholder: true },
-      ],
-    },
   ],
   architecture: {
     kicker: "Bagaimana Simalas disusun",
@@ -329,12 +289,11 @@ const id: Copy = {
         "Dashboard staf laboratorium dengan Blade + Tailwind, situs publik dengan React",
         "Aplikasi Flutter untuk mahasiswa, termasuk asisten Gemini",
         "Firmware C++/FreeRTOS dan sinkronisasi hybrid",
-        "Dasar ROS2 untuk AMR (LiDAR, encoder, VL53L0X)",
       ],
     },
     next: {
       title: "Yang sedang saya siapkan",
-      text: "Kode Simalas sudah terbuka di GitHub tanpa data lab. Berikutnya: mempelajari Docker untuk Laravel/MySQL, lalu membangun AfisFingerprintAnalyzer dengan C#.",
+      text: "Kode Simalas sudah terbuka di GitHub tanpa data lab. Proyek lain saya kerjakan dulu sampai layak ditampilkan, bukan dipasang sebagai placeholder.",
     },
   },
   contact: {
@@ -472,46 +431,6 @@ const en: Copy = {
         { src: "/projects/simalas-app-welcome.png", caption: "Onboarding and sign-in gate", tag: "Mobile", width: 460, height: 960 },
       ],
     },
-    {
-      slug: "amr-ros2",
-      name: "AMR · ROS2",
-      role: "Robotics & sensing",
-      status: "study",
-      summary:
-        "Campus autonomous mobile robot: ROS2 as middleware, LiDAR for mapping, wheel encoders for odometry, VL53L0X for close range. Academic work, not a product.",
-      features: [
-        "ROS2 nodes for odometry and sensor reads",
-        "Room mapping with LiDAR",
-        "Close-range obstacle detection (VL53L0X)",
-      ],
-      contributionTitle: "My role",
-      contribution:
-        "Wired sensors into ROS2 and calibrated wheel odometry. The goal was understanding robot data flow, not claiming full navigation.",
-      stack: ["ROS2", "Python", "LiDAR", "Encoder"],
-      images: [
-        { src: "/projects/amr-ros2.svg", caption: "ROS2 node diagram", tag: "Diagram", width: 1200, height: 800, placeholder: true },
-      ],
-    },
-    {
-      slug: "afis-fingerprint-analyzer",
-      name: "AfisFingerprintAnalyzer",
-      role: "C# .NET desktop",
-      status: "soon",
-      summary:
-        "A desktop app that decodes raw fingerprint byte arrays into image visualisations and scores their quality. Planned as this semester's differentiator.",
-      features: [
-        "Decode template byte arrays into images",
-        "Score fingerprint image quality",
-        "Export analysis results",
-      ],
-      contributionTitle: "The plan",
-      contribution:
-        "Built with C# .NET (WinForms/WPF) as a companion to Simalas, so fingerprint templates can be audited visually.",
-      stack: ["C#", ".NET", "WinForms / WPF"],
-      images: [
-        { src: "/projects/afis-analyzer.svg", caption: "Interface sketch", tag: "Concept", width: 1200, height: 800, placeholder: true },
-      ],
-    },
   ],
   architecture: {
     kicker: "How Simalas is built",
@@ -579,12 +498,11 @@ const en: Copy = {
         "Lab staff dashboard in Blade + Tailwind, public site in React",
         "Flutter app for students, including a Gemini assistant",
         "C++/FreeRTOS firmware and hybrid sync",
-        "ROS2 basics for AMRs (LiDAR, encoders, VL53L0X)",
       ],
     },
     next: {
       title: "What I am preparing",
-      text: "The Simalas source is now public on GitHub without any lab data. Next: learning Docker for Laravel/MySQL, then building AfisFingerprintAnalyzer in C#.",
+      text: "The Simalas source is now public on GitHub without any lab data. Other projects stay private until they are ready to show, not listed as placeholders.",
     },
   },
   contact: {

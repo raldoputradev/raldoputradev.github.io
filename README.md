@@ -2,7 +2,7 @@
 
 Situs portofolio statis untuk magang 2027. Bilingual **ID / EN**. Tidak berisi data laboratorium, API key, atau dummy production.
 
-**Live later:** hosting awal 2027 (GitHub Pages, Cloudflare Pages, atau Vercel). Sekarang: jalankan lokal.
+Live: [https://raldoputradev.github.io](https://raldoputradev.github.io)
 
 ## Stack
 
@@ -33,7 +33,7 @@ Isi folder `out/` yang diunggah ke host. Trailing slash sudah aktif supaya cocok
 | --- | --- |
 | Nama | Rayendra Aldo Putra |
 | Email | raldoputra.dev@gmail.com |
-| GitHub | akun baru — isi `github` di `lib/site.ts` setelah repo publik ada |
+| GitHub | [raldoputradev](https://github.com/raldoputradev) |
 
 ## Isi situs
 
@@ -41,7 +41,7 @@ Satu halaman panjang per bahasa (`/id/` dan `/en/`), navigasi lewat anchor:
 
 - `#home` — hero, statistik, marquee stack
 - `#skills` — keahlian teknis
-- `#projects` — Simalas, AMR/ROS2, AfisFingerprintAnalyzer (dengan galeri gambar)
+- `#projects` — Simalas saja (yang sudah jadi, dengan galeri gambar)
 - `#architecture` — lapisan Simalas dan keputusan desain
 - `#about` · `#contact`
 
@@ -58,9 +58,7 @@ Tangkapan layar ponsel (`simalas-app-*.png`) sudah dipotong bagian status bar (j
 supaya tidak ada informasi perangkat yang ikut tampil. Galeri otomatis mengenali gambar potret dan
 menampilkannya setinggi kartu, bukan selebar kartu.
 
-Masih placeholder: `amr-ros2.svg` dan `afis-analyzer.svg`. Timpa dengan file asli lalu perbarui
-`images` di `lib/i18n.ts` (isi `width`/`height` sesuai ukuran file, hapus `placeholder: true`). Ambil
-tangkapan layar selebar mungkin — makin besar resolusinya, makin tajam saat diperbesar.
+AMR dan AfisFingerprintAnalyzer tidak ditampilkan sampai siap jadi showcase.
 
 ## Foto dan tema
 
