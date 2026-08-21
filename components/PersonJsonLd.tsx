@@ -9,10 +9,12 @@ export function PersonJsonLd() {
     url: "https://raldoputradev.github.io",
     email: site.email,
     jobTitle: "Mahasiswa Teknik Robotika",
+    image: "https://raldoputradev.github.io/rayendra-aldo-putra.png",
     affiliation: {
       "@type": "CollegeOrUniversity",
       name: site.campus,
     },
+    identifier: site.githubHandle,
     sameAs: [site.github, site.linkedin].filter(Boolean),
   };
 

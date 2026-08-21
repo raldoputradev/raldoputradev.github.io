@@ -17,6 +17,16 @@ import { SkillGrid } from "@/components/SkillGrid";
 import { getCopy } from "@/lib/i18n";
 import { isLocale, site } from "@/lib/site";
 
+function channelRel(href: string | null) {
+  if (!href?.startsWith("http")) {
+    return undefined;
+  }
+  if (href === site.github || href === site.linkedin) {
+    return "me noreferrer";
+  }
+  return "noreferrer";
+}
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) {
@@ -106,7 +116,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     key={channel.label}
                     href={channel.href as string}
                     target={channel.href?.startsWith("http") ? "_blank" : undefined}
-                    rel={channel.href?.startsWith("http") ? "noreferrer" : undefined}
+                    rel={channelRel(channel.href)}
                     aria-label={channel.label}
                     title={channel.label}
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
@@ -343,7 +353,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   key={channel.label}
                   href={channel.href}
                   target={channel.href.startsWith("http") ? "_blank" : undefined}
-                  rel={channel.href.startsWith("http") ? "noreferrer" : undefined}
+                  rel={channelRel(channel.href)}
                   className="card card-lift group flex flex-col items-center gap-3 px-5 py-7"
                 >
                   {body}
