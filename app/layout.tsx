@@ -17,7 +17,7 @@ const display = Newsreader({
   weight: ["600"],
   style: ["normal", "italic"],
   variable: "--font-newsreader",
-  display: "swap",
+  display: "optional",
 });
 
 const mono = IBM_Plex_Mono({
@@ -84,7 +84,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${sans.variable} ${display.variable} ${mono.variable}`}
     >
       <head>
-        <link rel="preload" as="image" href="/rayendra-aldo-putra-hero.webp" type="image/webp" />
+        <link
+          rel="preload"
+          as="image"
+          href="/rayendra-aldo-putra-hero.webp"
+          type="image/webp"
+          media="(min-width: 1024px)"
+        />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="font-sans antialiased text-ink">

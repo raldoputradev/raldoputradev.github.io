@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { site, type Locale } from "@/lib/site";
 import { getCopy } from "@/lib/i18n";
 import { LocaleSwitch } from "./LocaleSwitch";
@@ -12,29 +12,6 @@ export function Header({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
   const [active, setActive] = useState<string>("home");
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) {
-          setActive(visible.target.id);
-        }
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: [0, 0.2, 0.6] },
-    );
-
-    sections.forEach((id) => {
-      const node = document.getElementById(id);
-      if (node) {
-        observer.observe(node);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/60 bg-bg">
@@ -52,6 +29,7 @@ export function Header({ locale }: { locale: Locale }) {
               <a
                 key={id}
                 href={`#${id}`}
+                onClick={() => setActive(id)}
                 className={`nav-link ${active === id ? "is-active text-ink" : "hover:text-ink"}`}
               >
                 {copy.nav[id]}
@@ -88,7 +66,10 @@ export function Header({ locale }: { locale: Locale }) {
             <a
               key={id}
               href={`#${id}`}
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setActive(id);
+                setOpen(false);
+              }}
               className={`rounded-lg px-3 py-2.5 transition-colors ${
                 active === id ? "bg-raise text-ink" : "hover:bg-raise/60 hover:text-ink"
               }`}
