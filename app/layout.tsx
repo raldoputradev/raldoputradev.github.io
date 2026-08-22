@@ -9,6 +9,7 @@ const sans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-plex-sans",
+  display: "swap",
 });
 
 const display = Newsreader({
@@ -16,12 +17,15 @@ const display = Newsreader({
   weight: ["500", "600"],
   style: ["normal", "italic"],
   variable: "--font-newsreader",
+  display: "swap",
 });
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-plex-mono",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -80,6 +84,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${sans.variable} ${display.variable} ${mono.variable}`}
     >
       <head>
+        <link rel="preload" as="image" href="/rayendra-aldo-putra-hero.webp" type="image/webp" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="font-sans antialiased text-ink">

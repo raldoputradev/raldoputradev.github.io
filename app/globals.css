@@ -20,10 +20,10 @@
   --bg-raise: #ffffff;
   --line: #d8d2c4;
   --text: #15181f;
-  --muted: #5a6272;
+  --muted: #3f4654;
   --accent: #0f8f6e;
   --accent-dim: #9fd8c6;
-  --gold: #8a6a1f;
+  --gold: #5c4614;
   --on-accent: #ffffff;
   --grid: rgb(90 98 114 / 0.14);
   --shade: rgb(21 24 31 / 0.08);
@@ -72,7 +72,30 @@ body {
 }
 
 .text-stroke {
-  color: color-mix(in srgb, var(--text) 82%, transparent);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 80;
+  transform: translateY(-160%);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  transform: none;
 }
 
 .reveal {
@@ -248,8 +271,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);

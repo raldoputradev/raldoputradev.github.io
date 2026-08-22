@@ -6,20 +6,22 @@ export function Reveal({
   children,
   className = "",
   delay = 0,
+  immediate = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  immediate?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(immediate);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) {
       return;
     }
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (immediate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setVisible(true);
       return;
     }
@@ -34,7 +36,7 @@ export function Reveal({
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [immediate]);
 
   return (
     <div

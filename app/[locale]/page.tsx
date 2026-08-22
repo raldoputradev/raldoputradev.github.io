@@ -85,7 +85,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <section id="home" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-14 pb-16 sm:px-8 sm:pt-20">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-          <Reveal>
+          <Reveal immediate>
             <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-gold sm:text-[11px]">
               <span className="h-px w-8 bg-gold" />
               {copy.hero.kicker}
@@ -121,7 +121,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     rel={channelRel(channel.href)}
                     aria-label={channel.label}
                     title={channel.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
                   >
                     {channel.icon}
                   </a>
@@ -129,9 +129,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </div>
           </Reveal>
-          <Reveal delay={120}>
-            <PortraitCard locale={locale} />
-          </Reveal>
+          <PortraitCard locale={locale} />
         </div>
 
         <Reveal>

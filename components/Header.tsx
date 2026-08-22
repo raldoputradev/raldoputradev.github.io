@@ -69,7 +69,8 @@ export function Header({ locale }: { locale: Locale }) {
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-label="Menu"
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1 rounded-full border border-line md:hidden"
+            aria-controls={open ? "mobile-nav" : undefined}
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1 rounded-full border border-line md:hidden"
           >
             <span
               className={`h-px w-4 bg-ink transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`}
@@ -82,7 +83,7 @@ export function Header({ locale }: { locale: Locale }) {
       </div>
 
       {open ? (
-        <nav className="flex flex-col gap-1 border-t border-line/60 px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-muted md:hidden">
+        <nav id="mobile-nav" className="flex flex-col gap-1 border-t border-line/60 px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-muted md:hidden">
           {sections.map((id) => (
             <a
               key={id}

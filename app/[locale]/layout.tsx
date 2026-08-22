@@ -69,8 +69,11 @@ export default async function LocaleLayout({
     <div className="flex min-h-screen flex-col">
       <HtmlLang locale={locale} />
       <PersonJsonLd />
+      <a href="#main" className="skip-link">
+        {locale === "id" ? "Langsung ke isi" : "Skip to content"}
+      </a>
       <Header locale={locale} />
-      <main className="flex-1">{children}</main>
+      <main id="main" tabIndex={-1} className="flex-1 outline-none">{children}</main>
       <Footer locale={locale} />
     </div>
   );

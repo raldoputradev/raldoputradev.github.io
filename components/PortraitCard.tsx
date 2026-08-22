@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Locale } from "@/lib/site";
 import { site } from "@/lib/site";
 import { getCopy } from "@/lib/i18n";
@@ -12,13 +11,13 @@ export function PortraitCard({ locale }: { locale: Locale }) {
       <div className="absolute -bottom-4 -left-4 h-14 w-14 rounded-xl border border-line/70 bg-raise/50" />
       <div className="portrait-shell">
         <div className="portrait-stage relative aspect-[4/5] overflow-hidden rounded-[22px]">
-          <Image
-            src="/rayendra-aldo-putra-480.png"
+          <img
+            src="/rayendra-aldo-putra-hero.webp"
             alt={site.name}
-            width={480}
-            height={480}
-            priority
-            sizes="(max-width: 640px) 320px, 384px"
+            width={400}
+            height={400}
+            fetchPriority="high"
+            decoding="async"
             className="absolute bottom-0 left-1/2 w-[102%] -translate-x-1/2"
           />
           <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-line bg-bg/85 px-3.5 py-1.5">
