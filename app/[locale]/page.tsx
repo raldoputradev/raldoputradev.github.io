@@ -85,7 +85,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <section id="home" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-14 pb-16 sm:px-8 sm:pt-20">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-          <Reveal immediate>
+          <div>
             <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-gold sm:text-[11px]">
               <span className="h-px w-8 bg-gold" />
               {copy.hero.kicker}
@@ -128,7 +128,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 ))}
               </div>
             </div>
-          </Reveal>
+          </div>
           <PortraitCard locale={locale} />
         </div>
 
@@ -266,14 +266,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         <ol className="mt-8 grid gap-4 md:grid-cols-2">
           {copy.architecture.layers.map((layer, index) => (
-            <Reveal key={layer.name} delay={index * 60}>
-              <li className="card card-lift h-full p-5">
-                <p className="font-mono text-[11px] text-accent">
-                  {String(index + 1).padStart(2, "0")} &middot; {layer.tech}
-                </p>
-                <h3 className="mt-2 font-display text-xl italic text-ink">{layer.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{layer.text}</p>
-              </li>
+            <Reveal key={layer.name} as="li" delay={index * 60} className="card card-lift h-full p-5">
+              <p className="font-mono text-[11px] text-accent">
+                {String(index + 1).padStart(2, "0")} &middot; {layer.tech}
+              </p>
+              <h3 className="mt-2 font-display text-xl italic text-ink">{layer.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{layer.text}</p>
             </Reveal>
           ))}
         </ol>
@@ -287,11 +285,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </Reveal>
             <ul className="mt-4 space-y-5">
               {copy.architecture.decisions.map((item, index) => (
-                <Reveal key={item.title} delay={index * 60}>
-                  <li className="rounded-r-xl border-l-2 border-accent-dim bg-raise/30 py-2 pl-4">
-                    <h4 className="font-medium text-ink">{item.title}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
-                  </li>
+                <Reveal
+                  key={item.title}
+                  as="li"
+                  delay={index * 60}
+                  className="rounded-r-xl border-l-2 border-accent-dim bg-raise/30 py-2 pl-4"
+                >
+                  <h4 className="font-medium text-ink">{item.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
                 </Reveal>
               ))}
             </ul>

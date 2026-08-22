@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import type { Locale } from "@/lib/site";
 
@@ -18,10 +17,6 @@ export function LocaleSwitch({ locale }: { locale: Locale }) {
   const router = useRouter();
   const next: Locale = locale === "id" ? "en" : "id";
   const href = swapLocale(pathname, next);
-
-  useEffect(() => {
-    router.prefetch(href);
-  }, [href, router]);
 
   return (
     <button

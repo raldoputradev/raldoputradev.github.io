@@ -10,15 +10,15 @@ export function PortraitCard({ locale }: { locale: Locale }) {
       <div className="absolute -right-4 -top-4 h-20 w-20 rounded-2xl border border-line/70 bg-raise/50" />
       <div className="absolute -bottom-4 -left-4 h-14 w-14 rounded-xl border border-line/70 bg-raise/50" />
       <div className="portrait-shell">
-        <div className="portrait-stage relative aspect-[4/5] overflow-hidden rounded-[22px]">
+        <div className="portrait-stage relative flex aspect-[4/5] items-end justify-center overflow-hidden rounded-[22px]">
           <img
             src="/rayendra-aldo-putra-hero.webp"
             alt={site.name}
             width={400}
             height={400}
             fetchPriority="high"
-            decoding="async"
-            className="absolute bottom-0 left-1/2 w-[102%] -translate-x-1/2"
+            decoding="sync"
+            className="w-full"
           />
           <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-line bg-bg/85 px-3.5 py-1.5">
             <span className="relative flex h-2 w-2">

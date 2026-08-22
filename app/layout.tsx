@@ -7,14 +7,14 @@ import "./globals.css";
 
 const sans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   variable: "--font-plex-sans",
   display: "swap",
 });
 
 const display = Newsreader({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["600"],
   style: ["normal", "italic"],
   variable: "--font-newsreader",
   display: "swap",
@@ -22,7 +22,7 @@ const display = Newsreader({
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   variable: "--font-plex-mono",
   display: "swap",
   preload: false,

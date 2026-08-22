@@ -112,7 +112,7 @@ export function ProjectShowcase({
               className={`transition-transform duration-500 group-hover:scale-[1.02] ${
                 portrait ? "h-[26rem] w-auto rounded-xl sm:h-[30rem]" : "h-auto w-full"
               }`}
-              loading={index === 0 ? "eager" : "lazy"}
+              loading="lazy"
             />
             <span className="absolute left-3 top-3 rounded-full border border-line bg-bg/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted">
               {image.tag}
