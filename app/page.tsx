@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/id/" },
+};
 
 // Situs ini diekspor statis, jadi redirect() tidak bisa dipakai: tidak ada server
 // yang mengirim status 307. Meta refresh bekerja di hosting statis mana pun.
