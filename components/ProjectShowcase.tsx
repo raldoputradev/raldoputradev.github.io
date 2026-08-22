@@ -82,6 +82,18 @@ export function ProjectShowcase({
               </li>
             ))}
           </ul>
+
+          {project.repoUrl ? (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:text-ink"
+            >
+              {work.repoLink}
+              {project.repoLabel ? <span className="text-muted">· {project.repoLabel}</span> : null}
+            </a>
+          ) : null}
         </div>
 
         <div>

@@ -21,6 +21,8 @@ export type Project = {
   contributionTitle: string;
   contribution: string;
   stack: string[];
+  repoUrl?: string;
+  repoLabel?: string;
   images: ProjectImage[];
 };
 
@@ -69,6 +71,7 @@ export type Copy = {
     zoomHint: string;
     placeholderNote: string;
     closeLabel: string;
+    repoLink: string;
   };
   projects: Project[];
   architecture: {
@@ -169,12 +172,12 @@ const id: Copy = {
     titleLead: "Keahlian",
     titleAccent: "Teknis",
     groups: [
-      { title: "Bahasa", items: ["PHP", "TypeScript", "Dart", "C++", "SQL"] },
+      { title: "Bahasa", items: ["PHP", "TypeScript", "Dart", "C++", "C#", "SQL"] },
       { title: "Web", items: ["Laravel", "Blade", "React", "Vite", "Tailwind"] },
       { title: "Mobile", items: ["Flutter", "Gemini API"] },
       { title: "Edge / IoT", items: ["ESP32", "FreeRTOS", "MQTT", "WebSocket"] },
       { title: "Robotika", items: ["ROS2", "LiDAR", "Wheel encoder", "VL53L0X"] },
-      { title: "Praktik", items: ["Git", "Role & permission", "Throttle", "Signed URL"] },
+      { title: "Praktik", items: ["Git", "Role & permission", "Throttle", "Signed URL", "WinForms"] },
     ],
   },
   work: {
@@ -188,6 +191,7 @@ const id: Copy = {
     zoomHint: "Klik gambar untuk memperbesar",
     placeholderNote: "Tangkapan layar menyusul",
     closeLabel: "Tutup",
+    repoLink: "Buka di GitHub",
   },
   projects: [
     {
@@ -209,6 +213,8 @@ const id: Copy = {
       contribution:
         "Merancang dan menulis seluruh lapisan: skema database, API Laravel, dashboard laboran (Blade + Tailwind), situs publik React, aplikasi Flutter, dan firmware ESP32. Termasuk keamanan (throttle, signed URL, middleware izin) dan perakitan mekanik perangkat.",
       stack: ["Laravel", "Blade", "React", "Flutter", "C++ / FreeRTOS", "ESP32", "MySQL"],
+      repoUrl: "https://github.com/raldoputradev/aiot-simalas",
+      repoLabel: "raldoputradev/aiot-simalas",
       images: [
         { src: "/projects/simalas-dashboard.png", caption: "Dashboard laboran: KPI, tren aktivitas IoT, distribusi peran", tag: "Web admin", width: 1024, height: 506 },
         { src: "/projects/simalas-ai.png", caption: "Asisten AI internal dengan konfirmasi sebelum mengubah data", tag: "Asisten AI", width: 1024, height: 509 },
@@ -220,6 +226,32 @@ const id: Copy = {
         { src: "/projects/simalas-app-locker.png", caption: "Aplikasi mahasiswa: arsip pengambilan loker dengan bukti foto", tag: "Mobile", width: 460, height: 960 },
         { src: "/projects/simalas-app-helpdesk.png", caption: "Helpdesk AI di aplikasi mahasiswa", tag: "Mobile", width: 460, height: 960 },
         { src: "/projects/simalas-app-welcome.png", caption: "Onboarding dan gerbang masuk aplikasi", tag: "Mobile", width: 460, height: 960 },
+      ],
+    },
+    {
+      slug: "afis-fingerprint-analyzer",
+      name: "Afis Fingerprint Analyzer",
+      role: "Desktop · C#",
+      status: "live",
+      summary:
+        "Aplikasi Windows untuk mengaudit blob template DY50/R307 (512 byte) yang dipakai Simalas, plus tab terpisah untuk citra sensor. Bukan rekonstruksi foto jari dan bukan mesin matching absensi.",
+      features: [
+        "Peta byte 32×16, histogram, hex, skor entropi, dan CRC32 untuk blob 512 byte",
+        "Tab citra: foto abu-abu, kerangka ridge, titik ujung/cabang — hanya jika ada berkas gambar",
+        "Contoh fiktif di samples/; tidak memakai data mahasiswa atau lab",
+        "Dua jenis data tidak saling didekode: template on-sensor tetap bukan foto KTP",
+      ],
+      contributionTitle: "Kontribusi saya",
+      contribution:
+        "Merancang dan menulis aplikasi WinForms .NET 8: parser blob, peta byte, inspeksi citra, dan README yang memisahkan klaim jujur dari eksperimen filter AFIS berbasis foto.",
+      stack: ["C#", ".NET 8", "WinForms"],
+      repoUrl: "https://github.com/raldoputradev/afis-fingerprint-analyzer",
+      repoLabel: "raldoputradev/afis-fingerprint-analyzer",
+      images: [
+        { src: "/projects/afis-template.png", caption: "Tab template: blob sintetis, skor 99, histogram byte — tetap peta byte, bukan foto jari", tag: "Template 512 byte", width: 1024, height: 674 },
+        { src: "/projects/afis-citra.png", caption: "Tab citra: ridge sintetis (bukan jari orang), kerangka, histogram intensitas", tag: "Citra sensor", width: 1024, height: 667 },
+        { src: "/projects/afis-kosong.png", caption: "Contoh kosong: semua byte 0, skor 0", tag: "Sampel", width: 966, height: 629 },
+        { src: "/projects/afis-tipis.png", caption: "Contoh tipis: sedikit nilai bukan nol, skor rendah", tag: "Sampel", width: 967, height: 632 },
       ],
     },
   ],
@@ -289,11 +321,12 @@ const id: Copy = {
         "Dashboard staf laboratorium dengan Blade + Tailwind, situs publik dengan React",
         "Aplikasi Flutter untuk mahasiswa, termasuk asisten Gemini",
         "Firmware C++/FreeRTOS dan sinkronisasi hybrid",
+        "Aplikasi desktop C# / WinForms untuk audit template sidik jari Simalas",
       ],
     },
     next: {
       title: "Yang sedang saya siapkan",
-      text: "Kode Simalas sudah terbuka di GitHub tanpa data lab. Proyek lain saya kerjakan dulu sampai layak ditampilkan, bukan dipasang sebagai placeholder.",
+      text: "Simalas dan Afis Fingerprint Analyzer sudah terbuka di GitHub. Berikutnya: uji citra dari mesin setelah kampus buka, dengan data enroll milik saya sendiri — bukan foto lab.",
     },
   },
   contact: {
@@ -378,12 +411,12 @@ const en: Copy = {
     titleLead: "Technical",
     titleAccent: "Skills",
     groups: [
-      { title: "Languages", items: ["PHP", "TypeScript", "Dart", "C++", "SQL"] },
+      { title: "Languages", items: ["PHP", "TypeScript", "Dart", "C++", "C#", "SQL"] },
       { title: "Web", items: ["Laravel", "Blade", "React", "Vite", "Tailwind"] },
       { title: "Mobile", items: ["Flutter", "Gemini API"] },
       { title: "Edge / IoT", items: ["ESP32", "FreeRTOS", "MQTT", "WebSocket"] },
       { title: "Robotics", items: ["ROS2", "LiDAR", "Wheel encoder", "VL53L0X"] },
-      { title: "Practice", items: ["Git", "Roles & permissions", "Throttle", "Signed URL"] },
+      { title: "Practice", items: ["Git", "Roles & permissions", "Throttle", "Signed URL", "WinForms"] },
     ],
   },
   work: {
@@ -397,6 +430,7 @@ const en: Copy = {
     zoomHint: "Click the image to enlarge",
     placeholderNote: "Screenshot coming soon",
     closeLabel: "Close",
+    repoLink: "Open on GitHub",
   },
   projects: [
     {
@@ -418,6 +452,8 @@ const en: Copy = {
       contribution:
         "Designed and wrote every layer: database schema, Laravel API, staff dashboard (Blade + Tailwind), public React site, Flutter app, and ESP32 firmware. Including security (throttle, signed URLs, permission middleware) and the mechanical build.",
       stack: ["Laravel", "Blade", "React", "Flutter", "C++ / FreeRTOS", "ESP32", "MySQL"],
+      repoUrl: "https://github.com/raldoputradev/aiot-simalas",
+      repoLabel: "raldoputradev/aiot-simalas",
       images: [
         { src: "/projects/simalas-dashboard.png", caption: "Staff dashboard: KPIs, IoT activity trend, role split", tag: "Web admin", width: 1024, height: 506 },
         { src: "/projects/simalas-ai.png", caption: "Internal AI assistant, confirmation required before data changes", tag: "AI assistant", width: 1024, height: 509 },
@@ -429,6 +465,32 @@ const en: Copy = {
         { src: "/projects/simalas-app-locker.png", caption: "Student app: locker pickup archive with photo proof", tag: "Mobile", width: 460, height: 960 },
         { src: "/projects/simalas-app-helpdesk.png", caption: "AI helpdesk inside the student app", tag: "Mobile", width: 460, height: 960 },
         { src: "/projects/simalas-app-welcome.png", caption: "Onboarding and sign-in gate", tag: "Mobile", width: 460, height: 960 },
+      ],
+    },
+    {
+      slug: "afis-fingerprint-analyzer",
+      name: "Afis Fingerprint Analyzer",
+      role: "Desktop · C#",
+      status: "live",
+      summary:
+        "A Windows desktop tool to audit the 512-byte DY50/R307 character templates used by Simalas, plus a separate tab for sensor images. Not a reconstructed fingerprint photo and not an attendance matcher.",
+      features: [
+        "32×16 byte map, histogram, hex, entropy score, and CRC32 for a 512-byte blob",
+        "Image tab: grayscale, ridge skeleton, endings/bifurcations — only when an image file exists",
+        "Fictional samples only; no student or lab templates",
+        "The two data types are not interchangeable: an on-sensor template is never a KTP-style photo",
+      ],
+      contributionTitle: "My contribution",
+      contribution:
+        "Designed and wrote the .NET 8 WinForms app: blob parser, byte map, image inspector, and a README that keeps honest claims separate from photo-based AFIS filter papers.",
+      stack: ["C#", ".NET 8", "WinForms"],
+      repoUrl: "https://github.com/raldoputradev/afis-fingerprint-analyzer",
+      repoLabel: "raldoputradev/afis-fingerprint-analyzer",
+      images: [
+        { src: "/projects/afis-template.png", caption: "Template tab: synthetic blob, score 99, byte histogram — still a byte map, not a finger photo", tag: "512-byte template", width: 1024, height: 674 },
+        { src: "/projects/afis-citra.png", caption: "Image tab: synthetic ridges (not a real finger), skeleton, intensity histogram", tag: "Sensor image", width: 1024, height: 667 },
+        { src: "/projects/afis-kosong.png", caption: "Empty sample: all bytes 0, score 0", tag: "Sample", width: 966, height: 629 },
+        { src: "/projects/afis-tipis.png", caption: "Sparse sample: few non-zero bytes, low score", tag: "Sample", width: 967, height: 632 },
       ],
     },
   ],
@@ -498,11 +560,12 @@ const en: Copy = {
         "Lab staff dashboard in Blade + Tailwind, public site in React",
         "Flutter app for students, including a Gemini assistant",
         "C++/FreeRTOS firmware and hybrid sync",
+        "C# / WinForms desktop auditor for Simalas fingerprint templates",
       ],
     },
     next: {
       title: "What I am preparing",
-      text: "The Simalas source is now public on GitHub without any lab data. Other projects stay private until they are ready to show, not listed as placeholders.",
+      text: "Simalas and Afis Fingerprint Analyzer are public on GitHub. Next: test a sensor image from the lab machine after campus reopens, using my own enroll data — not lab photos.",
     },
   },
   contact: {

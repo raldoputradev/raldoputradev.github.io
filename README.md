@@ -41,7 +41,7 @@ Satu halaman panjang per bahasa (`/id/` dan `/en/`), navigasi lewat anchor:
 
 - `#home` — hero, statistik, marquee stack
 - `#skills` — keahlian teknis
-- `#projects` — Simalas saja (yang sudah jadi, dengan galeri gambar)
+- `#projects` — Simalas dan Afis Fingerprint Analyzer
 - `#architecture` — lapisan Simalas dan keputusan desain
 - `#about` · `#contact`
 
@@ -58,7 +58,7 @@ Tangkapan layar ponsel (`simalas-app-*.png`) sudah dipotong bagian status bar (j
 supaya tidak ada informasi perangkat yang ikut tampil. Galeri otomatis mengenali gambar potret dan
 menampilkannya setinggi kartu, bukan selebar kartu.
 
-AMR dan AfisFingerprintAnalyzer tidak ditampilkan sampai siap jadi showcase.
+AMR / ROS2 tidak ditampilkan sampai ada perangkat kampus. Afis Fingerprint Analyzer sudah di `#projects`.
 
 ## Foto dan tema
 
