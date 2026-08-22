@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { HtmlLang } from "@/components/HtmlLang";
 import { PersonJsonLd } from "@/components/PersonJsonLd";
 import { getCopy } from "@/lib/i18n";
 import { isLocale, locales, site } from "@/lib/site";
@@ -34,6 +35,20 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: site.name,
       locale: locale === "id" ? "id_ID" : "en_US",
       type: "website",
+      images: [
+        {
+          url: "/og-share.jpg",
+          width: 1200,
+          height: 630,
+          alt: copy.meta.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: copy.meta.title,
+      description: copy.meta.description,
+      images: ["/og-share.jpg"],
     },
   };
 }
@@ -52,6 +67,7 @@ export default async function LocaleLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
+      <HtmlLang locale={locale} />
       <PersonJsonLd />
       <Header locale={locale} />
       <main className="flex-1">{children}</main>

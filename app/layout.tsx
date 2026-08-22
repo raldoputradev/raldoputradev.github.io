@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Portofolio Rayendra Aldo Putra — GitHub https://github.com/raldoputradev. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Laravel, Flutter, ESP32.",
+    "Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Portofolio Simalas dan Afis — Laravel, Flutter, ESP32.",
   keywords: [
     "Rayendra Aldo Putra",
     "raldoputradev",
@@ -49,7 +49,21 @@ export const metadata: Metadata = {
     siteName: site.name,
     url: "https://raldoputradev.github.io",
     locale: "id_ID",
-    images: [{ url: "/rayendra-aldo-putra.png", alt: site.name }],
+    images: [
+      {
+        url: "/og-share.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — Portofolio`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Portofolio`,
+    description:
+      "Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Portofolio Simalas dan Afis.",
+    images: ["/og-share.jpg"],
   },
   icons: { icon: "/favicon.svg" },
 };

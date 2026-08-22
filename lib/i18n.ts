@@ -111,9 +111,9 @@ export type Copy = {
 
 const id: Copy = {
   meta: {
-    title: "Rayendra Aldo Putra — Portofolio",
+    title: "Rayendra Aldo Putra — Portofolio | Politeknik Negeri Batam",
     description:
-      "Rayendra Aldo Putra — GitHub https://github.com/raldoputradev. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Sistem end-to-end: Laravel, Flutter, ESP32/FreeRTOS, ROS2.",
+      "Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Portofolio Simalas dan Afis — Laravel, Flutter, ESP32.",
   },
   nav: {
     home: "Beranda",
@@ -350,9 +350,9 @@ const id: Copy = {
 
 const en: Copy = {
   meta: {
-    title: "Rayendra Aldo Putra — Portfolio",
+    title: "Rayendra Aldo Putra — Portfolio | Politeknik Negeri Batam",
     description:
-      "Rayendra Aldo Putra — GitHub https://github.com/raldoputradev. Robotics Engineering student at Politeknik Negeri Batam. End-to-end systems: Laravel, Flutter, ESP32/FreeRTOS, ROS2.",
+      "Robotics student at Politeknik Negeri Batam. Portfolio: Simalas and Afis — Laravel, Flutter, ESP32.",
   },
   nav: {
     home: "Home",

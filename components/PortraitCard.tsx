@@ -13,11 +13,12 @@ export function PortraitCard({ locale }: { locale: Locale }) {
       <div className="portrait-shell">
         <div className="portrait-stage relative aspect-[4/5] overflow-hidden rounded-[22px]">
           <Image
-            src="/rayendra-aldo-putra.png"
+            src="/rayendra-aldo-putra-480.png"
             alt={site.name}
-            width={768}
-            height={768}
+            width={480}
+            height={480}
             priority
+            sizes="(max-width: 640px) 320px, 384px"
             className="absolute bottom-0 left-1/2 w-[102%] -translate-x-1/2"
           />
           <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-line bg-bg/85 px-3.5 py-1.5">

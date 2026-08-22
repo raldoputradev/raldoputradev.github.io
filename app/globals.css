@@ -6,7 +6,7 @@
   --bg-raise: #10141b;
   --line: #232b38;
   --text: #f3eee4;
-  --muted: #98a1b0;
+  --muted: #b4bcc8;
   --accent: #3ee0b1;
   --accent-dim: #1a4d40;
   --gold: #e0c07a;
@@ -68,20 +68,11 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
 }
 
 .text-stroke {
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 55%, transparent);
-}
-
-:root[data-theme="light"] .text-stroke {
-  -webkit-text-stroke-width: 1.2px;
-  -webkit-text-stroke-color: color-mix(in srgb, var(--text) 78%, transparent);
+  color: color-mix(in srgb, var(--text) 82%, transparent);
 }
 
 .reveal {
