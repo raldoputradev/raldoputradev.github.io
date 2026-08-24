@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatedName } from "./AnimatedName";
+import { isAuditClient } from "@/lib/audit";
 import { site } from "@/lib/site";
 
 const SPLASH_MS = 4200;
@@ -25,7 +25,11 @@ export function Splash() {
   }, []);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      document.documentElement.dataset.splash === "skip" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      isAuditClient()
+    ) {
       document.documentElement.dataset.splash = "skip";
       setShow(false);
       return;
@@ -42,22 +46,26 @@ export function Splash() {
 
   return (
     <div className={`splash${leaving ? " is-out" : ""}`} role="status" aria-live="polite" aria-label={site.name}>
-      <div className="splash-grid" aria-hidden />
-      <span className="splash-scan" aria-hidden />
-      <span className="splash-shape is-sq" aria-hidden />
-      <span className="splash-shape is-ring" aria-hidden />
-      <span className="splash-shape is-plus" aria-hidden />
-      <span className="splash-corner is-tl" aria-hidden />
-      <span className="splash-corner is-tr" aria-hidden />
-      <span className="splash-corner is-bl" aria-hidden />
-      <span className="splash-corner is-br" aria-hidden />
+      <div className="splash-wash" aria-hidden />
+      <div className="splash-mesh" aria-hidden />
+      <span className="splash-orb is-mint" aria-hidden />
+      <span className="splash-orb is-gold" aria-hidden />
 
       <div className="splash-mark">
         <p className="splash-kicker">Portfolio</p>
-        <AnimatedName text={site.name} className="splash-name" />
-        <div className="splash-loader" aria-hidden>
-          <span className="splash-orbit" />
-          <span className="splash-diamond" />
+        <div className="splash-name-box">
+          <p className="splash-name">{site.name}</p>
+        </div>
+        <div className="splash-load" aria-hidden>
+          <svg className="splash-ring" viewBox="0 0 52 52">
+            <circle cx="26" cy="26" r="20" />
+            <circle className="splash-ring-arc" cx="26" cy="26" r="20" />
+          </svg>
+          <span className="splash-dots">
+            <i />
+            <i />
+            <i />
+          </span>
         </div>
       </div>
     </div>

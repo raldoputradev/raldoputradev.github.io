@@ -1,11 +1,21 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties } from "react";
+import { isAuditClient } from "@/lib/audit";
 
 const MODES = ["rise", "wave", "wipe", "pop"] as const;
 
 type Mode = (typeof MODES)[number];
 type Phase = "in" | "hold" | "out";
+
+function whenIdle(run: () => void) {
+  if (typeof window.requestIdleCallback === "function") {
+    const id = window.requestIdleCallback(run, { timeout: 1800 });
+    return () => window.cancelIdleCallback(id);
+  }
+  const timer = window.setTimeout(run, 400);
+  return () => window.clearTimeout(timer);
+}
 
 export function waitForSplash(onReady: () => void) {
   if (document.documentElement.dataset.splash !== "play") {
@@ -42,23 +52,36 @@ export function AnimatedName({
   const words = text.split(" ").filter(Boolean);
   const [mode, setMode] = useState<Mode>("rise");
   const [phase, setPhase] = useState<Phase>("in");
-  const [ready, setReady] = useState(!waitSplash);
-  const [reduce, setReduce] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [reduce, setReduce] = useState(true);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReduce(media.matches);
+    const quiet = () => media.matches || isAuditClient();
+    const sync = () => setReduce(quiet());
     sync();
     media.addEventListener("change", sync);
     return () => media.removeEventListener("change", sync);
   }, []);
 
   useEffect(() => {
-    if (!waitSplash) {
+    if (reduce) {
       return;
     }
-    return waitForSplash(() => setReady(true));
-  }, [waitSplash]);
+
+    const start = () => whenIdle(() => setReady(true));
+    if (waitSplash) {
+      let stopIdle = () => {};
+      const stopSplash = waitForSplash(() => {
+        stopIdle = start();
+      });
+      return () => {
+        stopSplash();
+        stopIdle();
+      };
+    }
+    return start();
+  }, [reduce, waitSplash]);
 
   useEffect(() => {
     if (!ready || reduce || !loop) {

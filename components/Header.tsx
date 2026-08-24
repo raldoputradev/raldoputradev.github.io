@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { site, type Locale } from "@/lib/site";
+import { type Locale } from "@/lib/site";
 import { getCopy } from "@/lib/i18n";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { ThemeToggle } from "./ThemeToggle";
@@ -15,38 +15,55 @@ export function Header({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const nodes = sections
-      .map((id) => document.getElementById(id))
-      .filter((node): node is HTMLElement => Boolean(node));
-    if (!nodes.length) {
-      return;
+    let observer: IntersectionObserver | null = null;
+    const start = () => {
+      const nodes = sections
+        .map((id) => document.getElementById(id))
+        .filter((node): node is HTMLElement => Boolean(node));
+      if (!nodes.length) {
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          const id = visible[0]?.target.id;
+          if (id) {
+            setActive(id);
+          }
+        },
+        { rootMargin: "-28% 0px -58% 0px", threshold: [0, 0.2, 0.5, 1] },
+      );
+
+      nodes.forEach((node) => observer?.observe(node));
+    };
+
+    let idleId = 0;
+    let usedRic = false;
+    if (typeof window.requestIdleCallback === "function") {
+      usedRic = true;
+      idleId = window.requestIdleCallback(start, { timeout: 2000 });
+    } else {
+      idleId = window.setTimeout(start, 400);
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        const id = visible[0]?.target.id;
-        if (id) {
-          setActive(id);
-        }
-      },
-      { rootMargin: "-28% 0px -58% 0px", threshold: [0, 0.2, 0.5, 1] },
-    );
-
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
+    return () => {
+      if (usedRic) {
+        window.cancelIdleCallback(idleId);
+      } else {
+        window.clearTimeout(idleId);
+      }
+      observer?.disconnect();
+    };
   }, []);
 
   return (
     <header className="site-nav">
       <div className={`site-nav-bar${open ? " is-open" : ""}`}>
         <a href="#home" className="site-nav-brand" onClick={() => setOpen(false)}>
-          <span className="site-nav-mark" aria-hidden>
-            <span>A</span>
-          </span>
-          <span className="site-nav-name">{site.shortName}</span>
+          <span className="site-nav-name">{locale === "en" ? "Portfolio" : "Portofolio"}</span>
         </a>
 
         <nav className="site-nav-links" aria-label="Primary">

@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import {
   DownloadIcon,
@@ -10,14 +11,18 @@ import {
 } from "@/components/Icons";
 import { Marquee } from "@/components/Marquee";
 import { PortraitCard } from "@/components/PortraitCard";
-import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SkillGrid } from "@/components/SkillGrid";
 import { AnimatedName } from "@/components/AnimatedName";
+import { CodeCard } from "@/components/CodeCard";
 import { TypewriterText } from "@/components/TypewriterText";
 import { getCopy } from "@/lib/i18n";
 import { isLocale, site } from "@/lib/site";
+
+const ProjectShowcase = dynamic(() =>
+  import("@/components/ProjectShowcase").then((mod) => ({ default: mod.ProjectShowcase })),
+);
 
 function channelRel(href: string | null) {
   if (!href?.startsWith("http")) {
@@ -114,9 +119,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               className="hero-typed mt-4 max-w-xl text-base text-gold sm:text-lg"
             />
             <p className="hero-copy mt-6 max-w-xl leading-relaxed text-muted">{copy.hero.intro}</p>
-            <p className="hero-copy mt-3 max-w-xl text-sm text-gold" style={{ animationDelay: "1.2s" }}>
-              {copy.hero.line}
-            </p>
+            <CodeCard caption={copy.hero.line} className="mt-6 max-w-xl" />
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a href="#projects" className="btn btn-primary">
                 {copy.hero.primary}

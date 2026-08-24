@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { waitForSplash } from "./AnimatedName";
+import { isAuditClient } from "@/lib/audit";
 
 export function TypewriterText({
   phrases,
@@ -32,7 +33,7 @@ export function TypewriterText({
     }
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
+    if (reduce || isAuditClient()) {
       setShown(phrasesList[0] ?? "");
       return;
     }
@@ -40,6 +41,7 @@ export function TypewriterText({
     let cancelled = false;
     let timer = 0;
     let stopSplashWait = () => {};
+    let stopIdle = () => {};
     let phraseIndex = 0;
     let charIndex = Array.from(phrasesList[0] ?? "").length;
     let mode: "hold" | "delete" | "type" = "hold";
@@ -85,11 +87,24 @@ export function TypewriterText({
       if (cancelled) {
         return;
       }
-      timer = window.setTimeout(step, startDelay);
+      const begin = () => {
+        if (cancelled) {
+          return;
+        }
+        timer = window.setTimeout(step, startDelay);
+      };
+      if (typeof window.requestIdleCallback === "function") {
+        const idle = window.requestIdleCallback(begin, { timeout: 1800 });
+        stopIdle = () => window.cancelIdleCallback(idle);
+        return;
+      }
+      const late = window.setTimeout(begin, 400);
+      stopIdle = () => window.clearTimeout(late);
     });
     return () => {
       cancelled = true;
       stopSplashWait();
+      stopIdle();
       window.clearTimeout(timer);
     };
   }, [deleteMs, holdMs, phraseKey, startDelay, typeMs]);

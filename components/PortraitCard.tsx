@@ -15,6 +15,8 @@ export function PortraitCard({ locale }: { locale: Locale }) {
             width={400}
             height={400}
             decoding="async"
+            loading="lazy"
+            fetchPriority="low"
             className="h-full w-full object-cover object-[center_12%]"
           />
         </div>
