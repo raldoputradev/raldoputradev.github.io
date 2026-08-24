@@ -10,7 +10,7 @@ export function PortraitCard({ locale }: { locale: Locale }) {
       <div className="portrait-shell w-full">
         <div className="portrait-stage relative aspect-square overflow-hidden rounded-full">
           <img
-            src="/rayendra-aldo-putra-hero.webp"
+            src="/rayendra-aldo-putra-hero.webp?v=2"
             alt={site.name}
             width={400}
             height={400}

@@ -112,7 +112,7 @@ const id: Copy = {
   meta: {
     title: "Rayendra Aldo Putra — Portofolio | Politeknik Negeri Batam",
     description:
-      "Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Portofolio Simalas dan Afis — Laravel, Flutter, ESP32.",
+      "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server.",
   },
   nav: {
     home: "Beranda",
@@ -368,7 +368,7 @@ const en: Copy = {
   meta: {
     title: "Rayendra Aldo Putra — Portfolio | Politeknik Negeri Batam",
     description:
-      "Robotics student at Politeknik Negeri Batam. Portfolio: Simalas and Afis — Laravel, Flutter, ESP32.",
+      "Portfolio of Rayendra Aldo Putra. Robotics student at Politeknik Negeri Batam. Simalas: fingerprint devices, Laravel, Flutter, ESP32 — local-first, then sync to the server.",
   },
   nav: {
     home: "Home",

@@ -409,15 +409,7 @@ body {
 }
 
 .portrait-stage {
-  background-color: var(--bg-raise);
-  background-image:
-    linear-gradient(to right, var(--grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid) 1px, transparent 1px),
-    linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent), transparent 55%);
-  background-size:
-    26px 26px,
-    26px 26px,
-    100% 100%;
+  background-color: #0a121c;
 }
 
 .theme-toggle {

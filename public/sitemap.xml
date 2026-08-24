@@ -3,12 +3,14 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://raldoputradev.github.io/id/</loc>
+    <lastmod>2026-08-24</lastmod>
     <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/"/>
   </url>
   <url>
     <loc>https://raldoputradev.github.io/en/</loc>
+    <lastmod>2026-08-24</lastmod>
     <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/"/>

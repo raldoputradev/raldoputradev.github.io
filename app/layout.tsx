@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Portofolio Simalas dan Afis — Laravel, Flutter, ESP32.",
+    "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server.",
   keywords: [
     "Rayendra Aldo Putra",
     "raldoputradev",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} — Portofolio`,
     description:
-      "Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Portofolio Simalas dan Afis.",
+      "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32.",
     images: ["/og-share.jpg"],
   },
   icons: { icon: "/favicon.svg" },
@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link
           rel="preload"
           as="image"
-          href="/rayendra-aldo-putra-hero.webp"
+          href="/rayendra-aldo-putra-hero.webp?v=2"
           type="image/webp"
           media="(min-width: 1024px)"
         />

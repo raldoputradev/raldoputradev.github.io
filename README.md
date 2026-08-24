@@ -1,6 +1,6 @@
 # Portofolio — Rayendra Aldo Putra
 
-Situs portofolio statis untuk magang 2027. Bilingual **ID / EN**. Tidak berisi data laboratorium, API key, atau dummy production.
+Situs portofolio Rayendra Aldo Putra, mahasiswa Teknik Robotika di Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server. Bilingual **ID / EN**. Tidak berisi data laboratorium, API key, atau dummy production.
 
 Live: [https://raldoputradev.github.io](https://raldoputradev.github.io)
 
@@ -62,9 +62,7 @@ AMR / ROS2 tidak ditampilkan sampai ada perangkat kampus. Afis Fingerprint Analy
 
 ## Foto dan tema
 
-`public/rayendra-aldo-putra.png` adalah foto dengan latar merah yang sudah dipotong jadi transparan,
-supaya menyatu dengan kartu di mode terang maupun gelap. File aslinya disimpan di
-`assets/portrait-original.png` (tidak ikut disajikan ke publik).
+Foto profil (`public/rayendra-aldo-putra.png` dan `-hero.webp`) memakai latar gelap `#0a121c`, bukan putih atau transparan, supaya lingkaran foto tidak berubah jadi putih di mode terang.
 
 Mode terang/gelap diatur lewat atribut `data-theme` pada `<html>`. Pilihan disimpan di `localStorage`,
 dan kunjungan pertama mengikuti setelan sistem. Semua warna berasal dari variabel CSS di
