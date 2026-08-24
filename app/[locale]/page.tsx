@@ -14,6 +14,8 @@ import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SkillGrid } from "@/components/SkillGrid";
+import { AnimatedName } from "@/components/AnimatedName";
+import { TypewriterText } from "@/components/TypewriterText";
 import { getCopy } from "@/lib/i18n";
 import { isLocale, site } from "@/lib/site";
 
@@ -37,6 +39,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const channels = [
     {
       label: "Email",
+      brand: "email",
       value: site.email,
       note: copy.contact.emailNote,
       href: `mailto:${site.email}`,
@@ -44,6 +47,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
     {
       label: "GitHub",
+      brand: "github",
       value: site.githubHandle,
       note: copy.contact.githubNote,
       href: site.github,
@@ -51,6 +55,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
     {
       label: "LinkedIn",
+      brand: "linkedin",
       value: site.linkedinHandle,
       note: copy.contact.linkedinNote,
       href: site.linkedin,
@@ -58,6 +63,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
     {
       label: "WhatsApp",
+      brand: "whatsapp",
       value: site.whatsappLabel,
       note: copy.contact.whatsappNote,
       href: site.whatsapp,
@@ -65,6 +71,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
     {
       label: "Instagram",
+      brand: "instagram",
       value: site.instagramHandle,
       note: copy.contact.instagramNote,
       href: site.instagram,
@@ -72,6 +79,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
     {
       label: "Repo Simalas",
+      brand: "repo",
       value: site.sandboxRepoLabel,
       note: copy.contact.sandboxNote,
       href: site.sandboxRepo,
@@ -79,29 +87,36 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
   ];
 
-  const liveChannels = channels.filter((channel) => channel.href !== null);
+  const heroChannels = channels.filter((channel) => channel.href && channel.brand !== "repo");
 
   return (
     <>
-      <section id="home" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-14 pb-16 sm:px-8 sm:pt-20">
+      <section id="home" className="mx-auto max-w-6xl scroll-mt-28 px-5 pt-16 pb-16 sm:px-8 sm:pt-20">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-gold sm:text-[11px]">
               <span className="h-px w-8 bg-gold" />
               {copy.hero.kicker}
             </p>
-            <h1 className="mt-5 font-display text-4xl leading-[1.1] sm:text-5xl lg:text-6xl">
-              {copy.hero.headlineLead}{" "}
-              <span className="text-gradient italic">{copy.hero.headlineAccent}</span>
-              <br />
-              <span className="text-stroke">{copy.hero.headlineTail}</span>
-            </h1>
-            <p className="mt-6 max-w-xl leading-relaxed text-muted">
-              {copy.hero.introBefore}
-              <strong className="font-medium text-ink">{site.name}</strong>
-              {copy.hero.introAfter}
+            <p className="mt-5 font-display text-2xl text-muted italic sm:text-3xl">
+              {copy.hero.hello}
             </p>
-            <p className="mt-3 max-w-xl text-sm text-gold">{copy.hero.line}</p>
+            <AnimatedName
+              as="h1"
+              text={site.name}
+              loop
+              waitSplash
+              className="hero-name mt-2 font-display text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]"
+            />
+            <TypewriterText
+              phrases={copy.hero.typedLines}
+              startDelay={600}
+              className="hero-typed mt-4 max-w-xl text-base text-gold sm:text-lg"
+            />
+            <p className="hero-copy mt-6 max-w-xl leading-relaxed text-muted">{copy.hero.intro}</p>
+            <p className="hero-copy mt-3 max-w-xl text-sm text-gold" style={{ animationDelay: "1.2s" }}>
+              {copy.hero.line}
+            </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a href="#projects" className="btn btn-primary">
                 {copy.hero.primary}
@@ -113,7 +128,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </a>
               ) : null}
               <div className="flex items-center gap-2">
-                {liveChannels.map((channel) => (
+                {heroChannels.map((channel) => (
                   <a
                     key={channel.label}
                     href={channel.href as string}
@@ -121,7 +136,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     rel={channelRel(channel.href)}
                     aria-label={channel.label}
                     title={channel.label}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+                    className={`brand-btn brand-${channel.brand}`}
                   >
                     {channel.icon}
                   </a>
@@ -332,7 +347,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {channels.map((channel) => {
               const body = (
                 <>
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-line text-muted transition-colors group-hover:border-accent group-hover:text-accent">
+                  <span className={`brand-btn brand-${channel.brand}`}>
                     {channel.icon}
                   </span>
                   <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">

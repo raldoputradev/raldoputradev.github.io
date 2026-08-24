@@ -2,6 +2,7 @@ import Link from "next/link";
 import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Splash } from "@/components/Splash";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 /** Menentukan tema sebelum paint pertama supaya tidak ada kedip putih/hitam. */
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})();`;
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t;document.documentElement.dataset.splash=window.matchMedia("(prefers-reduced-motion: reduce)").matches?"skip":"play"}catch(e){document.documentElement.dataset.theme="dark";document.documentElement.dataset.splash="play"}})();`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -94,6 +95,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="font-sans antialiased text-ink">
+        <Splash />
         {children}
         <p className="sr-only">
           <Link href="/id/">Bahasa Indonesia</Link>

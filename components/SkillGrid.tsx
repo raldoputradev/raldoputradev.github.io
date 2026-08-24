@@ -13,11 +13,10 @@ export function SkillGrid({ groups }: { groups: Copy["skills"]["groups"] }) {
               </span>
               <h3 className="font-display text-xl italic text-ink">{group.title}</h3>
             </div>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-muted sm:justify-end">
-              {group.items.map((item, position) => (
-                <span key={item} className="flex items-center gap-3">
-                  {position > 0 ? <span className="text-line">&middot;</span> : null}
-                  <span className="transition-colors hover:text-gold">{item}</span>
+            <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+              {group.items.map((item) => (
+                <span key={item} className="skill-chip">
+                  {item}
                 </span>
               ))}
             </div>

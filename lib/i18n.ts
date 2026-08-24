@@ -35,11 +35,10 @@ export type Copy = {
   theme: { toDark: string; toLight: string };
   hero: {
     kicker: string;
-    headlineLead: string;
-    headlineAccent: string;
-    headlineTail: string;
-    introBefore: string;
-    introAfter: string;
+    hello: string;
+    titleLine: string;
+    typedLines: string[];
+    intro: string;
     line: string;
     primary: string;
     secondary: string;
@@ -124,14 +123,18 @@ const id: Copy = {
   },
   theme: { toDark: "Mode gelap", toLight: "Mode terang" },
   hero: {
-    kicker: "Mahasiswa Teknik Robotika",
-    headlineLead: "Membangun sistem",
-    headlineAccent: "end-to-end",
-    headlineTail: "dari sensor ke cloud.",
-    introBefore: "Saya ",
-    introAfter:
-      " — saya membangun rantai utuh: mesin sidik jari di tepi, API Laravel, web admin, dan aplikasi Flutter. Bukan demo terpisah.",
-    line: "Sistem yang saya rancang tetap jalan saat jaringan putus.",
+    kicker: "Batam · Politeknik Negeri Batam",
+    hello: "Halo, saya",
+    titleLine: "Teknik Robotika · sistem dari sensor ke cloud",
+    typedLines: [
+      "Teknik Robotika · sensor ke cloud",
+      "Edge, API, web, dan mobile",
+      "Local-first, lalu sync ke server",
+      "Simalas: sidik jari sampai dashboard",
+    ],
+    intro:
+      "Saya merancang rantai utuh: mesin sidik jari di tepi, API Laravel, web admin, dan aplikasi Flutter. Bukan demo terpisah — satu sistem yang tetap jalan saat jaringan putus.",
+    line: "Local-first di perangkat. Sync ke server kemudian.",
     primary: "Lihat proyek",
     secondary: "Arsitektur Simalas",
     contactCta: "Hubungi saya",
@@ -176,8 +179,21 @@ const id: Copy = {
       { title: "Web", items: ["Laravel", "Blade", "React", "Vite", "Tailwind"] },
       { title: "Mobile", items: ["Flutter", "Gemini API"] },
       { title: "Edge / IoT", items: ["ESP32", "FreeRTOS", "MQTT", "WebSocket"] },
-      { title: "Robotika", items: ["ROS2", "LiDAR", "Wheel encoder", "VL53L0X"] },
-      { title: "Praktik", items: ["Git", "Role & permission", "Throttle", "Signed URL", "WinForms"] },
+      { title: "Robotika", items: ["ROS2", "LiDAR", "Wheel encoder"] },
+      {
+        title: "Praktik",
+        items: [
+          "Git",
+          "Role & permission",
+          "Throttle",
+          "Signed URL",
+          "WinForms",
+          "Machine learning",
+          "Computer Vision",
+          "PID",
+          "Drone",
+        ],
+      },
     ],
   },
   work: {
@@ -310,8 +326,8 @@ const id: Copy = {
     titleLead: "Tentang",
     titleAccent: "Saya",
     body: [
-      "Saya mahasiswa Teknik Robotika. Sejak semester 6 saya belajar web dan software engineering secara mandiri, supaya robotika tidak berhenti di firmware.",
-      "Pengalaman saya belum panjang, dan saya tidak menutupinya dengan daftar sertifikat. Yang bisa saya tunjukkan adalah satu sistem utuh yang saya tulis sendiri dari sensor sampai antarmuka — beserta alasan di balik setiap keputusannya.",
+      "Saya merancang sistem laboratorium yang tetap berjalan saat jaringan putus — dari mesin sidik jari sampai aplikasi mahasiswa.",
+      "Mahasiswa Teknik Robotika di Politeknik Negeri Batam. Yang saya tunjukkan adalah sistem yang dipakai di lab, dengan keputusan desain yang bisa ditelusuri: edge, API, web, dan mobile dalam satu rantai.",
       "AI saya pakai sebagai asisten, bukan penulis tanpa kendali. Utang teknis saya perlakukan sebagai pekerjaan yang harus dirapikan, bukan disembunyikan.",
     ],
     how: {
@@ -363,14 +379,18 @@ const en: Copy = {
   },
   theme: { toDark: "Dark mode", toLight: "Light mode" },
   hero: {
-    kicker: "Robotics Engineering student",
-    headlineLead: "Building",
-    headlineAccent: "end-to-end",
-    headlineTail: "systems, sensor to cloud.",
-    introBefore: "I'm ",
-    introAfter:
-      " — I build the whole chain: fingerprint machines at the edge, a Laravel API, a staff web admin, and a Flutter app. Not isolated demos.",
-    line: "The systems I design keep working when the network drops.",
+    kicker: "Batam · Politeknik Negeri Batam",
+    hello: "Hello, I am",
+    titleLine: "Robotics Engineering · systems from sensor to cloud",
+    typedLines: [
+      "Robotics Engineering · sensor to cloud",
+      "Edge, API, web, and mobile",
+      "Local-first, then sync to the server",
+      "Simalas: fingerprint to dashboard",
+    ],
+    intro:
+      "I design the whole chain: fingerprint machines at the edge, a Laravel API, a staff web admin, and a Flutter app. Not isolated demos — one system that keeps running when the network drops.",
+    line: "Local-first on the device. Sync to the server later.",
     primary: "View projects",
     secondary: "Simalas architecture",
     contactCta: "Contact me",
@@ -415,8 +435,21 @@ const en: Copy = {
       { title: "Web", items: ["Laravel", "Blade", "React", "Vite", "Tailwind"] },
       { title: "Mobile", items: ["Flutter", "Gemini API"] },
       { title: "Edge / IoT", items: ["ESP32", "FreeRTOS", "MQTT", "WebSocket"] },
-      { title: "Robotics", items: ["ROS2", "LiDAR", "Wheel encoder", "VL53L0X"] },
-      { title: "Practice", items: ["Git", "Roles & permissions", "Throttle", "Signed URL", "WinForms"] },
+      { title: "Robotics", items: ["ROS2", "LiDAR", "Wheel encoder"] },
+      {
+        title: "Practice",
+        items: [
+          "Git",
+          "Roles & permissions",
+          "Throttle",
+          "Signed URL",
+          "WinForms",
+          "Machine learning",
+          "Computer Vision",
+          "PID",
+          "Drone",
+        ],
+      },
     ],
   },
   work: {
@@ -549,8 +582,8 @@ const en: Copy = {
     titleLead: "About",
     titleAccent: "Me",
     body: [
-      "I am a Robotics Engineering student. Since my 6th semester I have taught myself web and software engineering so robotics does not stop at firmware.",
-      "My experience is not long, and I do not pad it with a certificate list. What I can show is one complete system I wrote myself, from sensor to interface, along with the reasoning behind each decision.",
+      "I design lab systems that keep running when the network drops — from fingerprint machines to the student app.",
+      "Robotics Engineering student at Politeknik Negeri Batam. What I show is a system used in the lab, with design decisions you can trace: edge, API, web, and mobile in one chain.",
       "I use AI as an assistant, not an unsupervised author. I treat technical debt as work to clean up, not to hide.",
     ],
     how: {

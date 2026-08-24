@@ -15,7 +15,7 @@ export function PersonJsonLd() {
       name: site.campus,
     },
     identifier: site.githubHandle,
-    sameAs: [site.github, site.linkedin].filter(Boolean),
+    sameAs: [site.github, site.linkedin, site.instagram].filter(Boolean),
   };
 
   return (
