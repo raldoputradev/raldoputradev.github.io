@@ -110,7 +110,7 @@ export type Copy = {
 
 const id: Copy = {
   meta: {
-    title: "Rayendra Aldo Putra — Portofolio | Politeknik Negeri Batam",
+    title: "Rayendra Aldo Putra — Portofolio | Politeknik Negeri Batam | raldoputradev",
     description:
       "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server.",
   },
@@ -327,7 +327,7 @@ const id: Copy = {
     titleAccent: "Saya",
     body: [
       "Saya merancang sistem laboratorium yang tetap berjalan saat jaringan putus — dari mesin sidik jari sampai aplikasi mahasiswa.",
-      "Mahasiswa Teknik Robotika di Politeknik Negeri Batam. Yang saya tunjukkan adalah sistem yang dipakai di lab, dengan keputusan desain yang bisa ditelusuri: edge, API, web, dan mobile dalam satu rantai.",
+      "Mahasiswa Teknik Robotika di Politeknik Negeri Batam (raldoputradev). Yang saya tunjukkan adalah sistem yang dipakai di lab, dengan keputusan desain yang bisa ditelusuri: edge, API, web, dan mobile dalam satu rantai. Nama lengkap saya Rayendra Aldo Putra — bukan Aldo Rayendra Rachmat Putra.",
       "AI saya pakai sebagai asisten, bukan penulis tanpa kendali. Utang teknis saya perlakukan sebagai pekerjaan yang harus dirapikan, bukan disembunyikan.",
     ],
     how: {
@@ -366,7 +366,7 @@ const id: Copy = {
 
 const en: Copy = {
   meta: {
-    title: "Rayendra Aldo Putra — Portfolio | Politeknik Negeri Batam",
+    title: "Rayendra Aldo Putra — Portfolio | Politeknik Negeri Batam | raldoputradev",
     description:
       "Portfolio of Rayendra Aldo Putra. Robotics student at Politeknik Negeri Batam. Simalas: fingerprint devices, Laravel, Flutter, ESP32 — local-first, then sync to the server.",
   },
@@ -583,7 +583,7 @@ const en: Copy = {
     titleAccent: "Me",
     body: [
       "I design lab systems that keep running when the network drops — from fingerprint machines to the student app.",
-      "Robotics Engineering student at Politeknik Negeri Batam. What I show is a system used in the lab, with design decisions you can trace: edge, API, web, and mobile in one chain.",
+      "Robotics Engineering student at Politeknik Negeri Batam (raldoputradev). What I show is a system used in the lab, with design decisions you can trace: edge, API, web, and mobile in one chain. My full name is Rayendra Aldo Putra — not Aldo Rayendra Rachmat Putra.",
       "I use AI as an assistant, not an unsupervised author. I treat technical debt as work to clean up, not to hide.",
     ],
     how: {
