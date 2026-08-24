@@ -45,7 +45,12 @@ export function Splash() {
   }
 
   return (
-    <div className={`splash${leaving ? " is-out" : ""}`} role="status" aria-live="polite" aria-label={site.name}>
+    <div
+      className={`splash${leaving ? " is-out" : ""}`}
+      role="status"
+      aria-live="polite"
+      aria-label={`${site.name}, ${site.splashRole}`}
+    >
       <div className="splash-wash" aria-hidden />
       <div className="splash-mesh" aria-hidden />
       <span className="splash-orb is-mint" aria-hidden />
@@ -56,6 +61,7 @@ export function Splash() {
         <div className="splash-name-box">
           <p className="splash-name">{site.name}</p>
         </div>
+        <p className="splash-role">{site.splashRole}</p>
         <div className="splash-load" aria-hidden>
           <svg className="splash-ring" viewBox="0 0 52 52">
             <circle cx="26" cy="26" r="20" />

@@ -12,6 +12,7 @@ export function isLocale(value: string): value is Locale {
  */
 export const site = {
   name: "Rayendra Aldo Putra",
+  splashRole: "Robotic Engineer · Full-Stack",
   shortName: "Aldo",
   email: "raldoputra.dev@gmail.com",
   github: "https://github.com/raldoputradev",

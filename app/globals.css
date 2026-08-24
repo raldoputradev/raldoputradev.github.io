@@ -737,10 +737,30 @@ html[data-splash="skip"] .splash {
   position: relative;
   justify-content: center;
   font-family: var(--font-display), ui-serif, Georgia, serif;
-  font-size: clamp(2.5rem, 8vw, 4.6rem);
+  font-size: clamp(2.15rem, 6.6vw, 3.85rem);
   font-style: italic;
   font-weight: 600;
   line-height: 1.12;
+}
+
+.splash-role {
+  margin-top: -0.15rem;
+  max-width: 22rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: var(--splash-gold);
+  animation: splash-role-in 0.7s ease 0.48s both;
+}
+
+@keyframes splash-role-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 }
 
 .splash-load {
@@ -1147,6 +1167,7 @@ html[data-splash="play"] .code-card-caption {
   .splash-ring,
   .splash-ring-arc,
   .splash-kicker,
+  .splash-role,
   .splash-wash,
   .splash-orb,
   .name-letter,
