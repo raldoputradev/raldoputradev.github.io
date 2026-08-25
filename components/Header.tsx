@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { type Locale } from "@/lib/site";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { site, type Locale } from "@/lib/site";
 import { getCopy } from "@/lib/i18n";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { ThemeToggle } from "./ThemeToggle";
@@ -13,57 +14,88 @@ export function Header({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
   const [active, setActive] = useState<string>("home");
   const [open, setOpen] = useState(false);
+  const lockRef = useRef<string | null>(null);
+
+  const goTo = (id: string) => {
+    setActive(id);
+    lockRef.current = id;
+    setOpen(false);
+    window.setTimeout(() => {
+      if (lockRef.current === id) {
+        lockRef.current = null;
+      }
+    }, 900);
+  };
 
   useEffect(() => {
-    let observer: IntersectionObserver | null = null;
-    const start = () => {
-      const nodes = sections
-        .map((id) => document.getElementById(id))
-        .filter((node): node is HTMLElement => Boolean(node));
-      if (!nodes.length) {
+    const pick = () => {
+      if (lockRef.current) {
         return;
       }
 
-      observer = new IntersectionObserver(
-        (entries) => {
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-          const id = visible[0]?.target.id;
-          if (id) {
-            setActive(id);
-          }
-        },
-        { rootMargin: "-28% 0px -58% 0px", threshold: [0, 0.2, 0.5, 1] },
-      );
+      const offset = 112;
+      let current: string = "home";
+      for (const id of sections) {
+        const node = document.getElementById(id);
+        if (!node) {
+          continue;
+        }
+        if (node.getBoundingClientRect().top - offset <= 0) {
+          current = id;
+        }
+      }
 
-      nodes.forEach((node) => observer?.observe(node));
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll > 0 && window.scrollY >= maxScroll - 28) {
+        current = "contact";
+      }
+
+      setActive((prev) => (prev === current ? prev : current));
     };
 
-    let idleId = 0;
-    let usedRic = false;
-    if (typeof window.requestIdleCallback === "function") {
-      usedRic = true;
-      idleId = window.requestIdleCallback(start, { timeout: 2000 });
+    const hash = window.location.hash.replace("#", "");
+    if (sections.includes(hash as (typeof sections)[number])) {
+      setActive(hash);
     } else {
-      idleId = window.setTimeout(start, 400);
+      pick();
     }
 
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(pick);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("hashchange", pick);
+    window.addEventListener("resize", onScroll);
     return () => {
-      if (usedRic) {
-        window.cancelIdleCallback(idleId);
-      } else {
-        window.clearTimeout(idleId);
-      }
-      observer?.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("hashchange", pick);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <header className="site-nav">
       <div className={`site-nav-bar${open ? " is-open" : ""}`}>
-        <a href="#home" className="site-nav-brand" onClick={() => setOpen(false)}>
-          <span className="site-nav-name">{locale === "en" ? "Portfolio" : "Portofolio"}</span>
+        <a href="#home" className="site-nav-brand" onClick={() => goTo("home")}>
+          <Image
+            src="/logo-rap.png"
+            alt={site.name}
+            width={263}
+            height={123}
+            className="site-nav-logo"
+            priority
+          />
         </a>
 
         <nav className="site-nav-links" aria-label="Primary">
@@ -71,6 +103,7 @@ export function Header({ locale }: { locale: Locale }) {
             <a
               key={id}
               href={`#${id}`}
+              onClick={() => goTo(id)}
               className={`nav-link ${active === id ? "is-active text-ink" : "hover:text-ink"}`}
             >
               {copy.nav[id]}
@@ -81,14 +114,18 @@ export function Header({ locale }: { locale: Locale }) {
         <div className="site-nav-end">
           <ThemeToggle labels={copy.theme} />
           <LocaleSwitch locale={locale} />
-          <a href="#contact" className="site-nav-cta" onClick={() => setOpen(false)}>
+          <a
+            href="#contact"
+            className={`site-nav-cta${active === "contact" ? " is-active" : ""}`}
+            onClick={() => goTo("contact")}
+          >
             {copy.nav.contact}
           </a>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
-            aria-label="Menu"
+            aria-label={open ? "Tutup menu" : "Menu"}
             aria-controls={open ? "mobile-nav" : undefined}
             className="site-nav-menu md:hidden"
           >
@@ -104,14 +141,19 @@ export function Header({ locale }: { locale: Locale }) {
             <a
               key={id}
               href={`#${id}`}
-              onClick={() => setOpen(false)}
-              className={`rounded-xl px-3 py-2.5 transition-colors ${
-                active === id ? "bg-raise text-ink" : "hover:bg-raise/60 hover:text-ink"
-              }`}
+              onClick={() => goTo(id)}
+              className={`site-nav-drawer-link${active === id ? " is-active" : ""}`}
             >
               {copy.nav[id]}
             </a>
           ))}
+          <a
+            href="#contact"
+            onClick={() => goTo("contact")}
+            className={`site-nav-drawer-cta${active === "contact" ? " is-active" : ""}`}
+          >
+            {copy.nav.contact}
+          </a>
         </nav>
       ) : null}
     </header>

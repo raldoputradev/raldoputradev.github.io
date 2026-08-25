@@ -255,15 +255,24 @@ body {
   display: inline-flex;
   align-items: center;
   min-width: 0;
-  padding-left: 0.45rem;
+  padding-left: 0.35rem;
 }
 
-.site-nav-name {
-  font-family: var(--font-display), ui-serif, Georgia, serif;
-  font-size: 1.15rem;
-  font-style: italic;
-  letter-spacing: -0.02em;
-  color: var(--text);
+.site-nav-logo {
+  display: block;
+  height: 1.85rem;
+  width: auto;
+  max-width: 7.2rem;
+  object-fit: contain;
+  transition: filter 0.35s ease, opacity 0.25s ease;
+}
+
+.site-nav-brand:hover .site-nav-logo {
+  opacity: 0.82;
+}
+
+:root[data-theme="dark"] .site-nav-logo {
+  filter: invert(1) brightness(1.08);
 }
 
 .site-nav-links {
@@ -319,6 +328,12 @@ body {
   box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 32%, transparent);
 }
 
+.site-nav-cta.is-active {
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--on-accent) 28%, transparent),
+    0 8px 18px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
 .site-nav-menu {
   display: inline-flex;
   flex-direction: column;
@@ -350,6 +365,68 @@ body {
   backdrop-filter: blur(16px);
 }
 
+.site-nav-drawer-link {
+  border-radius: 0.9rem;
+  padding: 0.78rem 0.9rem;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.site-nav-drawer-link.is-active {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg-raise));
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.site-nav-drawer-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.35rem;
+  min-height: 2.7rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+}
+
+.site-nav-drawer-cta.is-active {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--text) 22%, transparent);
+}
+
+@media (max-width: 767px) {
+  .site-nav {
+    padding: 0 8px;
+  }
+
+  .site-nav-bar {
+    gap: 0.4rem;
+    padding: 0.3rem 0.35rem 0.3rem 0.45rem;
+  }
+
+  .site-nav-cta {
+    display: none;
+  }
+
+  .site-nav-logo {
+    height: 1.55rem;
+    max-width: 5.5rem;
+  }
+
+  .site-nav .lang-toggle {
+    width: 3.65rem;
+  }
+
+  .site-nav .theme-toggle,
+  .site-nav-menu {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
 @media (min-width: 768px) {
   .site-nav-links {
     display: flex;
@@ -357,6 +434,11 @@ body {
 
   .site-nav-menu {
     display: none;
+  }
+
+  .site-nav-logo {
+    height: 2.05rem;
+    max-width: 8rem;
   }
 }
 
@@ -703,6 +785,16 @@ html[data-splash="skip"] .splash {
   animation: splash-kicker 0.7s ease 0.18s both;
 }
 
+.splash-logo {
+  display: block;
+  height: 3.15rem;
+  width: auto;
+  max-width: min(72vw, 14rem);
+  object-fit: contain;
+  filter: invert(1) brightness(1.1);
+  animation: splash-kicker 0.7s ease 0.18s both;
+}
+
 @keyframes splash-kicker {
   from {
     opacity: 0;
@@ -771,34 +863,107 @@ html[data-splash="skip"] .splash {
   margin-top: 0.45rem;
 }
 
-.splash-ring {
-  width: 3.35rem;
-  height: 3.35rem;
-  transform: rotate(-90deg);
+.splash-dial {
+  position: relative;
+  width: 5.6rem;
+  height: 5.6rem;
   animation: splash-kicker 0.5s ease 0.55s both;
-  filter: drop-shadow(0 0 10px rgb(62 224 177 / 0.45));
 }
 
-.splash-ring circle {
+.splash-dial-face {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.splash-ticks {
+  stroke: rgb(62 224 177 / 0.38);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  transform-origin: 44px 44px;
+  animation: splash-ticks 18s linear infinite;
+}
+
+.splash-ring-track,
+.splash-ring-arc,
+.splash-ring-spin {
   fill: none;
-  stroke-width: 5;
 }
 
-.splash-ring circle:first-child {
-  stroke: rgb(255 255 255 / 0.16);
+.splash-ring-track {
+  stroke: rgb(255 255 255 / 0.14);
+  stroke-width: 3.2;
 }
 
 .splash-ring-arc {
   stroke: var(--splash-mint);
+  stroke-width: 3.2;
   stroke-linecap: round;
-  stroke-dasharray: 125.7;
-  stroke-dashoffset: 125.7;
+  stroke-dasharray: 201;
+  stroke-dashoffset: 201;
+  transform-origin: 44px 44px;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 8px rgb(62 224 177 / 0.55));
   animation: splash-ring 2.6s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
+}
+
+.splash-ring-spin {
+  stroke: rgb(224 192 122 / 0.55);
+  stroke-width: 1.15;
+  stroke-dasharray: 4 7;
+  stroke-linecap: round;
+  transform-origin: 44px 44px;
+  animation: splash-spin 7s linear infinite;
+}
+
+.splash-dial-core {
+  position: absolute;
+  inset: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.08rem;
+  border-radius: 50%;
+  border: 1px solid rgb(62 224 177 / 0.28);
+  background:
+    radial-gradient(circle at 50% 35%, rgb(62 224 177 / 0.16), transparent 62%),
+    rgb(8 14 22 / 0.78);
+  box-shadow: inset 0 0 12px rgb(62 224 177 / 0.12);
+}
+
+.splash-claw {
+  width: 1.15rem;
+  height: 1.15rem;
+  stroke: var(--splash-mint);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.splash-dial-core span {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--splash-ink);
 }
 
 @keyframes splash-ring {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes splash-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes splash-ticks {
+  to {
+    transform: rotate(-360deg);
   }
 }
 
@@ -1167,9 +1332,14 @@ html[data-splash="play"] .code-card-caption {
   .splash-ring,
   .splash-ring-arc,
   .splash-kicker,
+  .splash-logo,
   .splash-role,
   .splash-wash,
   .splash-orb,
+  .splash-dial,
+  .splash-ticks,
+  .splash-ring-arc,
+  .splash-ring-spin,
   .name-letter,
   .code-line,
   .code-card-caption {
