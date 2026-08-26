@@ -70,6 +70,8 @@ export type Copy = {
     zoomHint: string;
     placeholderNote: string;
     closeLabel: string;
+    prevImage: string;
+    nextImage: string;
     repoLink: string;
   };
   projects: Project[];
@@ -203,10 +205,12 @@ const id: Copy = {
     statusLive: "Sistem berjalan",
     statusStudy: "Studi kampus",
     statusSoon: "Menyusul",
-    galleryHint: "Klik thumbnail untuk berganti",
+    galleryHint: "Geser, atau pakai panah untuk berganti",
     zoomHint: "Klik gambar untuk memperbesar",
     placeholderNote: "Tangkapan layar menyusul",
     closeLabel: "Tutup",
+    prevImage: "Gambar sebelumnya",
+    nextImage: "Gambar berikutnya",
     repoLink: "Buka di GitHub",
   },
   projects: [
@@ -459,10 +463,12 @@ const en: Copy = {
     statusLive: "Running system",
     statusStudy: "Course work",
     statusSoon: "Upcoming",
-    galleryHint: "Click a thumbnail to switch",
+    galleryHint: "Swipe or use the arrows to switch",
     zoomHint: "Click the image to enlarge",
     placeholderNote: "Screenshot coming soon",
     closeLabel: "Close",
+    prevImage: "Previous image",
+    nextImage: "Next image",
     repoLink: "Open on GitHub",
   },
   projects: [
