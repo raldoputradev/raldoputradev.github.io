@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unknown-property */
-// @ts-nocheck — meshline + Rapier types from React Bits Lanyard
 "use client";
 import { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, extend, useFrame, useThree, type ThreeElement, type ThreeEvent } from '@react-three/fiber';
@@ -48,6 +46,19 @@ declare module '@react-three/fiber' {
 const BLANK_PIXEL =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
 
+type SizedSource = CanvasImageSource & { width: number; height: number };
+
+function asSizedSource(image: unknown): SizedSource | null {
+  if (!image || typeof image !== 'object') {
+    return null;
+  }
+  const sized = image as { width?: number; height?: number };
+  if (typeof sized.width !== 'number' || typeof sized.height !== 'number') {
+    return null;
+  }
+  return image as SizedSource;
+}
+
 // The card model's front face is UV-mapped to the LEFT half of the texture
 // atlas and the back face to the RIGHT half (measured from card.glb). Each
 // custom image is composited into its own half so the two faces render
@@ -71,7 +82,6 @@ export default function Lanyard({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
   fov = 20,
-  transparent = true,
   frontImage = null,
   backImage = null,
   imageFit = 'cover',
@@ -204,7 +214,7 @@ function Band({
     return body.lerped;
   };
 
-  const { nodes, materials } = useGLTF(CARD_GLB) as {
+  const { nodes, materials } = useGLTF(CARD_GLB) as unknown as {
     nodes: { card: THREE.Mesh; clip: THREE.Mesh; clamp: THREE.Mesh };
     materials: { base: THREE.MeshPhysicalMaterial; metal: THREE.MeshStandardMaterial };
   };
@@ -220,7 +230,8 @@ function Band({
     const baseMap = materials.base.map as THREE.Texture;
     if (!frontImage && !backImage) return baseMap;
 
-    const baseImg = baseMap.image as any;
+    const baseImg = asSizedSource(baseMap.image);
+    if (!baseImg) return baseMap;
     const W = baseImg.width;
     const H = baseImg.height;
     const canvas = document.createElement('canvas');
@@ -231,7 +242,7 @@ function Band({
     // Keep the original baked atlas for the card edges and any untouched face.
     ctx.drawImage(baseImg, 0, 0, W, H);
 
-    const drawFitted = (img: any, rect: typeof FRONT_UV_RECT) => {
+    const drawFitted = (img: SizedSource, rect: typeof FRONT_UV_RECT) => {
       const rx = rect.x * W;
       const ry = rect.y * H;
       const rw = rect.w * W;
@@ -252,8 +263,10 @@ function Band({
       ctx.restore();
     };
 
-    if (frontImage && frontTex.image) drawFitted(frontTex.image, FRONT_UV_RECT);
-    if (backImage && backTex.image) drawFitted(backTex.image, BACK_UV_RECT);
+    const frontSrc = asSizedSource(frontTex.image);
+    const backSrc = asSizedSource(backTex.image);
+    if (frontImage && frontSrc) drawFitted(frontSrc, FRONT_UV_RECT);
+    if (backImage && backSrc) drawFitted(backSrc, BACK_UV_RECT);
 
     const composite = new THREE.CanvasTexture(canvas);
     composite.colorSpace = THREE.SRGBColorSpace;
