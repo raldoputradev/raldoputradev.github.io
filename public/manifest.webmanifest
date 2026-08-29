@@ -1,0 +1,24 @@
+{
+  "name": "Rayendra Aldo Putra — Portofolio",
+  "short_name": "RAP",
+  "description": "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam.",
+  "start_url": "/id/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#07080b",
+  "theme_color": "#07080b",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-rap.png",
+      "sizes": "263x123",
+      "type": "image/png"
+    }
+  ]
+}

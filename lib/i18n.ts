@@ -1,6 +1,6 @@
 import type { Locale } from "./site";
 
-type NavKey = "home" | "skills" | "projects" | "about" | "contact";
+type NavKey = "home" | "skills" | "projects" | "about" | "journey" | "contact";
 
 export type ProjectImage = {
   src: string;
@@ -44,7 +44,10 @@ export type Copy = {
     secondary: string;
     contactCta: string;
     cv: string;
+    cvSoon: string;
+    roles: string[];
     status: string;
+    lanyard: string;
   };
   facts: {
     title: string;
@@ -57,7 +60,13 @@ export type Copy = {
     kicker: string;
     titleLead: string;
     titleAccent: string;
+    blurb: string;
     groups: { title: string; items: string[] }[];
+    items: string[];
+    filters: { all: string; web: string; embedded: string; design: string };
+    notes: Record<string, string>;
+    learningTitle: string;
+    learning: string[];
   };
   work: {
     kicker: string;
@@ -68,11 +77,37 @@ export type Copy = {
     statusSoon: string;
     galleryHint: string;
     zoomHint: string;
+    zoomViewerHint: string;
     placeholderNote: string;
+    emptyPoster: string;
+    swipe: string;
+    ask: string;
+    askOpen: string;
+    askCancel: string;
+    prevProject: string;
+    nextProject: string;
     closeLabel: string;
     prevImage: string;
     nextImage: string;
     repoLink: string;
+    blurb: string;
+    back: string;
+    open: string;
+  };
+  journey: {
+    kicker: string;
+    titleLead: string;
+    titleAccent: string;
+    blurb: string;
+    items: {
+      year: string;
+      range: string;
+      tag: string;
+      title: string;
+      place: string;
+      text: string;
+      stack: string[];
+    }[];
   };
   projects: Project[];
   architecture: {
@@ -121,6 +156,7 @@ const id: Copy = {
     skills: "Keahlian",
     projects: "Proyek",
     about: "Tentang",
+    journey: "Jejak",
     contact: "Kontak",
   },
   theme: { toDark: "Mode gelap", toLight: "Mode terang" },
@@ -135,13 +171,16 @@ const id: Copy = {
       "Simalas: sidik jari sampai dashboard",
     ],
     intro:
-      "Saya merancang rantai utuh: mesin sidik jari di tepi, API Laravel, web admin, dan aplikasi Flutter. Bukan demo terpisah — satu sistem yang tetap jalan saat jaringan putus.",
+      "Saya merancang dan membangun perangkat lunak secara utuh — arsitektur, alur data, dan antarmuka yang tetap andal saat dipakai. Bukan kumpulan demo terpisah, melainkan sistem yang bisa dioperasikan dan dikembangkan.",
     line: "Local-first di perangkat. Sync ke server kemudian.",
     primary: "Lihat proyek",
     secondary: "Arsitektur Simalas",
     contactCta: "Hubungi saya",
     cv: "Unduh CV",
+    cvSoon: "Coming soon",
+    roles: ["IoT Developer", "Robotic Engineer", "Full-Stack", "Firmware Engineer"],
     status: "Terbuka untuk kolaborasi",
+    lanyard: "Robotic Engineer · raldoputradev",
   },
   facts: {
     title: "Data singkat",
@@ -173,45 +212,164 @@ const id: Copy = {
     { value: "5+", label: "Bahasa & framework dipakai langsung" },
   ],
   skills: {
-    kicker: "Yang saya pakai",
-    titleLead: "Keahlian",
-    titleAccent: "Teknis",
-    groups: [
-      { title: "Bahasa", items: ["PHP", "TypeScript", "Dart", "C++", "C#", "SQL"] },
-      { title: "Web", items: ["Laravel", "Blade", "React", "Vite", "Tailwind"] },
-      { title: "Mobile", items: ["Flutter", "Gemini API"] },
-      { title: "Edge / IoT", items: ["ESP32", "FreeRTOS", "MQTT", "WebSocket"] },
-      { title: "Robotika", items: ["ROS2", "LiDAR", "Wheel encoder"] },
-      {
-        title: "Praktik",
-        items: [
-          "Git",
-          "Role & permission",
-          "Throttle",
-          "Signed URL",
-          "WinForms",
-          "Machine learning",
-          "Computer Vision",
-          "PID",
-          "Drone",
-        ],
-      },
+    kicker: "Stack",
+    titleLead: "Tools &",
+    titleAccent: "Tech Stack",
+    blurb: "Teknologi dan tools yang saya gunakan untuk merancang, membangun, dan merawat perangkat lunak.",
+    groups: [],
+    items: [
+      "PHP",
+      "TypeScript",
+      "JavaScript",
+      "Dart",
+      "C++",
+      "C#",
+      "MySQL",
+      "Laravel",
+      "Blade",
+      "React",
+      "Next.js",
+      "Vite",
+      "Tailwind",
+      "Flutter",
+      "Node.js",
+      "Gemini API",
+      "ESP32",
+      "FreeRTOS",
+      "MQTT",
+      "WebSocket",
+      "ROS2",
+      "LiDAR",
+      "Git",
+      "GitHub",
+      "Figma",
+      "Docker",
+      "Machine learning",
+      "Computer Vision",
     ],
+    filters: { all: "Semua", web: "Web", embedded: "Embedded", design: "Craft" },
+    notes: {
+      Laravel: "API Simalas",
+      Blade: "Dashboard laboran",
+      React: "Situs publik Simalas",
+      Flutter: "Aplikasi mahasiswa",
+      ESP32: "Firmware mesin sidik jari",
+      "C++": "FreeRTOS di ESP32",
+      MySQL: "Skema Simalas",
+      "C#": "Afis Fingerprint Analyzer",
+      "Next.js": "Portofolio ini",
+      Figma: "Alur dan antarmuka",
+    },
+    learningTitle: "Sedang dipelajari",
+    learning: ["C#", "TensorFlow", "OpenCV"],
   },
   work: {
-    kicker: "Yang sudah dibangun",
-    titleLead: "Proyek",
-    titleAccent: "Unggulan",
+    kicker: "Project pilihan",
+    titleLead: "Project",
+    titleAccent: "Pilihan",
     statusLive: "Sistem berjalan",
     statusStudy: "Studi kampus",
     statusSoon: "Menyusul",
     galleryHint: "Geser, atau pakai panah untuk berganti",
     zoomHint: "Klik gambar untuk memperbesar",
-    placeholderNote: "Tangkapan layar menyusul",
+    zoomViewerHint: "Cubit untuk zoom · geser · ketuk dua kali · tutup",
+    placeholderNote: "Tangkapan layar menyusul — poster kosong dulu, isi belakangan.",
+    emptyPoster: "Poster menyusul",
+    swipe: "Geser",
+    ask: "Buka proyek?",
+    askOpen: "Buka",
+    askCancel: "Batal",
+    prevProject: "Proyek sebelumnya",
+    nextProject: "Proyek berikutnya",
     closeLabel: "Tutup",
     prevImage: "Gambar sebelumnya",
     nextImage: "Gambar berikutnya",
     repoLink: "Buka di GitHub",
+    blurb:
+      "Hanya proyek yang benar-benar ada. Kartu kiri atau kanan menggeser dulu; klik kartu di tengah untuk membuka studi kasus.",
+    back: "Kembali ke proyek",
+    open: "Buka studi kasus",
+  },
+  journey: {
+    kicker: "Jejak",
+    titleLead: "Jejak",
+    titleAccent: "Saya",
+    blurb:
+      "Alur dari SMK sampai sistem lab yang dipakai nyata — tahun ajaran dan proyek, sesuai CV. Magang belum dimulai.",
+    items: [
+      {
+        year: "2026",
+        range: "Feb – Jul 2026",
+        tag: "Proyek",
+        title: "SIMALAS — web, mobile & IoT",
+        place: "BRAIL · Politeknik Negeri Batam",
+        text: "Sistem absensi sidik jari dan loker lab dalam satu rantai: API Laravel, dashboard staf, situs publik React, aplikasi Flutter, dan firmware ESP32 local-first. Termasuk Afis Fingerprint Analyzer (C#) untuk audit template — bukan mesin matching absensi.",
+        stack: ["Laravel", "Flutter", "ESP32", "MySQL", "React", "C#"],
+      },
+      {
+        year: "2025",
+        range: "Agu 2025 – Jan 2026",
+        tag: "Mekanikal",
+        title: "SIMALAS — rancang bangun perangkat",
+        place: "Laboratorium Polibatam",
+        text: "Rangka loker, rumah modul sidik jari, keypad, dan display; rute kabel agar papan tetap bisa diservis. Prototype enclosure pertama diiterasi setelah dirakit — fit dan riset belum matang untuk mesin jadi.",
+        stack: ["SolidWorks", "Fabrikasi"],
+      },
+      {
+        year: "2024",
+        range: "Okt 2024 – Jul 2025",
+        tag: "Mekanikal",
+        title: "Filament Length Meter",
+        place: "Kampus · printer 3D",
+        text: "Alat ukur pemakaian filamen agar sisa material bisa diperkirakan, bukan ditebak dari spool. Desain jalur filamen, kontak roller/idler, dan dudukan yang tidak menghalangi cetak.",
+        stack: ["SolidWorks", "Perakitan"],
+      },
+      {
+        year: "2024",
+        range: "Agu 2024 – sekarang",
+        tag: "Organisasi",
+        title: "BRAIL",
+        place: "Barelang Robotics of Artificial Intelligence Lab",
+        text: "Anggota tim proyek SIMALAS. Diskusi teknis dan pengembangan sistem IoT berbasis mikrokontroler di lab.",
+        stack: ["IoT", "Kolaborasi lab"],
+      },
+      {
+        year: "2023",
+        range: "Agu 2023 – Agu 2024",
+        tag: "Mekanikal",
+        title: "Transporter Robot (line follower)",
+        place: "Lomba kampus · Polibatam",
+        text: "Satu robot, dua aturan lomba. Semester 1: sasis, gripper, dan dudukan sensor untuk ambil kotak lalu bawa ke stasiun lain. Semester 2: robot yang sama, ditambah lift agar kotak diangkat, dipindah, dan diletakkan di tujuan. Kode line-follower bukan bagian saya.",
+        stack: ["SolidWorks", "Gripper"],
+      },
+      {
+        year: "2023",
+        range: "Agu 2023 – sekarang",
+        tag: "Pendidikan",
+        title: "D4 Teknik Robotika",
+        place: "Politeknik Negeri Batam",
+        text: "Masuk jalur vokasi robotika. Fokus bergeser dari mekanikal kompetisi ke perangkat lunak yang menyambung perangkat, API, dan aplikasi dalam satu sistem.",
+        stack: ["C++", "ESP32"],
+      },
+      {
+        year: "2023",
+        range: "Agu 2023",
+        tag: "Organisasi",
+        title: "Inaugurasi Laksamana 2023",
+        place: "Politeknik Negeri Batam",
+        text: "Kegiatan inaugurasi kampus di awal masa studi D4 — sesuai CV, bukan magang dan bukan jabatan.",
+        stack: [],
+      },
+      {
+        year: "2020",
+        range: "Jul 2020 – Apr 2023",
+        tag: "Pendidikan",
+        title: "Teknik Komputer dan Jaringan",
+        place: "SMK Negeri 7 Batam",
+        text: "Fondasi kelistrikan, jaringan, dan kerja bengkel sebelum masuk politeknik.",
+        stack: ["Jaringan", "Kelistrikan"],
+      },
+    ],
   },
   projects: [
     {
@@ -331,7 +489,7 @@ const id: Copy = {
     titleAccent: "Saya",
     body: [
       "Saya merancang sistem laboratorium yang tetap berjalan saat jaringan putus — dari mesin sidik jari sampai aplikasi mahasiswa.",
-      "Mahasiswa Teknik Robotika di Politeknik Negeri Batam (raldoputradev). Yang saya tunjukkan adalah sistem yang dipakai di lab, dengan keputusan desain yang bisa ditelusuri: edge, API, web, dan mobile dalam satu rantai. Nama lengkap saya Rayendra Aldo Putra — bukan Aldo Rayendra Rachmat Putra.",
+      "Mahasiswa Teknik Robotika di Politeknik Negeri Batam (raldoputradev). Yang saya tunjukkan adalah sistem yang dipakai di lab, dengan keputusan desain yang bisa ditelusuri: edge, API, web, dan mobile dalam satu rantai.",
       "AI saya pakai sebagai asisten, bukan penulis tanpa kendali. Utang teknis saya perlakukan sebagai pekerjaan yang harus dirapikan, bukan disembunyikan.",
     ],
     how: {
@@ -379,6 +537,7 @@ const en: Copy = {
     skills: "Skills",
     projects: "Projects",
     about: "About",
+    journey: "Journey",
     contact: "Contact",
   },
   theme: { toDark: "Dark mode", toLight: "Light mode" },
@@ -393,13 +552,16 @@ const en: Copy = {
       "Simalas: fingerprint to dashboard",
     ],
     intro:
-      "I design the whole chain: fingerprint machines at the edge, a Laravel API, a staff web admin, and a Flutter app. Not isolated demos — one system that keeps running when the network drops.",
+      "I design and build software end to end — architecture, data flow, and interfaces that stay reliable in real use. Not a pile of isolated demos, but systems that can be operated and extended.",
     line: "Local-first on the device. Sync to the server later.",
     primary: "View projects",
     secondary: "Simalas architecture",
     contactCta: "Contact me",
     cv: "Download CV",
+    cvSoon: "Coming soon",
+    roles: ["IoT Developer", "Robotic Engineer", "Full-Stack", "Firmware Engineer"],
     status: "Open to collaboration",
+    lanyard: "Robotic Engineer · raldoputradev",
   },
   facts: {
     title: "Quick facts",
@@ -431,45 +593,164 @@ const en: Copy = {
     { value: "5+", label: "Languages & frameworks used hands-on" },
   ],
   skills: {
-    kicker: "What I work with",
-    titleLead: "Technical",
-    titleAccent: "Skills",
-    groups: [
-      { title: "Languages", items: ["PHP", "TypeScript", "Dart", "C++", "C#", "SQL"] },
-      { title: "Web", items: ["Laravel", "Blade", "React", "Vite", "Tailwind"] },
-      { title: "Mobile", items: ["Flutter", "Gemini API"] },
-      { title: "Edge / IoT", items: ["ESP32", "FreeRTOS", "MQTT", "WebSocket"] },
-      { title: "Robotics", items: ["ROS2", "LiDAR", "Wheel encoder"] },
-      {
-        title: "Practice",
-        items: [
-          "Git",
-          "Roles & permissions",
-          "Throttle",
-          "Signed URL",
-          "WinForms",
-          "Machine learning",
-          "Computer Vision",
-          "PID",
-          "Drone",
-        ],
-      },
+    kicker: "Stack",
+    titleLead: "Tools &",
+    titleAccent: "Tech Stack",
+    blurb: "Technologies and tools I use to design, build, and maintain software.",
+    groups: [],
+    items: [
+      "PHP",
+      "TypeScript",
+      "JavaScript",
+      "Dart",
+      "C++",
+      "C#",
+      "MySQL",
+      "Laravel",
+      "Blade",
+      "React",
+      "Next.js",
+      "Vite",
+      "Tailwind",
+      "Flutter",
+      "Node.js",
+      "Gemini API",
+      "ESP32",
+      "FreeRTOS",
+      "MQTT",
+      "WebSocket",
+      "ROS2",
+      "LiDAR",
+      "Git",
+      "GitHub",
+      "Figma",
+      "Docker",
+      "Machine learning",
+      "Computer Vision",
     ],
+    filters: { all: "All", web: "Web", embedded: "Embedded", design: "Craft" },
+    notes: {
+      Laravel: "Simalas API",
+      Blade: "Lab staff dashboard",
+      React: "Simalas public site",
+      Flutter: "Student app",
+      ESP32: "Fingerprint firmware",
+      "C++": "FreeRTOS on ESP32",
+      MySQL: "Simalas schema",
+      "C#": "Afis Fingerprint Analyzer",
+      "Next.js": "This portfolio",
+      Figma: "Flows and UI",
+    },
+    learningTitle: "Currently learning",
+    learning: ["C#", "TensorFlow", "OpenCV"],
   },
   work: {
-    kicker: "What I've built",
-    titleLead: "Featured",
+    kicker: "Chosen work",
+    titleLead: "Chosen",
     titleAccent: "Projects",
     statusLive: "Running system",
     statusStudy: "Course work",
     statusSoon: "Upcoming",
     galleryHint: "Swipe or use the arrows to switch",
     zoomHint: "Click the image to enlarge",
-    placeholderNote: "Screenshot coming soon",
+    zoomViewerHint: "Pinch to zoom · drag · double tap · close",
+    placeholderNote: "Screenshot coming soon — empty posters for now.",
+    emptyPoster: "Poster coming soon",
+    swipe: "Slide",
+    ask: "Open this project?",
+    askOpen: "Open",
+    askCancel: "Cancel",
+    prevProject: "Previous project",
+    nextProject: "Next project",
     closeLabel: "Close",
     prevImage: "Previous image",
     nextImage: "Next image",
     repoLink: "Open on GitHub",
+    blurb:
+      "Real projects only. Side cards slide into place first; click the center card to open the case study.",
+    back: "Back to projects",
+    open: "Open case study",
+  },
+  journey: {
+    kicker: "Journey",
+    titleLead: "My",
+    titleAccent: "Journey",
+    blurb:
+      "From vocational school to a lab system in real use — academic years and projects, matching the CV. An internship has not started.",
+    items: [
+      {
+        year: "2026",
+        range: "Feb – Jul 2026",
+        tag: "Project",
+        title: "SIMALAS — web, mobile & IoT",
+        place: "BRAIL · Politeknik Negeri Batam",
+        text: "Fingerprint attendance and lab lockers in one chain: a Laravel API, staff dashboard, public React site, Flutter app, and local-first ESP32 firmware. Includes Afis Fingerprint Analyzer (C#) to audit templates — not the attendance matcher.",
+        stack: ["Laravel", "Flutter", "ESP32", "MySQL", "React", "C#"],
+      },
+      {
+        year: "2025",
+        range: "Aug 2025 – Jan 2026",
+        tag: "Mechanical",
+        title: "SIMALAS — physical build",
+        place: "Polibatam laboratory",
+        text: "Locker frame, housings for the fingerprint module, keypad, and display; cable routing so boards stay serviceable. The first attendance enclosure was an early prototype — then mounts and layout were iterated after assembly.",
+        stack: ["SolidWorks", "Fabrication"],
+      },
+      {
+        year: "2024",
+        range: "Oct 2024 – Jul 2025",
+        tag: "Mechanical",
+        title: "Filament Length Meter",
+        place: "Campus · 3D printer",
+        text: "A meter for how much filament a printer has used, so remaining material can be estimated instead of guessed from the spool. Filament path, roller/idler contact, and a mount that does not block printing.",
+        stack: ["SolidWorks", "Assembly"],
+      },
+      {
+        year: "2024",
+        range: "Aug 2024 – present",
+        tag: "Organization",
+        title: "BRAIL",
+        place: "Barelang Robotics of Artificial Intelligence Lab",
+        text: "Member of the SIMALAS project team. Technical discussions and microcontroller-based IoT work in the lab.",
+        stack: ["IoT", "Lab collaboration"],
+      },
+      {
+        year: "2023",
+        range: "Aug 2023 – Aug 2024",
+        tag: "Mechanical",
+        title: "Transporter Robot (line follower)",
+        place: "Campus competition · Polibatam",
+        text: "One robot, two competition rule-sets. Semester 1: chassis, gripper, and sensor mounts to pick up a box and carry it to another station. Semester 2: the same robot, with a lift so the box could be raised, moved, and placed. Line-follower code was not my part.",
+        stack: ["SolidWorks", "Gripper"],
+      },
+      {
+        year: "2023",
+        range: "Aug 2023 – present",
+        tag: "Education",
+        title: "D4 Robotics Engineering",
+        place: "Politeknik Negeri Batam",
+        text: "Entered the vocational robotics track. Focus moved from competition mechanics to software that connects devices, APIs, and applications as one system.",
+        stack: ["C++", "ESP32"],
+      },
+      {
+        year: "2023",
+        range: "Aug 2023",
+        tag: "Organization",
+        title: "Inaugurasi Laksamana 2023",
+        place: "Politeknik Negeri Batam",
+        text: "Campus inauguration at the start of the D4 programme — listed on the CV; not an internship or a titled role.",
+        stack: [],
+      },
+      {
+        year: "2020",
+        range: "Jul 2020 – Apr 2023",
+        tag: "Education",
+        title: "Computer and Network Engineering",
+        place: "SMK Negeri 7 Batam",
+        text: "Vocational foundation in electrical work, networking, and workshop practice before polytechnic.",
+        stack: ["Networking", "Electrical"],
+      },
+    ],
   },
   projects: [
     {
@@ -589,7 +870,7 @@ const en: Copy = {
     titleAccent: "Me",
     body: [
       "I design lab systems that keep running when the network drops — from fingerprint machines to the student app.",
-      "Robotics Engineering student at Politeknik Negeri Batam (raldoputradev). What I show is a system used in the lab, with design decisions you can trace: edge, API, web, and mobile in one chain. My full name is Rayendra Aldo Putra — not Aldo Rayendra Rachmat Putra.",
+      "Robotics Engineering student at Politeknik Negeri Batam (raldoputradev). What I show is a system used in the lab, with design decisions you can trace: edge, API, web, and mobile in one chain.",
       "I use AI as an assistant, not an unsupervised author. I treat technical debt as work to clean up, not to hide.",
     ],
     how: {
@@ -630,4 +911,12 @@ const dictionaries: Record<Locale, Copy> = { id, en };
 
 export function getCopy(locale: Locale): Copy {
   return dictionaries[locale];
+}
+
+export function getProject(locale: Locale, slug: string) {
+  return getCopy(locale).projects.find((project) => project.slug === slug);
+}
+
+export function getProjectSlugs() {
+  return getCopy("id").projects.map((project) => project.slug);
 }

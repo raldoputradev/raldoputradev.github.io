@@ -1,18 +1,29 @@
-import { site } from "@/lib/site";
+import { site, type Locale } from "@/lib/site";
 
 /** Mengikat nama lengkap ke satu orang: GitHub, LinkedIn, Instagram, kampus, Batam. */
-export function PersonJsonLd() {
-  const personId = "https://raldoputradev.github.io/#person";
-  const pageId = "https://raldoputradev.github.io/#profile";
+export function PersonJsonLd({ locale }: { locale: Locale }) {
+  const personId = `${site.origin}/#person`;
+  const siteId = `${site.origin}/#website`;
+  const pageId = `${site.origin}/#profile`;
+  const pageUrl = `${site.origin}/${locale}/`;
   const data = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "ProfilePage",
-        "@id": pageId,
-        url: "https://raldoputradev.github.io/id/",
+        "@type": "WebSite",
+        "@id": siteId,
+        url: `${site.origin}/id/`,
         name: `${site.name} — Portofolio`,
         inLanguage: ["id", "en"],
+        publisher: { "@id": personId },
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": pageId,
+        url: pageUrl,
+        name: `${site.name} — ${locale === "id" ? "Portofolio" : "Portfolio"}`,
+        inLanguage: locale,
+        isPartOf: { "@id": siteId },
         about: { "@id": personId },
         mainEntity: { "@id": personId },
       },
@@ -24,14 +35,21 @@ export function PersonJsonLd() {
         additionalName: "Aldo",
         familyName: "Putra",
         alternateName: ["raldoputradev", "Rayendra Aldo Putra"],
-        url: "https://raldoputradev.github.io",
+        url: site.origin,
         email: site.email,
-        image: "https://raldoputradev.github.io/rayendra-aldo-putra.png?v=2",
-        jobTitle: "Mahasiswa Teknik Robotika, Politeknik Negeri Batam",
+        image: `${site.origin}${site.photo}`,
+        jobTitle:
+          locale === "id"
+            ? "Mahasiswa Teknik Robotika, Politeknik Negeri Batam"
+            : "Robotics student, Politeknik Negeri Batam",
         disambiguatingDescription:
-          "Pengembang Simalas di Batam (raldoputradev). Bukan Aldo Rayendra Rachmat Putra, psikolog klinis.",
+          locale === "id"
+            ? "Pengembang Simalas di Batam (raldoputradev). Mahasiswa Teknik Robotika, Politeknik Negeri Batam."
+            : "Simalas developer in Batam (raldoputradev). Robotics student at Politeknik Negeri Batam.",
         description:
-          "Rayendra Aldo Putra, mahasiswa Teknik Robotika di Politeknik Negeri Batam. Merancang Simalas: mesin sidik jari ESP32, API Laravel, web admin, dan aplikasi Flutter. Local-first, lalu sync ke server.",
+          locale === "id"
+            ? "Rayendra Aldo Putra, mahasiswa Teknik Robotika di Politeknik Negeri Batam. Merancang Simalas: mesin sidik jari ESP32, API Laravel, web admin, dan aplikasi Flutter. Local-first, lalu sync ke server."
+            : "Rayendra Aldo Putra, robotics student at Politeknik Negeri Batam. Builds Simalas: ESP32 fingerprint devices, Laravel API, admin web, and Flutter app. Local-first, then sync to the server.",
         nationality: "ID",
         homeLocation: {
           "@type": "Place",

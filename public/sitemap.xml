@@ -3,16 +3,56 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://raldoputradev.github.io/id/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/"/>
   </url>
   <url>
     <loc>https://raldoputradev.github.io/en/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/"/>
+  </url>
+  <url>
+    <loc>https://raldoputradev.github.io/id/work/simalas/</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/work/simalas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/work/simalas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/work/simalas/"/>
+  </url>
+  <url>
+    <loc>https://raldoputradev.github.io/en/work/simalas/</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/work/simalas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/work/simalas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/work/simalas/"/>
+  </url>
+  <url>
+    <loc>https://raldoputradev.github.io/id/work/afis-fingerprint-analyzer/</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/work/afis-fingerprint-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/work/afis-fingerprint-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/work/afis-fingerprint-analyzer/"/>
+  </url>
+  <url>
+    <loc>https://raldoputradev.github.io/en/work/afis-fingerprint-analyzer/</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://raldoputradev.github.io/id/work/afis-fingerprint-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://raldoputradev.github.io/en/work/afis-fingerprint-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raldoputradev.github.io/id/work/afis-fingerprint-analyzer/"/>
   </url>
 </urlset>

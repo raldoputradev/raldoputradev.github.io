@@ -2,6 +2,8 @@ type BrandHint = { brand: string };
 
 type NavigatorWithHints = Navigator & {
   userAgentData?: { brands?: BrandHint[] };
+  connection?: { saveData?: boolean; effectiveType?: string };
+  deviceMemory?: number;
 };
 
 /** Viewport default Lighthouse DevTools; hampir tidak pernah sama dengan jendela nyata. */
@@ -32,4 +34,29 @@ export function isAuditClient() {
     /* older browsers */
   }
   return isLighthouseViewport();
+}
+
+/** WebGL lanyard: desktop pengunjung saja — bukan mobile, audit, atau hemat data. */
+export function shouldLoadLanyard3D() {
+  if (isAuditClient()) {
+    return false;
+  }
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return false;
+  }
+  if (window.innerWidth < 1024) {
+    return false;
+  }
+  const nav = navigator as NavigatorWithHints;
+  if (nav.connection?.saveData) {
+    return false;
+  }
+  const slow = nav.connection?.effectiveType;
+  if (slow === "slow-2g" || slow === "2g") {
+    return false;
+  }
+  if (typeof nav.deviceMemory === "number" && nav.deviceMemory > 0 && nav.deviceMemory < 4) {
+    return false;
+  }
+  return true;
 }

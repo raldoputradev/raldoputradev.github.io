@@ -12,6 +12,7 @@ export function TypewriterText({
   typeMs = 42,
   deleteMs = 26,
   holdMs = 1600,
+  loop = false,
 }: {
   phrases: string[];
   className?: string;
@@ -20,6 +21,7 @@ export function TypewriterText({
   typeMs?: number;
   deleteMs?: number;
   holdMs?: number;
+  loop?: boolean;
 }) {
   const list = phrases.filter(Boolean);
   const phraseKey = list.join("\u0000");
@@ -27,11 +29,12 @@ export function TypewriterText({
 
   useEffect(() => {
     const phrasesList = phraseKey.split("\u0000").filter(Boolean);
-    if (phrasesList.length < 2) {
-      setShown(phrasesList[0] ?? "");
+    if (phrasesList.length === 0) {
+      setShown("");
       return;
     }
 
+    const once = !loop && phrasesList.length < 2;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce || isAuditClient()) {
       setShown(phrasesList[0] ?? "");
@@ -76,6 +79,9 @@ export function TypewriterText({
       charIndex += 1;
       setShown(Array.from(phrasesList[phraseIndex] ?? "").slice(0, charIndex).join(""));
       if (charIndex >= Array.from(phrasesList[phraseIndex] ?? "").length) {
+        if (once) {
+          return;
+        }
         mode = "hold";
         timer = window.setTimeout(step, holdMs);
         return;
@@ -107,12 +113,12 @@ export function TypewriterText({
       stopIdle();
       window.clearTimeout(timer);
     };
-  }, [deleteMs, holdMs, phraseKey, startDelay, typeMs]);
+  }, [deleteMs, holdMs, loop, phraseKey, startDelay, typeMs]);
 
   return (
     <Tag className={className} aria-label={list.join(" · ")}>
       {shown}
-      {list.length > 1 ? <span className="type-caret" aria-hidden /> : null}
+      {list.length > 0 ? <span className="type-caret" aria-hidden /> : null}
     </Tag>
   );
 }

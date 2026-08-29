@@ -1,28 +1,86 @@
-import { Reveal } from "./Reveal";
-import type { Copy } from "@/lib/i18n";
+"use client";
 
-export function SkillGrid({ groups }: { groups: Copy["skills"]["groups"] }) {
+import { useMemo, useState } from "react";
+import { Reveal } from "./Reveal";
+import { SkillLogo } from "./SkillLogo";
+import { skillIsInk, skillTone, SKILL_FILTERS, type SkillFilterId } from "@/lib/skill-mark";
+
+export function SkillGrid({
+  items,
+  filters,
+  learningTitle,
+  learning,
+}: {
+  items: string[];
+  filters: Record<SkillFilterId, string>;
+  learningTitle: string;
+  learning: string[];
+}) {
+  const [filter, setFilter] = useState<SkillFilterId>("all");
+  const shown = useMemo(() => {
+    const allow = SKILL_FILTERS[filter];
+    if (!allow) {
+      return items;
+    }
+    const set = new Set<string>(allow);
+    return items.filter((item) => set.has(item));
+  }, [filter, items]);
+
   return (
-    <div className="quiet-panel overflow-hidden">
-      {groups.map((group, index) => (
-        <Reveal key={group.title} delay={index * 50}>
-          <div className="skill-row">
-            <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[11px] text-accent">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="font-display text-xl italic text-ink">{group.title}</h3>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-              {group.items.map((item) => (
-                <span key={item} className="skill-chip">
-                  {item}
+    <Reveal>
+      <div className="skill-filters" role="tablist" aria-label={filters?.all ?? "Filter"}>
+        {(Object.keys(SKILL_FILTERS) as SkillFilterId[]).map((id) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={filter === id}
+            className={`skill-filter${filter === id ? " is-on" : ""}`}
+            onClick={() => setFilter(id)}
+          >
+            {filters[id]}
+          </button>
+        ))}
+      </div>
+      <ul className="skill-tiles">
+        {shown.map((item) => (
+          <li
+            key={item}
+            className={`skill-tile${skillIsInk(item) ? " is-ink" : ""}`}
+            style={{ color: skillTone(item) }}
+            tabIndex={0}
+            title={item}
+            aria-label={item}
+          >
+            <span className="skill-mark">
+              <SkillLogo name={item} />
+            </span>
+            <span className="skill-tile-name">{item}</span>
+          </li>
+        ))}
+      </ul>
+      {learning.length > 0 ? (
+        <div className="skill-learning">
+          <p className="skill-learning-title">{learningTitle}</p>
+          <ul>
+            {learning.map((item) => (
+              <li
+                key={item}
+                className={`skill-tile is-learn${skillIsInk(item) ? " is-ink" : ""}`}
+                style={{ color: skillTone(item) }}
+                tabIndex={0}
+                title={item}
+                aria-label={item}
+              >
+                <span className="skill-mark">
+                  <SkillLogo name={item} />
                 </span>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-      ))}
-    </div>
+                <span className="skill-tile-name">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </Reveal>
   );
 }

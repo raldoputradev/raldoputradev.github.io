@@ -1,45 +1,100 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { isAuditClient } from "@/lib/audit";
 import { site } from "@/lib/site";
 
-const SPLASH_MS = 4200;
-const EXIT_MS = 700;
+gsap.registerPlugin(useGSAP);
+
+const NAME_WORDS = site.name.split(" ");
 
 export function Splash() {
+  const root = useRef<HTMLDivElement>(null);
+  const countRef = useRef<HTMLSpanElement>(null);
   const [show, setShow] = useState(true);
-  const [leaving, setLeaving] = useState(false);
-  const finishing = useRef(false);
 
-  const finish = useCallback(() => {
-    if (finishing.current) {
-      return;
-    }
-    finishing.current = true;
-    setLeaving(true);
-    window.setTimeout(() => {
-      document.documentElement.dataset.splash = "skip";
-      setShow(false);
-    }, EXIT_MS);
-  }, []);
+  useGSAP(
+    () => {
+      const skip =
+        document.documentElement.dataset.splash === "skip" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        isAuditClient();
 
-  useEffect(() => {
-    if (
-      document.documentElement.dataset.splash === "skip" ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      isAuditClient()
-    ) {
-      document.documentElement.dataset.splash = "skip";
-      setShow(false);
-      return;
-    }
+      if (skip) {
+        document.documentElement.dataset.splash = "skip";
+        window.scrollTo(0, 0);
+        setShow(false);
+        return;
+      }
 
-    document.documentElement.dataset.splash = "play";
-    const playTimer = window.setTimeout(finish, SPLASH_MS);
-    return () => window.clearTimeout(playTimer);
-  }, [finish]);
+      document.documentElement.dataset.splash = "play";
+      window.scrollTo(0, 0);
+
+      const overlay = root.current;
+      if (!overlay) {
+        return;
+      }
+
+      const count = { value: 0 };
+      const countNode = countRef.current;
+
+      gsap.set(".splash-logo", { clipPath: "inset(0 100% 0 0)" });
+      gsap.set(".splash-word-inner", { yPercent: 120 });
+      gsap.set(".splash-role-inner", { clipPath: "inset(0 100% 0 0)" });
+      gsap.set(".splash-rule", { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(".splash-frame span", { scale: 0 });
+      gsap.set(".splash-axis", { scaleY: 0, transformOrigin: "center top" });
+      gsap.set(".splash-copy", { clipPath: "inset(0% 0% 0% 0%)" });
+      gsap.set(".splash-scan", { y: "-12vh" });
+
+      const tl = gsap.timeline({
+        defaults: { ease: "power4.out" },
+        onComplete: () => {
+          document.documentElement.dataset.splash = "skip";
+          window.scrollTo(0, 0);
+          setShow(false);
+        },
+      });
+
+      tl.to(".splash-scan", { y: "112vh", duration: 0.9, ease: "none" })
+        .to(
+          ".splash-frame span",
+          { scale: 1, duration: 0.55, stagger: 0.05, ease: "power3.out" },
+          0.12,
+        )
+        .to(".splash-axis", { scaleY: 1, duration: 0.7, ease: "power3.inOut" }, 0.18)
+        .to(".splash-logo", { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "power4.inOut" }, 0.28)
+        .to(
+          ".splash-word-inner",
+          { yPercent: 0, duration: 0.85, stagger: 0.08, ease: "power4.out" },
+          0.42,
+        )
+        .to(".splash-role-inner", { clipPath: "inset(0 0% 0 0)", duration: 0.55, ease: "power3.inOut" }, 0.72)
+        .to(".splash-rule", { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, 0.82)
+        .to(
+          count,
+          {
+            value: 100,
+            duration: 1.55,
+            ease: "power1.inOut",
+            onUpdate: () => {
+              if (countNode) {
+                countNode.textContent = String(Math.round(count.value)).padStart(3, "0");
+              }
+            },
+          },
+          0.55,
+        )
+        .to(".splash-copy", { clipPath: "inset(50% 0 50% 0)", duration: 0.48, ease: "power4.in" }, "+=0.18")
+        .to(".splash-axis", { scaleY: 0, transformOrigin: "center center", duration: 0.35, ease: "power3.in" }, "<")
+        .to(".splash-shutter.is-top", { yPercent: -101, duration: 0.95, ease: "power4.inOut" }, "-=0.08")
+        .to(".splash-shutter.is-bottom", { yPercent: 101, duration: 0.95, ease: "power4.inOut" }, "<");
+    },
+    { scope: root },
+  );
 
   if (!show) {
     return null;
@@ -47,66 +102,59 @@ export function Splash() {
 
   return (
     <div
-      className={`splash${leaving ? " is-out" : ""}`}
+      ref={root}
+      className="splash"
       role="status"
       aria-live="polite"
       aria-label={`${site.name}, ${site.splashRole}`}
     >
-      <div className="splash-wash" aria-hidden />
-      <div className="splash-mesh" aria-hidden />
-      <span className="splash-orb is-mint" aria-hidden />
-      <span className="splash-orb is-gold" aria-hidden />
+      <div className="splash-shutter is-top" aria-hidden>
+        <div className="splash-mesh" />
+      </div>
+      <div className="splash-shutter is-bottom" aria-hidden>
+        <div className="splash-mesh" />
+      </div>
+      <span className="splash-axis" aria-hidden />
+      <span className="splash-scan" aria-hidden />
 
-      <div className="splash-mark">
-        <Image
-          src="/logo-rap.png"
-          alt=""
-          width={263}
-          height={123}
-          className="splash-logo"
-          priority
-        />
-        <div className="splash-name-box">
-          <p className="splash-name">{site.name}</p>
-        </div>
-        <p className="splash-role">{site.splashRole}</p>
-        <div className="splash-load" aria-hidden>
-          <div className="splash-dial">
-            <svg className="splash-dial-face" viewBox="0 0 88 88">
-              <g className="splash-ticks">
-                {Array.from({ length: 24 }, (_, index) => {
-                  const angle = (index / 24) * Math.PI * 2 - Math.PI / 2;
-                  const inner = index % 6 === 0 ? 37.5 : 39.5;
-                  return (
-                    <line
-                      key={index}
-                      x1={44 + Math.cos(angle) * inner}
-                      y1={44 + Math.sin(angle) * inner}
-                      x2={44 + Math.cos(angle) * 42.5}
-                      y2={44 + Math.sin(angle) * 42.5}
-                    />
-                  );
-                })}
-              </g>
-              <circle className="splash-ring-track" cx="44" cy="44" r="32" />
-              <circle className="splash-ring-arc" cx="44" cy="44" r="32" />
-              <circle className="splash-ring-spin" cx="44" cy="44" r="23" />
-            </svg>
-            <div className="splash-dial-core">
-              <svg className="splash-claw" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="22" r="3.2" />
-                <path d="M16 19.2V12.4" />
-                <path d="M16 12.6 8.8 7.4M16 12.6 23.2 7.4" />
-                <path d="M8.8 7.4 6.6 10.2M23.2 7.4 25.4 10.2" />
-              </svg>
-              <span>RAP</span>
-            </div>
-          </div>
-          <span className="splash-dots">
-            <i />
-            <i />
-            <i />
+      <div className="splash-copy">
+        <div className="splash-hud" aria-hidden>
+          <span>raldoputradev</span>
+          <span className="splash-count">
+            <span ref={countRef} className="splash-count-num">
+              000
+            </span>
+            %
           </span>
+        </div>
+        <div className="splash-frame" aria-hidden>
+          <span className="is-tl" />
+          <span className="is-tr" />
+          <span className="is-bl" />
+          <span className="is-br" />
+        </div>
+        <div className="splash-mark">
+          <div className="splash-logo-clip">
+            <Image
+              src="/logo-rap.png"
+              alt=""
+              width={263}
+              height={123}
+              className="splash-logo"
+              priority
+            />
+          </div>
+          <p className="splash-name">
+            {NAME_WORDS.map((word) => (
+              <span key={word} className="splash-word">
+                <span className="splash-word-inner">{word}</span>
+              </span>
+            ))}
+          </p>
+          <p className="splash-role">
+            <span className="splash-role-inner">{site.splashRole}</span>
+          </p>
+          <span className="splash-rule" aria-hidden />
         </div>
       </div>
     </div>

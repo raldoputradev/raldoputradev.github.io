@@ -1,18 +1,23 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { site, type Locale } from "@/lib/site";
 import { getCopy } from "@/lib/i18n";
+import { homeHref } from "@/lib/paths";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { ThemeToggle } from "./ThemeToggle";
+import { DownloadIcon } from "./Icons";
 
-const links = ["home", "about", "skills", "projects"] as const;
-const sections = ["home", "about", "skills", "projects", "contact"] as const;
+const links = ["home", "about", "journey", "skills", "projects"] as const;
+const sections = ["home", "about", "journey", "skills", "projects", "contact"] as const;
 
 export function Header({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
-  const [active, setActive] = useState<string>("home");
+  const pathname = usePathname() || `/${locale}/`;
+  const onWork = pathname.includes("/work/");
+  const [active, setActive] = useState<string>(onWork ? "projects" : "home");
   const [open, setOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const lockRef = useRef<string | null>(null);
@@ -30,11 +35,15 @@ export function Header({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     const pick = () => {
+      if (pathname.includes("/work/")) {
+        setActive("projects");
+        return;
+      }
       if (lockRef.current) {
         return;
       }
 
-      const offset = navRef.current?.getBoundingClientRect().bottom ?? 112;
+      const offset = 88;
       let current: string = "home";
       for (const id of sections) {
         const node = document.getElementById(id);
@@ -55,7 +64,7 @@ export function Header({ locale }: { locale: Locale }) {
     };
 
     const hash = window.location.hash.replace("#", "");
-    if (sections.includes(hash as (typeof sections)[number])) {
+    if (!pathname.includes("/work/") && sections.includes(hash as (typeof sections)[number])) {
       setActive(hash);
     } else {
       pick();
@@ -76,12 +85,12 @@ export function Header({ locale }: { locale: Locale }) {
       window.removeEventListener("hashchange", pick);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <header ref={navRef} className="site-nav">
       <div className={`site-nav-bar${open ? " is-open" : ""}`}>
-        <a href="#home" className="site-nav-brand" onClick={() => goTo("home")}>
+        <a href={homeHref(locale, "home")} className="site-nav-brand" aria-label={site.name} onClick={() => goTo("home")}>
           <Image
             src="/logo-rap.png"
             alt={site.name}
@@ -92,11 +101,11 @@ export function Header({ locale }: { locale: Locale }) {
           />
         </a>
 
-        <nav className="site-nav-links" aria-label="Primary">
+        <nav className="site-nav-links" aria-label={locale === "id" ? "Navigasi utama" : "Primary"}>
           {links.map((id) => (
             <a
               key={id}
-              href={`#${id}`}
+              href={homeHref(locale, id)}
               onClick={() => goTo(id)}
               className={`nav-link ${active === id ? "is-active text-ink" : "hover:text-ink"}`}
             >
@@ -108,8 +117,14 @@ export function Header({ locale }: { locale: Locale }) {
         <div className="site-nav-end">
           <ThemeToggle labels={copy.theme} />
           <LocaleSwitch locale={locale} />
+          {site.cv ? (
+            <a href={site.cv} download className="site-nav-cv" aria-label={copy.hero.cv}>
+              <DownloadIcon className="h-4 w-4" />
+              <span className="hidden lg:inline">{copy.hero.cv}</span>
+            </a>
+          ) : null}
           <a
-            href="#contact"
+            href={homeHref(locale, "contact")}
             className={`site-nav-cta${active === "contact" ? " is-active" : ""}`}
             onClick={() => goTo("contact")}
           >
@@ -134,15 +149,20 @@ export function Header({ locale }: { locale: Locale }) {
           {links.map((id) => (
             <a
               key={id}
-              href={`#${id}`}
+              href={homeHref(locale, id)}
               onClick={() => goTo(id)}
               className={`site-nav-drawer-link${active === id ? " is-active" : ""}`}
             >
               {copy.nav[id]}
             </a>
           ))}
+          {site.cv ? (
+            <a href={site.cv} download className="site-nav-drawer-link" onClick={() => setOpen(false)}>
+              {copy.hero.cv}
+            </a>
+          ) : null}
           <a
-            href="#contact"
+            href={homeHref(locale, "contact")}
             onClick={() => goTo("contact")}
             className={`site-nav-drawer-cta${active === "contact" ? " is-active" : ""}`}
           >
