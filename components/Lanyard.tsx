@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import { Canvas, extend, useFrame, useThree, type ThreeElement, type ThreeEvent } from '@react-three/fiber';
 import { useGLTF, useTexture } from '@react-three/drei';
 import {
@@ -131,7 +131,7 @@ export default function Lanyard({
       <Canvas
         camera={{ position, fov }}
         dpr={isMobile ? [1, 1] : [1, 1.25]}
-        eventSource={rootRef}
+        eventSource={rootRef as RefObject<HTMLElement>}
         eventPrefix="client"
         frameloop={live ? 'always' : 'never'}
         gl={{ alpha: true, antialias: false, powerPreference: 'low-power', premultipliedAlpha: true, toneMappingExposure: frontImage ? 0.92 : 1 }}

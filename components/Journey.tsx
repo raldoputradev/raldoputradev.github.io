@@ -107,7 +107,7 @@ export function Journey({ copy }: { copy: Copy["journey"] }) {
     const bits = [...zip.querySelectorAll<HTMLElement>(".journey-zip-bit")];
     const step = 0.024;
     let frame = 0;
-    let start = performance.now();
+    const start = performance.now();
 
     const place = (now: number) => {
       if (document.hidden) {
