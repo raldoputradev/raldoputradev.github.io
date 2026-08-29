@@ -36,15 +36,12 @@ export function isAuditClient() {
   return isLighthouseViewport();
 }
 
-/** WebGL lanyard: desktop pengunjung saja — bukan mobile, audit, atau hemat data. */
+/** WebGL lanyard for real visitors, including phones. Skip Lighthouse, reduced motion, save-data, and 2G. */
 export function shouldLoadLanyard3D() {
   if (isAuditClient()) {
     return false;
   }
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return false;
-  }
-  if (window.innerWidth < 1024) {
     return false;
   }
   const nav = navigator as NavigatorWithHints;
@@ -53,9 +50,6 @@ export function shouldLoadLanyard3D() {
   }
   const slow = nav.connection?.effectiveType;
   if (slow === "slow-2g" || slow === "2g") {
-    return false;
-  }
-  if (typeof nav.deviceMemory === "number" && nav.deviceMemory > 0 && nav.deviceMemory < 4) {
     return false;
   }
   return true;

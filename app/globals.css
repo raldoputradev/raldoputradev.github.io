@@ -178,7 +178,6 @@ body {
 html[data-sky="idle"] .site-sky-snakes .is-a,
 html[data-sky="idle"] .site-sky-snakes .is-d,
 html[data-sky="idle"] .site-sky-snakes .is-e,
-html[data-sky="idle"] .journey-spine-snake,
 html[data-sky="idle"] .marquee-track,
 html[data-sky="idle"] .velocity-role-track {
   animation-play-state: paused;
@@ -277,21 +276,85 @@ html[data-sky="idle"] .velocity-role-track {
 }
 
 .card {
-  border: 1px solid var(--line);
-  border-radius: 1rem;
-  background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-raise) 100%, white 4%), color-mix(in srgb, var(--bg) 42%, var(--bg-raise)));
+  box-shadow:
+    0 18px 36px rgb(0 0 0 / 0.22),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.055), transparent 42%);
 }
 
 .card-lift {
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
 }
 
 .card-lift:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+  box-shadow:
+    0 26px 50px rgb(0 0 0 / 0.34),
+    0 0 36px color-mix(in srgb, var(--accent) 34%, transparent),
+    inset 0 1px 0 rgb(255 255 255 / 0.12);
+}
+
+.contact-tile {
+  --brand: var(--accent);
+}
+
+.contact-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  z-index: 2;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(90deg, transparent, var(--brand), transparent);
+  opacity: 0.7;
+  transition:
+    left 0.3s ease,
+    right 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.contact-tile:hover,
+.contact-tile:focus-visible {
+  border-color: color-mix(in srgb, var(--brand) 78%, var(--line));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--brand) 16%, var(--bg-raise)), color-mix(in srgb, var(--bg) 30%, var(--bg-raise)));
+  box-shadow:
+    0 26px 52px rgb(0 0 0 / 0.38),
+    0 0 42px color-mix(in srgb, var(--brand) 46%, transparent),
+    inset 0 1px 0 rgb(255 255 255 / 0.14);
+}
+
+.contact-tile:hover::before,
+.contact-tile:focus-visible::before {
+  left: 8%;
+  right: 8%;
+  opacity: 1;
 }
 
 .pill {
@@ -1426,6 +1489,7 @@ html[data-sky="idle"] .velocity-role-track {
   overflow: visible;
   background: transparent;
   touch-action: none;
+  overscroll-behavior: contain;
 }
 
 @media (min-width: 768px) {
@@ -1643,6 +1707,12 @@ html[data-sky="idle"] .velocity-role-track {
 :root[data-theme="dark"] .skill-tile.is-ink .skill-logo,
 :root[data-theme="dark"] .skill-tile.is-ink .skill-mark img {
   filter: brightness(0) invert(1);
+}
+
+:root[data-theme="dark"] .skill-tile.is-deep .skill-logo,
+:root[data-theme="dark"] .skill-tile.is-deep .skill-mark img,
+:root[data-theme="dark"] .skill-tile.is-deep .skill-mark svg {
+  filter: saturate(1.2) brightness(1.72);
 }
 
 :root[data-theme="light"] .skill-logo,
@@ -1959,8 +2029,7 @@ html[data-sky="idle"] .velocity-role-track {
 }
 
 .journey-spine-track,
-.journey-spine-fill,
-.journey-spine-snake {
+.journey-spine-fill {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -1977,11 +2046,41 @@ html[data-sky="idle"] .velocity-role-track {
   stroke-dasharray: 1000;
 }
 
-.journey-spine-snake {
-  stroke: color-mix(in srgb, var(--gold) 80%, var(--accent));
-  stroke-width: 2.6;
-  stroke-dasharray: 90 910;
-  animation: sky-snake 14s linear infinite;
+.journey-zip {
+  position: absolute;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  left: 0.15rem;
+  z-index: 1;
+  width: 2.75rem;
+  pointer-events: none;
+}
+
+@media (min-width: 720px) {
+  .journey-zip {
+    left: 50%;
+    margin-left: -1.375rem;
+  }
+}
+
+.journey-zip-bit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 1.5px;
+  background: var(--accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 80%, transparent);
+  opacity: 0;
+}
+
+.journey-zip-bit.is-head {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: var(--gold);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--gold) 90%, transparent);
 }
 
 .journey-eras {
@@ -2037,16 +2136,19 @@ html[data-sky="idle"] .velocity-role-track {
   --kind: var(--accent);
   position: relative;
   grid-column: 2;
-  padding: 1.05rem 1.15rem 1.1rem;
-  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
-  border-radius: 1.05rem;
+  padding: 1.15rem 1.2rem 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--kind) 22%, var(--line));
+  border-radius: 1.15rem;
   background:
-    linear-gradient(165deg, color-mix(in srgb, var(--kind) 10%, var(--bg-raise)), color-mix(in srgb, var(--bg) 78%, transparent));
-  box-shadow: 0 16px 32px rgb(0 0 0 / 0.18);
+    linear-gradient(165deg, color-mix(in srgb, var(--kind) 16%, var(--bg-raise)), color-mix(in srgb, var(--bg) 62%, var(--bg-raise)));
+  box-shadow:
+    0 18px 36px rgb(0 0 0 / 0.22),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
   transition:
     border-color 0.3s ease,
     transform 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease,
+    background 0.3s ease;
 }
 
 .journey-card + .journey-card {
@@ -2070,15 +2172,37 @@ html[data-sky="idle"] .velocity-role-track {
 }
 
 .journey-era.is-on .journey-card {
-  border-color: color-mix(in srgb, var(--kind) 42%, var(--line));
+  border-color: color-mix(in srgb, var(--kind) 55%, var(--line));
   box-shadow:
-    0 16px 32px rgb(0 0 0 / 0.2),
-    0 0 0 1px color-mix(in srgb, var(--kind) 14%, transparent);
+    0 18px 36px rgb(0 0 0 / 0.24),
+    0 0 0 1px color-mix(in srgb, var(--kind) 22%, transparent),
+    0 0 24px color-mix(in srgb, var(--kind) 18%, transparent);
 }
 
 .journey-card:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--kind) 58%, var(--line));
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--kind) 88%, white);
+  background:
+    linear-gradient(165deg, color-mix(in srgb, var(--kind) 32%, var(--bg-raise)), color-mix(in srgb, var(--bg-raise) 88%, var(--kind)));
+  box-shadow:
+    0 24px 48px rgb(0 0 0 / 0.32),
+    0 0 40px color-mix(in srgb, var(--kind) 48%, transparent),
+    inset 0 1px 0 rgb(255 255 255 / 0.12);
+}
+
+.journey-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--kind) 38%, transparent), transparent 64%);
+  transition: opacity 0.3s ease;
+}
+
+.journey-card:hover::after {
+  opacity: 1;
 }
 
 .journey-card::before {
@@ -2391,17 +2515,6 @@ html[data-splash="skip"] .splash {
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse at center, #000 22%, transparent 78%);
   pointer-events: none;
-}
-
-.splash-axis {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 3;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, var(--splash-mint), transparent);
-  transform: scaleY(0);
 }
 
 .splash-scan {
@@ -2845,11 +2958,11 @@ html[data-splash="play"] .code-card-caption {
 
 .brand-btn:hover,
 .group:hover .brand-btn {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.06);
   color: var(--brand);
-  border-color: color-mix(in srgb, var(--brand) 55%, var(--line));
-  background: color-mix(in srgb, var(--brand) 12%, var(--bg-raise));
-  box-shadow: 0 0 18px color-mix(in srgb, var(--brand) 42%, transparent);
+  border-color: color-mix(in srgb, var(--brand) 80%, white);
+  background: color-mix(in srgb, var(--brand) 22%, var(--bg-raise));
+  box-shadow: 0 0 28px color-mix(in srgb, var(--brand) 62%, transparent);
 }
 
 .brand-email {
@@ -2858,7 +2971,7 @@ html[data-splash="play"] .code-card-caption {
 
 .brand-github,
 .brand-repo {
-  --brand: #8b949e;
+  --brand: #d0d7de;
 }
 
 .brand-linkedin {
@@ -2888,6 +3001,26 @@ html[data-splash="play"] .code-card-caption {
 
   .card-lift:hover {
     border-color: var(--line);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--bg-raise) 100%, white 4%), color-mix(in srgb, var(--bg) 42%, var(--bg-raise)));
+  }
+
+  .contact-tile:hover {
+    border-color: var(--line);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--bg-raise) 100%, white 4%), color-mix(in srgb, var(--bg) 42%, var(--bg-raise)));
+  }
+
+  .journey-card:hover {
+    transform: none;
+    border-color: color-mix(in srgb, var(--kind) 22%, var(--line));
+    background:
+      linear-gradient(165deg, color-mix(in srgb, var(--kind) 16%, var(--bg-raise)), color-mix(in srgb, var(--bg) 62%, var(--bg-raise)));
+    box-shadow:
+      0 18px 36px rgb(0 0 0 / 0.22),
+      inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+
+  .journey-card:hover::after {
+    opacity: 0;
   }
 
   .pill:hover {
@@ -2928,13 +3061,16 @@ html[data-splash="play"] .code-card-caption {
   .hero-banner-track,
   .site-sky-snakes .is-a,
   .site-sky-snakes .is-d,
-  .site-sky-snakes .is-e,
-  .journey-spine-snake {
+  .site-sky-snakes .is-e {
     animation: none !important;
   }
 
   .journey-spine-fill {
     stroke-dashoffset: 0 !important;
+  }
+
+  .journey-zip {
+    display: none;
   }
 
   .project-slide {
@@ -2996,9 +3132,12 @@ html[data-audit="1"] .site-sky-orbit,
 html[data-audit="1"] .site-sky-stars,
 html[data-audit="1"] .site-sky-snakes .is-a,
 html[data-audit="1"] .site-sky-snakes .is-d,
-html[data-audit="1"] .site-sky-snakes .is-e,
-html[data-audit="1"] .journey-spine-snake {
+html[data-audit="1"] .site-sky-snakes .is-e {
   animation: none !important;
+}
+
+html[data-audit="1"] .journey-zip {
+  display: none;
 }
 
 @media (max-width: 1023px) {
@@ -3049,7 +3188,16 @@ html[data-audit="1"] .type-caret {
 
 :root[data-theme="light"] .card-lift:hover,
 :root[data-theme="light"] .project-card:hover {
-  box-shadow: 0 16px 32px rgb(28 24 18 / 0.16);
+  box-shadow:
+    0 22px 44px rgb(28 24 18 / 0.2),
+    0 0 26px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+:root[data-theme="light"] .contact-tile:hover {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 12%, var(--bg-raise)), var(--bg-raise));
+  box-shadow:
+    0 22px 44px rgb(28 24 18 / 0.18),
+    0 0 28px color-mix(in srgb, var(--brand) 28%, transparent);
 }
 
 :root[data-theme="light"] .band {
@@ -3072,6 +3220,17 @@ html[data-audit="1"] .type-caret {
   );
   border-color: color-mix(in srgb, var(--kind) 28%, var(--line));
   box-shadow: 0 12px 26px var(--shade);
+}
+
+:root[data-theme="light"] .journey-card:hover {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--kind) 26%, var(--bg-raise)),
+    var(--bg-raise)
+  );
+  box-shadow:
+    0 22px 40px rgb(28 24 18 / 0.16),
+    0 0 28px color-mix(in srgb, var(--kind) 26%, transparent);
 }
 
 :root[data-theme="light"] .work-poster {

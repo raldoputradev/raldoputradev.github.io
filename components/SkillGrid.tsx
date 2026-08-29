@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Reveal } from "./Reveal";
 import { SkillLogo } from "./SkillLogo";
-import { skillIsInk, skillTone, SKILL_FILTERS, type SkillFilterId } from "@/lib/skill-mark";
+import { skillIsDeep, skillIsInk, skillTone, SKILL_FILTERS, type SkillFilterId } from "@/lib/skill-mark";
 
 export function SkillGrid({
   items,
@@ -46,7 +46,7 @@ export function SkillGrid({
         {shown.map((item) => (
           <li
             key={item}
-            className={`skill-tile${skillIsInk(item) ? " is-ink" : ""}`}
+            className={`skill-tile${skillIsInk(item) ? " is-ink" : ""}${skillIsDeep(item) ? " is-deep" : ""}`}
             style={{ color: skillTone(item) }}
             tabIndex={0}
             title={item}
@@ -66,7 +66,7 @@ export function SkillGrid({
             {learning.map((item) => (
               <li
                 key={item}
-                className={`skill-tile is-learn${skillIsInk(item) ? " is-ink" : ""}`}
+                className={`skill-tile is-learn${skillIsInk(item) ? " is-ink" : ""}${skillIsDeep(item) ? " is-deep" : ""}`}
                 style={{ color: skillTone(item) }}
                 tabIndex={0}
                 title={item}

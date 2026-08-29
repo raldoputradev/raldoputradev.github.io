@@ -27,9 +27,9 @@ const TONE: Record<string, string> = {
   Figma: "#F24E1E",
   Docker: "#2496ED",
   TensorFlow: "#FF6F00",
-  OpenCV: "#5C3EE8",
-  "Machine learning": "#6366F1",
-  "Computer Vision": "#1D4ED8",
+  OpenCV: "#8B7CF8",
+  "Machine learning": "#C4B5FD",
+  "Computer Vision": "#38BDF8",
 };
 
 function hashTone(value: string) {
@@ -50,6 +50,19 @@ export function skillIsInk(name: string) {
   return name === "Next.js" || name === "GitHub";
 }
 
+/** Brand marks that read as black on the dark theme unless lifted. */
+export function skillIsDeep(name: string) {
+  return (
+    name === "C++" ||
+    name === "C#" ||
+    name === "Dart" ||
+    name === "Flutter" ||
+    name === "OpenCV" ||
+    name === "Computer Vision" ||
+    name === "Machine learning"
+  );
+}
+
 export const SKILL_FILTERS = {
   all: null,
   web: [
@@ -64,10 +77,9 @@ export const SKILL_FILTERS = {
     "Vite",
     "Tailwind",
     "Node.js",
-    "Gemini API",
   ],
-  embedded: ["Dart", "C++", "C#", "Flutter", "ESP32", "FreeRTOS", "MQTT", "WebSocket", "ROS2", "LiDAR"],
-  design: ["Figma", "Git", "GitHub", "Docker", "Machine learning", "Computer Vision"],
+  embedded: ["Dart", "C++", "C#", "Flutter"],
+  design: ["Figma", "Git", "GitHub", "Docker"],
 } as const;
 
 export type SkillFilterId = keyof typeof SKILL_FILTERS;

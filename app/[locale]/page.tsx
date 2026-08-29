@@ -361,7 +361,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   href={channel.href}
                   target={channel.href.startsWith("http") ? "_blank" : undefined}
                   rel={channelRel(channel.href)}
-                  className="card card-lift group flex flex-col items-center gap-3 px-5 py-7"
+                  className={`card card-lift contact-tile brand-${channel.brand} group flex flex-col items-center gap-3 px-5 py-7`}
                 >
                   {body}
                 </a>

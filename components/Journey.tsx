@@ -55,6 +55,8 @@ function groupEras(items: JourneyItem[]): Era[] {
 
 export function Journey({ copy }: { copy: Copy["journey"] }) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const spineRef = useRef<SVGSVGElement>(null);
+  const zipRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const eras = useMemo(() => groupEras(copy.items), [copy.items]);
   const last = Math.max(eras.length - 1, 0);
@@ -90,6 +92,53 @@ export function Journey({ copy }: { copy: Copy["journey"] }) {
     };
   }, []);
 
+  useEffect(() => {
+    const svg = spineRef.current;
+    const zip = zipRef.current;
+    const path = svg?.querySelector(".journey-spine-track") as SVGPathElement | null;
+    if (!svg || !zip || !path) {
+      return;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      zip.hidden = true;
+      return;
+    }
+
+    const bits = [...zip.querySelectorAll<HTMLElement>(".journey-zip-bit")];
+    const step = 0.024;
+    let frame = 0;
+    let start = performance.now();
+
+    const place = (now: number) => {
+      if (document.hidden) {
+        frame = requestAnimationFrame(place);
+        return;
+      }
+      const len = path.getTotalLength();
+      if (len < 8) {
+        frame = requestAnimationFrame(place);
+        return;
+      }
+      const box = svg.getBoundingClientRect();
+      const t = ((now - start) / 9200) % 1;
+      bits.forEach((bit, index) => {
+        let u = t - index * step;
+        if (u < 0) {
+          u += 1;
+        }
+        const point = path.getPointAtLength(u * len);
+        const x = (point.x / 32) * box.width;
+        const y = (point.y / 1000) * box.height;
+        bit.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+        bit.style.opacity = index === 0 ? "1" : String(Math.max(0.28, 0.92 - index * 0.07));
+      });
+      frame = requestAnimationFrame(place);
+    };
+
+    frame = requestAnimationFrame(place);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <section id="journey" className="journey-band mx-auto max-w-6xl scroll-mt-8 px-3.5 py-20 sm:px-8">
       <Reveal>
@@ -102,7 +151,7 @@ export function Journey({ copy }: { copy: Copy["journey"] }) {
         />
       </Reveal>
       <div ref={rootRef} className="journey-story mt-14">
-        <svg className="journey-spine" viewBox="0 0 32 1000" preserveAspectRatio="none" aria-hidden>
+        <svg ref={spineRef} className="journey-spine" viewBox="0 0 32 1000" preserveAspectRatio="none" aria-hidden>
           <path
             className="journey-spine-track"
             d="M16 8 C 2 90, 30 180, 16 270 S 2 450, 16 540 S 30 720, 16 810 S 2 930, 16 992"
@@ -114,12 +163,12 @@ export function Journey({ copy }: { copy: Copy["journey"] }) {
             pathLength="1000"
             style={{ strokeDashoffset: 1000 - progress * 1000 }}
           />
-          <path
-            className="journey-spine-snake"
-            d="M16 8 C 2 90, 30 180, 16 270 S 2 450, 16 540 S 30 720, 16 810 S 2 930, 16 992"
-            pathLength="1000"
-          />
         </svg>
+        <div ref={zipRef} className="journey-zip" aria-hidden>
+          {Array.from({ length: 12 }, (_, index) => (
+            <span key={index} className={`journey-zip-bit${index === 0 ? " is-head" : ""}`} />
+          ))}
+        </div>
         <ol className="journey-eras">
           {eras.map((era, eraIndex) => {
             const reached = last <= 0 ? progress > 0.04 : progress >= eraIndex / last - 0.08;

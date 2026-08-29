@@ -51,46 +51,34 @@ export function HeroLanyard() {
     }
 
     let cancelled = false;
-    let stopIdle = () => {};
 
-    const start = () => {
-      void import("@/components/Lanyard")
-        .then((mod) => {
-          if (cancelled) {
-            return null;
-          }
-          setLanyard(() => mod.default);
-          return makeLanyardArt();
-        })
-        .then((next) => {
-          if (cancelled || !next) {
-            return;
-          }
-          if (next.front && next.strap) {
-            setArt(next);
-            setMode("3d");
-            return;
-          }
+    void import("@/components/Lanyard")
+      .then((mod) => {
+        if (cancelled) {
+          return null;
+        }
+        setLanyard(() => mod.default);
+        return makeLanyardArt();
+      })
+      .then((next) => {
+        if (cancelled || !next) {
+          return;
+        }
+        if (next.front && next.strap) {
+          setArt(next);
+          setMode("3d");
+          return;
+        }
+        setMode("static");
+      })
+      .catch(() => {
+        if (!cancelled) {
           setMode("static");
-        })
-        .catch(() => {
-          if (!cancelled) {
-            setMode("static");
-          }
-        });
-    };
-
-    if (typeof window.requestIdleCallback === "function") {
-      const idle = window.requestIdleCallback(start, { timeout: 1600 });
-      stopIdle = () => window.cancelIdleCallback(idle);
-    } else {
-      const late = window.setTimeout(start, 400);
-      stopIdle = () => window.clearTimeout(late);
-    }
+        }
+      });
 
     return () => {
       cancelled = true;
-      stopIdle();
     };
   }, []);
 
@@ -98,7 +86,7 @@ export function HeroLanyard() {
 
   if (mode === "3d" && art && Lanyard) {
     return (
-      <div className="hero-lanyard" role="img" aria-label={label}>
+      <div className="hero-lanyard" aria-label={label}>
         <Lanyard
           position={[0, 0, 12]}
           gravity={[0, -40, 0]}

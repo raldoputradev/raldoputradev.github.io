@@ -130,14 +130,17 @@ export default function Lanyard({
     <div ref={rootRef} className="relative z-0 h-full w-full origin-center">
       <Canvas
         camera={{ position, fov }}
-        dpr={[1, 1.25]}
+        dpr={isMobile ? [1, 1] : [1, 1.25]}
+        eventSource={rootRef}
+        eventPrefix="client"
         frameloop={live ? 'always' : 'never'}
         gl={{ alpha: true, antialias: false, powerPreference: 'low-power', premultipliedAlpha: true, toneMappingExposure: frontImage ? 0.92 : 1 }}
-        style={{ background: 'transparent' }}
+        style={{ background: 'transparent', touchAction: 'none' }}
         className="h-full w-full touch-none"
         onCreated={({ gl, scene }) => {
           gl.setClearColor(0x000000, 0);
           scene.background = null;
+          gl.domElement.style.touchAction = 'none';
         }}
       >
         <TransparentStage />
@@ -282,6 +285,17 @@ function Band({
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);
 
+  const endDrag = (event?: ThreeEvent<PointerEvent>) => {
+    if (event) {
+      try {
+        (event.target as Element).releasePointerCapture(event.pointerId);
+      } catch {
+        /* already released */
+      }
+    }
+    drag(false);
+  };
+
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
@@ -299,33 +313,63 @@ function Band({
     }
   }, [hovered, dragged]);
 
+  useEffect(() => {
+    if (!dragged) {
+      return;
+    }
+    const stop = () => drag(false);
+    window.addEventListener('pointerup', stop);
+    window.addEventListener('pointercancel', stop);
+    return () => {
+      window.removeEventListener('pointerup', stop);
+      window.removeEventListener('pointercancel', stop);
+    };
+  }, [dragged]);
+
   useFrame((state, delta) => {
+    const fixedBody = fixed.current;
+    const joint1 = j1.current;
+    const joint2 = j2.current;
+    const joint3 = j3.current;
+    const cardBody = card.current;
+    const strap = band.current;
+    if (!fixedBody || !joint1 || !joint2 || !joint3 || !cardBody || !strap) {
+      return;
+    }
+
     if (dragged && typeof dragged !== 'boolean') {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
       vec.add(dir.multiplyScalar(state.camera.position.length()));
-      [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
-      card.current?.setNextKinematicTranslation({
+      [cardBody, joint1, joint2, joint3, fixedBody].forEach((body) => body.wakeUp());
+      cardBody.setNextKinematicTranslation({
         x: vec.x - dragged.x,
         y: vec.y - dragged.y,
         z: vec.z - dragged.z
       });
     }
-    if (fixed.current) {
-      [j1, j2].forEach(ref => {
-        const lerped = getLerped(ref.current);
-        const clampedDistance = Math.max(0.1, Math.min(1, lerped.distanceTo(ref.current.translation())));
-        lerped.lerp(ref.current.translation(), delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)));
-      });
-      curve.points[0].copy(j3.current.translation());
-      curve.points[1].copy(getLerped(j2.current));
-      curve.points[2].copy(getLerped(j1.current));
-      curve.points[3].copy(fixed.current.translation());
-      band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
-      ang.copy(card.current.angvel());
-      rot.copy(card.current.rotation());
-      card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z }, true);
+
+    const t1 = joint1.translation();
+    const t2 = joint2.translation();
+    const t3 = joint3.translation();
+    const tFixed = fixedBody.translation();
+    if (![t1.x, t1.y, t1.z, t2.x, t2.y, t2.z, t3.x, t3.y, t3.z, tFixed.x, tFixed.y, tFixed.z].every(Number.isFinite)) {
+      return;
     }
+
+    [joint1, joint2].forEach((body) => {
+      const lerped = getLerped(body);
+      const clampedDistance = Math.max(0.1, Math.min(1, lerped.distanceTo(body.translation())));
+      lerped.lerp(body.translation(), delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)));
+    });
+    curve.points[0].copy(t3);
+    curve.points[1].copy(getLerped(joint2));
+    curve.points[2].copy(getLerped(joint1));
+    curve.points[3].copy(tFixed);
+    strap.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+    ang.copy(cardBody.angvel());
+    rot.copy(cardBody.rotation());
+    cardBody.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z }, true);
   });
 
   curve.curveType = 'chordal';
@@ -356,15 +400,20 @@ function Band({
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
-            onPointerUp={(e: ThreeEvent<PointerEvent>) => {
-              (e.target as Element).releasePointerCapture(e.pointerId);
-              drag(false);
-            }}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+            onLostPointerCapture={() => drag(false)}
             onPointerDown={(e: ThreeEvent<PointerEvent>) => {
+              e.stopPropagation();
+              e.nativeEvent.preventDefault();
               (e.target as Element).setPointerCapture(e.pointerId);
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
             }}
           >
+            <mesh position={[0, -0.15, 0.04]} renderOrder={2}>
+              <boxGeometry args={[1.2, 1.6, 0.18]} />
+              <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+            </mesh>
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
                 map={cardMap}

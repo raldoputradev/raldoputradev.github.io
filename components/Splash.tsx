@@ -46,7 +46,6 @@ export function Splash() {
       gsap.set(".splash-role-inner", { clipPath: "inset(0 100% 0 0)" });
       gsap.set(".splash-rule", { scaleX: 0, transformOrigin: "left center" });
       gsap.set(".splash-frame span", { scale: 0 });
-      gsap.set(".splash-axis", { scaleY: 0, transformOrigin: "center top" });
       gsap.set(".splash-copy", { clipPath: "inset(0% 0% 0% 0%)" });
       gsap.set(".splash-scan", { y: "-12vh" });
 
@@ -65,7 +64,6 @@ export function Splash() {
           { scale: 1, duration: 0.55, stagger: 0.05, ease: "power3.out" },
           0.12,
         )
-        .to(".splash-axis", { scaleY: 1, duration: 0.7, ease: "power3.inOut" }, 0.18)
         .to(".splash-logo", { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "power4.inOut" }, 0.28)
         .to(
           ".splash-word-inner",
@@ -89,7 +87,6 @@ export function Splash() {
           0.55,
         )
         .to(".splash-copy", { clipPath: "inset(50% 0 50% 0)", duration: 0.48, ease: "power4.in" }, "+=0.18")
-        .to(".splash-axis", { scaleY: 0, transformOrigin: "center center", duration: 0.35, ease: "power3.in" }, "<")
         .to(".splash-shutter.is-top", { yPercent: -101, duration: 0.95, ease: "power4.inOut" }, "-=0.08")
         .to(".splash-shutter.is-bottom", { yPercent: 101, duration: 0.95, ease: "power4.inOut" }, "<");
     },
@@ -114,7 +111,6 @@ export function Splash() {
       <div className="splash-shutter is-bottom" aria-hidden>
         <div className="splash-mesh" />
       </div>
-      <span className="splash-axis" aria-hidden />
       <span className="splash-scan" aria-hidden />
 
       <div className="splash-copy">
