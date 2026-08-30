@@ -43,6 +43,15 @@ export function HeroLanyard() {
   const [art, setArt] = useState<{ front: string; back: string; strap: string } | null>(null);
   const [mode, setMode] = useState<"wait" | "static" | "3d">("wait");
   const [Lanyard, setLanyard] = useState<ComponentType<LanyardProps> | null>(null);
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () => setCompact(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     if (!shouldLoadLanyard3D()) {
@@ -88,11 +97,11 @@ export function HeroLanyard() {
     return (
       <div className="hero-lanyard" aria-label={label}>
         <Lanyard
-          position={[0, 0, 12]}
+          position={compact ? [0, 0.45, 13.5] : [0, 0, 12]}
           gravity={[0, -40, 0]}
           fov={20}
           transparent
-          lanyardWidth={2.85}
+          lanyardWidth={compact ? 2.15 : 2.85}
           frontImage={art.front}
           backImage={art.back}
           lanyardImage={art.strap}

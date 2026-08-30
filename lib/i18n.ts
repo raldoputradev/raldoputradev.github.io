@@ -141,6 +141,9 @@ export type Copy = {
     sandboxNote: string;
     pending: string;
     quote: string;
+    ask: string;
+    askOpen: string;
+    askCancel: string;
   };
   footer: string;
 };
@@ -513,6 +516,9 @@ const id: Copy = {
     pending: "Menyusul",
     quote:
       "Perangkat lunak yang baik bukan hanya soal menulis kode, tapi merancang sistem yang menyelesaikan masalah nyata — termasuk ketika jaringannya mati.",
+    ask: "Buka halaman?",
+    askOpen: "Buka",
+    askCancel: "Batal",
   },
   footer: "Rayendra Aldo Putra · Portofolio",
 };
@@ -885,6 +891,9 @@ const en: Copy = {
     pending: "Coming soon",
     quote:
       "Good software is not only about writing code, but designing systems that solve real problems — including when the network is down.",
+    ask: "Open this page?",
+    askOpen: "Open",
+    askCancel: "Cancel",
   },
   footer: "Rayendra Aldo Putra · Portfolio",
 };

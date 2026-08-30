@@ -138,8 +138,8 @@ export function Header({ locale }: { locale: Locale }) {
             aria-controls={open ? "mobile-nav" : undefined}
             className="site-nav-menu md:hidden"
           >
-            <span className={`h-px w-4 bg-current transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`} />
-            <span className={`h-px w-4 bg-current transition-transform ${open ? "-translate-y-[3px] -rotate-45" : ""}`} />
+            <span className={`site-nav-menu-bar${open ? " is-close-top" : ""}`} />
+            <span className={`site-nav-menu-bar${open ? " is-close-bottom" : ""}`} />
           </button>
         </div>
       </div>

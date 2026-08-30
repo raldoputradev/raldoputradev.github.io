@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject } from 'react';
+import { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, extend, useFrame, useThree, type ThreeElement, type ThreeEvent } from '@react-three/fiber';
 import { useGLTF, useTexture } from '@react-three/drei';
 import {
@@ -31,6 +31,15 @@ function TransparentStage() {
       scene.background = null;
     }
   });
+  return null;
+}
+
+function TouchPolicy({ panY }: { panY: boolean }) {
+  const { gl } = useThree();
+  useLayoutEffect(() => {
+    const el = gl.domElement;
+    el.style.touchAction = panY ? "pan-y" : "none";
+  }, [gl, panY]);
   return null;
 }
 
@@ -131,19 +140,18 @@ export default function Lanyard({
       <Canvas
         camera={{ position, fov }}
         dpr={isMobile ? [1, 1] : [1, 1.25]}
-        eventSource={rootRef as RefObject<HTMLElement>}
-        eventPrefix="client"
         frameloop={live ? 'always' : 'never'}
         gl={{ alpha: true, antialias: false, powerPreference: 'low-power', premultipliedAlpha: true, toneMappingExposure: frontImage ? 0.92 : 1 }}
-        style={{ background: 'transparent', touchAction: 'none' }}
-        className="h-full w-full touch-none"
+        style={{ background: 'transparent', touchAction: isMobile ? 'pan-y' : 'none' }}
+        className="h-full w-full"
         onCreated={({ gl, scene }) => {
           gl.setClearColor(0x000000, 0);
           scene.background = null;
-          gl.domElement.style.touchAction = 'none';
+          gl.domElement.style.touchAction = isMobile ? 'pan-y' : 'none';
         }}
       >
         <TransparentStage />
+        <TouchPolicy panY={isMobile} />
         <ambientLight intensity={frontImage ? 1.55 : Math.PI} />
         <directionalLight position={[3, 5, 8]} intensity={1.15} />
         <directionalLight position={[-5, 1, 4]} intensity={0.45} />
@@ -284,6 +292,12 @@ function Band({
   );
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);
+  const pendingDrag = useRef<{
+    pointerId: number;
+    offset: THREE.Vector3;
+    x: number;
+    y: number;
+  } | null>(null);
 
   const endDrag = (event?: ThreeEvent<PointerEvent>) => {
     if (event) {
@@ -314,15 +328,64 @@ function Band({
   }, [hovered, dragged]);
 
   useEffect(() => {
+    if (!isMobile) {
+      return;
+    }
+
+    const onMove = (event: PointerEvent) => {
+      const pending = pendingDrag.current;
+      if (!pending || event.pointerId !== pending.pointerId || dragged) {
+        return;
+      }
+      const dx = event.clientX - pending.x;
+      const dy = event.clientY - pending.y;
+      if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
+        return;
+      }
+      if (Math.abs(dy) >= Math.abs(dx)) {
+        pendingDrag.current = null;
+        return;
+      }
+      pendingDrag.current = null;
+      try {
+        (event.target as Element | null)?.setPointerCapture?.(event.pointerId);
+      } catch {
+        /* capture is optional */
+      }
+      drag(pending.offset);
+    };
+
+    const onUp = (event: PointerEvent) => {
+      if (pendingDrag.current?.pointerId === event.pointerId) {
+        pendingDrag.current = null;
+      }
+    };
+
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+    };
+  }, [dragged, isMobile]);
+
+  useEffect(() => {
     if (!dragged) {
       return;
     }
     const stop = () => drag(false);
+    const blockScroll = (event: TouchEvent) => {
+      event.preventDefault();
+    };
     window.addEventListener('pointerup', stop);
     window.addEventListener('pointercancel', stop);
+    document.addEventListener('touchmove', blockScroll, { passive: false });
     return () => {
       window.removeEventListener('pointerup', stop);
       window.removeEventListener('pointercancel', stop);
+      document.removeEventListener('touchmove', blockScroll);
     };
   }, [dragged]);
 
@@ -396,24 +459,35 @@ function Band({
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
-            scale={2.25}
+            scale={isMobile ? 1.82 : 2.25}
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
+            onPointerUp={(event) => {
+              pendingDrag.current = null;
+              endDrag(event);
+            }}
+            onPointerCancel={(event) => {
+              pendingDrag.current = null;
+              endDrag(event);
+            }}
             onLostPointerCapture={() => drag(false)}
             onPointerDown={(e: ThreeEvent<PointerEvent>) => {
+              const offset = new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()));
+              if (isMobile) {
+                pendingDrag.current = {
+                  pointerId: e.pointerId,
+                  offset,
+                  x: e.nativeEvent.clientX,
+                  y: e.nativeEvent.clientY,
+                };
+                return;
+              }
               e.stopPropagation();
-              e.nativeEvent.preventDefault();
               (e.target as Element).setPointerCapture(e.pointerId);
-              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+              drag(offset);
             }}
           >
-            <mesh position={[0, -0.15, 0.04]} renderOrder={2}>
-              <boxGeometry args={[1.2, 1.6, 0.18]} />
-              <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-            </mesh>
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
                 map={cardMap}
@@ -431,7 +505,7 @@ function Band({
           </group>
         </RigidBody>
       </group>
-      <mesh ref={band}>
+      <mesh ref={band} raycast={() => undefined}>
         <meshLineGeometry />
         <meshLineMaterial
           color="white"

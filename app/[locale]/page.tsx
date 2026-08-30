@@ -1,15 +1,8 @@
 import { notFound } from "next/navigation";
-import {
-  DownloadIcon,
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  MailIcon,
-  RepoIcon,
-  WhatsappIcon,
-} from "@/components/Icons";
+import { DownloadIcon } from "@/components/Icons";
 import { Marquee } from "@/components/Marquee";
 import { HeroLanyard } from "@/components/HeroLanyard";
+import { ContactChannels } from "@/components/ContactChannels";
 import { CvSoonButton } from "@/components/CvSoonButton";
 import { RotateWords } from "@/components/RotateWords";
 import { Journey } from "@/components/Journey";
@@ -22,16 +15,6 @@ import { CodeCard } from "@/components/CodeCard";
 import { getCopy } from "@/lib/i18n";
 import { homeHref } from "@/lib/paths";
 import { isLocale, site } from "@/lib/site";
-
-function channelRel(href: string | null) {
-  if (!href?.startsWith("http")) {
-    return undefined;
-  }
-  if (href === site.github || href === site.linkedin) {
-    return "me noreferrer noopener";
-  }
-  return "noreferrer noopener";
-}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -47,7 +30,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       value: site.email,
       note: copy.contact.emailNote,
       href: `mailto:${site.email}`,
-      icon: <MailIcon />,
     },
     {
       label: "GitHub",
@@ -55,7 +37,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       value: site.githubHandle,
       note: copy.contact.githubNote,
       href: site.github,
-      icon: <GithubIcon />,
     },
     {
       label: "LinkedIn",
@@ -63,7 +44,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       value: site.linkedinHandle,
       note: copy.contact.linkedinNote,
       href: site.linkedin,
-      icon: <LinkedinIcon />,
     },
     {
       label: "WhatsApp",
@@ -71,7 +51,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       value: site.whatsappLabel,
       note: copy.contact.whatsappNote,
       href: site.whatsapp,
-      icon: <WhatsappIcon />,
     },
     {
       label: "Instagram",
@@ -79,7 +58,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       value: site.instagramHandle,
       note: copy.contact.instagramNote,
       href: site.instagram,
-      icon: <InstagramIcon />,
     },
     {
       label: "Repo Simalas",
@@ -87,7 +65,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       value: site.sandboxRepoLabel,
       note: copy.contact.sandboxNote,
       href: site.sandboxRepo,
-      icon: <RepoIcon />,
     },
   ];
 
@@ -336,45 +313,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-muted">{copy.contact.body}</p>
         </Reveal>
         <Reveal delay={80}>
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {channels.map((channel) => {
-              const body = (
-                <>
-                  <span className={`brand-btn brand-${channel.brand}`}>{channel.icon}</span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
-                    {channel.label}
-                  </span>
-                  <span
-                    className={`break-all text-sm ${channel.value ? "text-ink" : "text-muted italic"}`}
-                  >
-                    {channel.value ?? copy.contact.pending}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-                    {channel.note}
-                  </span>
-                </>
-              );
-
-              return channel.href ? (
-                <a
-                  key={channel.label}
-                  href={channel.href}
-                  target={channel.href.startsWith("http") ? "_blank" : undefined}
-                  rel={channelRel(channel.href)}
-                  className={`card card-lift contact-tile brand-${channel.brand} group flex flex-col items-center gap-3 px-5 py-7`}
-                >
-                  {body}
-                </a>
-              ) : (
-                <div
-                  key={channel.label}
-                  className="group flex flex-col items-center gap-3 rounded-2xl border border-dashed border-line/80 px-5 py-7 opacity-70"
-                >
-                  {body}
-                </div>
-              );
-            })}
-          </div>
+          <ContactChannels
+            channels={channels}
+            pending={copy.contact.pending}
+            ask={copy.contact.ask}
+            askOpen={copy.contact.askOpen}
+            askCancel={copy.contact.askCancel}
+          />
         </Reveal>
 
         {site.cv ? (
