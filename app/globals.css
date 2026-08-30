@@ -904,13 +904,47 @@ html[data-sky="idle"] .site-sky-snakes .is-e {
   }
 
   .site-nav-drawer {
-    font-size: 1.05rem;
-    letter-spacing: 0.14em;
-    padding: 0.85rem 0.75rem 1rem;
+    width: 100%;
+    gap: 0.22rem;
+    margin: 0 auto;
+    padding: 0.55rem 0.55rem 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    border-radius: 1.5rem 1.5rem 0 0;
+    border-bottom: 0;
+  }
+
+  .site-nav-bar.is-open {
+    border-radius: 0 0 1.5rem 1.5rem;
+    border-top-color: transparent;
   }
 
   .site-nav-drawer-link {
-    padding: 0.95rem 0.25rem 1.02rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    min-height: 3.25rem;
+    padding: 0.85rem 1rem 1rem;
+    font-size: 1.18rem;
+    border-radius: 1rem;
+  }
+
+  .site-nav-drawer-link::after {
+    left: 50%;
+    width: 4.75rem;
+    margin-left: -2.375rem;
+    bottom: 0.42rem;
+    height: 2px;
+  }
+
+  .site-nav-drawer-cta {
+    min-height: 3.35rem;
+    margin-top: 0.4rem;
+    font-size: 1.12rem;
+    font-weight: 600;
   }
 
   .text-\[10px\],
