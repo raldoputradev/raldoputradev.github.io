@@ -45,13 +45,13 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server.",
+    "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. SmartBrail: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server.",
   keywords: [
     "Rayendra Aldo Putra",
     "raldoputradev",
     "Teknik Robotika",
     "Politeknik Negeri Batam",
-    "Simalas",
+    "SmartBrail",
     "Laravel",
     "ESP32",
     "Full-Stack",
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} — Portofolio`,
     description:
-      "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32.",
+      "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. SmartBrail: sidik jari, Laravel, Flutter, ESP32.",
     images: [site.ogImage],
   },
   icons: { icon: "/favicon.svg", apple: "/logo-rap.png" },

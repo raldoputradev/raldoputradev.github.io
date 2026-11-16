@@ -60,7 +60,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       href: site.instagram,
     },
     {
-      label: "Repo Simalas",
+      label: "Repo SmartBrail",
       brand: "repo",
       value: site.sandboxRepoLabel,
       note: copy.contact.sandboxNote,

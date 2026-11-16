@@ -133,17 +133,30 @@ export function ProjectShowcase({
             ))}
           </ul>
 
-          {project.repoUrl ? (
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:text-ink"
-            >
-              {work.repoLink}
-              {project.repoLabel ? <span className="text-muted">· {project.repoLabel}</span> : null}
-            </a>
-          ) : null}
+          <span className="mt-5 inline-flex flex-wrap items-center gap-x-4 gap-y-2">
+            {project.liveUrl ? (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:text-ink"
+              >
+                Live
+                {project.liveLabel ? <span className="text-muted">· {project.liveLabel}</span> : null}
+              </a>
+            ) : null}
+            {project.repoUrl ? (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:text-ink"
+              >
+                {work.repoLink}
+                {project.repoLabel ? <span className="text-muted">· {project.repoLabel}</span> : null}
+              </a>
+            ) : null}
+          </span>
         </div>
 
         <div className="project-gallery">

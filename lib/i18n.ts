@@ -23,6 +23,8 @@ export type Project = {
   stack: string[];
   repoUrl?: string;
   repoLabel?: string;
+  liveUrl?: string;
+  liveLabel?: string;
   images: ProjectImage[];
 };
 
@@ -152,7 +154,7 @@ const id: Copy = {
   meta: {
     title: "Rayendra Aldo Putra — Portofolio | Politeknik Negeri Batam | raldoputradev",
     description:
-      "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server.",
+      "Portofolio Rayendra Aldo Putra. Mahasiswa Teknik Robotika, Politeknik Negeri Batam. SmartBrail: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server.",
   },
   nav: {
     home: "Beranda",
@@ -171,13 +173,13 @@ const id: Copy = {
       "Teknik Robotika · sensor ke cloud",
       "Edge, API, web, dan mobile",
       "Local-first, lalu sync ke server",
-      "Simalas: sidik jari sampai dashboard",
+      "SmartBrail: sidik jari sampai dashboard",
     ],
     intro:
       "Saya merancang dan membangun perangkat lunak secara utuh — arsitektur, alur data, dan antarmuka yang tetap andal saat dipakai. Bukan kumpulan demo terpisah, melainkan sistem yang bisa dioperasikan dan dikembangkan.",
     line: "Local-first di perangkat. Sync ke server kemudian.",
     primary: "Lihat proyek",
-    secondary: "Arsitektur Simalas",
+    secondary: "Arsitektur SmartBrail",
     contactCta: "Hubungi saya",
     cv: "Unduh CV",
     cvSoon: "Coming soon",
@@ -243,13 +245,13 @@ const id: Copy = {
     ],
     filters: { all: "Semua", web: "Web", embedded: "Embedded", design: "Craft" },
     notes: {
-      Laravel: "API Simalas",
+      Laravel: "API SmartBrail",
       Blade: "Dashboard laboran",
-      React: "Situs publik Simalas",
+      React: "Situs publik SmartBrail",
       Flutter: "Aplikasi mahasiswa",
       ESP32: "Firmware mesin sidik jari",
       "C++": "FreeRTOS di ESP32",
-      MySQL: "Skema Simalas",
+      MySQL: "Skema SmartBrail",
       "C#": "Afis Fingerprint Analyzer",
       "Next.js": "Portofolio ini",
       Figma: "Alur dan antarmuka",
@@ -295,18 +297,18 @@ const id: Copy = {
         year: "2026",
         range: "Feb – Jul 2026",
         tag: "Proyek",
-        title: "SIMALAS — web, mobile & IoT",
+        title: "SMARTBRAIL — web, mobile & IoT",
         place: "BRAIL · Politeknik Negeri Batam",
-        text: "Sistem absensi sidik jari dan loker lab dalam satu rantai: API Laravel, dashboard staf, situs publik React, aplikasi Flutter, dan firmware ESP32 local-first. Termasuk Afis Fingerprint Analyzer (C#) untuk audit template — bukan mesin matching absensi.",
+        text: "Sistem manajemen laboratorium pintar: absensi sidik jari, akses ruangan RFID/PIN, persetujuan ruangan, dan PBL — API Laravel, panel admin Inertia/React, situs publik, aplikasi Flutter, dan firmware ESP32-S3 offline-first. Termasuk Afis Fingerprint Analyzer (C#) untuk audit template — bukan mesin matching absensi.",
         stack: ["Laravel", "Flutter", "ESP32", "MySQL", "React", "C#"],
       },
       {
         year: "2025",
         range: "Agu 2025 – Jan 2026",
         tag: "Mekanikal",
-        title: "SIMALAS — rancang bangun perangkat",
+        title: "SMARTBRAIL — rancang bangun perangkat",
         place: "Laboratorium Polibatam",
-        text: "Rangka loker, rumah modul sidik jari, keypad, dan display; rute kabel agar papan tetap bisa diservis. Prototype enclosure pertama diiterasi setelah dirakit — fit dan riset belum matang untuk mesin jadi.",
+        text: "Rumah modul sidik jari, keypad, display, dan unit kontrol pintu; rute kabel agar papan tetap bisa diservis. Prototype enclosure pertama diiterasi setelah dirakit — fit dan riset belum matang untuk mesin jadi.",
         stack: ["SolidWorks", "Fabrikasi"],
       },
       {
@@ -367,26 +369,28 @@ const id: Copy = {
   },
   projects: [
     {
-      slug: "simalas",
-      name: "Simalas",
+      slug: "smartbrail",
+      name: "SmartBrail",
       role: "Full-stack & IoT",
       status: "live",
       summary:
-        "Sistem absensi dan loker laboratorium: web admin untuk laboran dan dosen, aplikasi mahasiswa, serta mesin sidik jari ESP32 dengan arsitektur local-first. Offline menulis ke flash; saat online menyinkron ke server.",
+        "Sistem manajemen laboratorium pintar untuk BRAIL, Politeknik Negeri Batam — absensi sidik jari/RFID/PIN, akses ruangan berbasis jadwal & izin, persetujuan ruangan, manajemen PBL, dan monitoring realtime. Live di smartbrail.com untuk admin, laboran, dosen, dan mahasiswa.",
       features: [
-        "Absensi sidik jari dengan sesi dan kebijakan keterlambatan",
-        "Loker lab: slot, bukti foto, dan riwayat tim",
-        "Manajemen peran & izin per menu (laboran, dosen, mahasiswa)",
-        "API mesin terpisah dari API mobile",
-        "Sinkronisasi hybrid: flash internal lalu push ke server",
-        "Asisten AI internal untuk admin dan helpdesk publik",
+        "Absensi sidik jari dengan sesi, kebijakan keterlambatan, dan kalender akademik",
+        "Akses ruangan via RFID / PIN / sidik jari — diverifikasi server, tetap jalan offline lewat cache ACL mesin",
+        "Persetujuan pemakaian ruangan + riwayat akses per ruangan",
+        "Periode akademik & kenaikan semester dengan review cuti/mengulang",
+        "Monitoring operasional realtime (Laravel Reverb): telemetri, pintu, status perangkat",
+        "Jejak audit admin + asisten AI kontekstual per peran",
       ],
       contributionTitle: "Kontribusi saya",
       contribution:
-        "Merancang dan menulis seluruh lapisan: skema database, API Laravel, dashboard laboran (Blade + Tailwind), situs publik React, aplikasi Flutter, dan firmware ESP32. Termasuk keamanan (throttle, signed URL, middleware izin) dan perakitan mekanik perangkat.",
-      stack: ["Laravel", "Blade", "React", "Flutter", "C++ / FreeRTOS", "ESP32", "MySQL"],
-      repoUrl: "https://github.com/raldoputradev/aiot-simalas",
-      repoLabel: "raldoputradev/aiot-simalas",
+        "Merancang dan menulis seluruh lapisan: skema database, API Laravel, panel admin Inertia/React, situs publik, aplikasi Flutter, dan firmware ESP32-S3 dua unit (panel depan + kontrol belakang, ESP-NOW terenkripsi). Termasuk keamanan (throttle, middleware izin, HTTPS) dan arsitektur akses offline-first.",
+      stack: ["Laravel", "Inertia", "React", "Flutter", "C++ / FreeRTOS", "ESP32-S3", "MySQL", "Reverb"],
+      repoUrl: "https://github.com/raldoputradev/smartbrail-showcase",
+      repoLabel: "raldoputradev/smartbrail-showcase",
+      liveUrl: "https://smartbrail.com",
+      liveLabel: "smartbrail.com",
       images: [
         { src: "/projects/simalas-dashboard.png", caption: "Dashboard laboran: KPI, tren aktivitas IoT, distribusi peran", tag: "Web admin", width: 1024, height: 506 },
         { src: "/projects/simalas-ai.png", caption: "Asisten AI internal dengan konfirmasi sebelum mengubah data", tag: "Asisten AI", width: 1024, height: 509 },
@@ -406,7 +410,7 @@ const id: Copy = {
       role: "Desktop · C#",
       status: "live",
       summary:
-        "Aplikasi Windows untuk mengaudit blob template DY50/R307 (512 byte) yang dipakai Simalas, plus tab terpisah untuk citra sensor. Bukan rekonstruksi foto jari dan bukan mesin matching absensi.",
+        "Aplikasi Windows untuk mengaudit blob template DY50/R307 (512 byte) yang dipakai SmartBrail, plus tab terpisah untuk citra sensor. Bukan rekonstruksi foto jari dan bukan mesin matching absensi.",
       features: [
         "Peta byte 32×16, histogram, hex, skor entropi, dan CRC32 untuk blob 512 byte",
         "Tab citra: foto abu-abu, kerangka ridge, titik ujung/cabang — hanya jika ada berkas gambar",
@@ -428,7 +432,7 @@ const id: Copy = {
     },
   ],
   architecture: {
-    kicker: "Bagaimana Simalas disusun",
+    kicker: "Bagaimana SmartBrail disusun",
     titleLead: "Arsitektur",
     titleAccent: "Sistem",
     layers: [
@@ -444,13 +448,13 @@ const id: Copy = {
       },
       {
         name: "Web",
-        tech: "Blade · Tailwind · React",
-        text: "Dashboard laboran dan dosen dengan Blade + Tailwind: pengguna, absensi, loker, mesin, pengumuman, asisten AI internal. Situs publik dan halaman unduh APK memakai React.",
+        tech: "Inertia · React · Tailwind",
+        text: "Panel admin multi-peran (admin, laboran, dosen) dengan Inertia + React: pengguna, absensi, ruangan, mesin, monitoring realtime, audit, asisten AI. Situs publik dan halaman unduh APK juga React.",
       },
       {
         name: "Mobile",
         tech: "Flutter · Dart · Gemini",
-        text: "Mahasiswa: absensi, loker, pengumuman, saran. Helpdesk AI untuk pertanyaan operasional.",
+        text: "Mahasiswa: absensi, jadwal, pengumuman, pengajuan ruangan tim. Helpdesk AI untuk pertanyaan operasional.",
       },
     ],
     decisionsTitle: "Keputusan desain",
@@ -460,8 +464,8 @@ const id: Copy = {
         text: "Tap tercatat di perangkat lebih dulu. Server menerima sync kemudian. Ini kebutuhan laboratorium, bukan tren arsitektur.",
       },
       {
-        title: "Mahasiswa tidak punya portal web",
-        text: "Route web mahasiswa diarahkan ke halaman info. Permukaan serangan lebih kecil, satu sumber kebenaran di aplikasi.",
+        title: "Dua unit per mesin akses",
+        text: "Panel depan (RFID, keypad, display) terpisah dari kontrol belakang (relay pintu) — berkomunikasi via ESP-NOW terenkripsi. Kabel daya pintu tidak terjangkau dari sisi luar.",
       },
       {
         title: "Mesin bukan pengguna",
@@ -473,7 +477,7 @@ const id: Copy = {
       items: [
         "API key mesin, token, dan kredensial email",
         "Data mahasiswa, template sidik jari, dan log operasional",
-        "Repo produksi Simalas (tetap private)",
+        "Repo produksi SmartBrail (tetap private)",
       ],
     },
   },
@@ -493,12 +497,12 @@ const id: Copy = {
         "Dashboard staf laboratorium dengan Blade + Tailwind, situs publik dengan React",
         "Aplikasi Flutter untuk mahasiswa, termasuk asisten Gemini",
         "Firmware C++/FreeRTOS dan sinkronisasi hybrid",
-        "Aplikasi desktop C# / WinForms untuk audit template sidik jari Simalas",
+        "Aplikasi desktop C# / WinForms untuk audit template sidik jari SmartBrail",
       ],
     },
     next: {
       title: "Yang sedang saya siapkan",
-      text: "Simalas dan Afis Fingerprint Analyzer sudah terbuka di GitHub. Berikutnya: uji citra dari mesin setelah kampus buka, dengan data enroll milik saya sendiri — bukan foto lab.",
+      text: "SmartBrail dan Afis Fingerprint Analyzer sudah terbuka di GitHub. Berikutnya: uji citra dari mesin setelah kampus buka, dengan data enroll milik saya sendiri — bukan foto lab.",
     },
   },
   contact: {
@@ -527,7 +531,7 @@ const en: Copy = {
   meta: {
     title: "Rayendra Aldo Putra — Portfolio | Politeknik Negeri Batam | raldoputradev",
     description:
-      "Portfolio of Rayendra Aldo Putra. Robotics student at Politeknik Negeri Batam. Simalas: fingerprint devices, Laravel, Flutter, ESP32 — local-first, then sync to the server.",
+      "Portfolio of Rayendra Aldo Putra. Robotics student at Politeknik Negeri Batam. SmartBrail: fingerprint devices, Laravel, Flutter, ESP32 — local-first, then sync to the server.",
   },
   nav: {
     home: "Home",
@@ -546,13 +550,13 @@ const en: Copy = {
       "Robotics Engineering · sensor to cloud",
       "Edge, API, web, and mobile",
       "Local-first, then sync to the server",
-      "Simalas: fingerprint to dashboard",
+      "SmartBrail: fingerprint to dashboard",
     ],
     intro:
       "I design and build software end to end — architecture, data flow, and interfaces that stay reliable in real use. Not a pile of isolated demos, but systems that can be operated and extended.",
     line: "Local-first on the device. Sync to the server later.",
     primary: "View projects",
-    secondary: "Simalas architecture",
+    secondary: "SmartBrail architecture",
     contactCta: "Contact me",
     cv: "Download CV",
     cvSoon: "Coming soon",
@@ -618,13 +622,13 @@ const en: Copy = {
     ],
     filters: { all: "All", web: "Web", embedded: "Embedded", design: "Craft" },
     notes: {
-      Laravel: "Simalas API",
+      Laravel: "SmartBrail API",
       Blade: "Lab staff dashboard",
-      React: "Simalas public site",
+      React: "SmartBrail public site",
       Flutter: "Student app",
       ESP32: "Fingerprint firmware",
       "C++": "FreeRTOS on ESP32",
-      MySQL: "Simalas schema",
+      MySQL: "SmartBrail schema",
       "C#": "Afis Fingerprint Analyzer",
       "Next.js": "This portfolio",
       Figma: "Flows and UI",
@@ -670,18 +674,18 @@ const en: Copy = {
         year: "2026",
         range: "Feb – Jul 2026",
         tag: "Project",
-        title: "SIMALAS — web, mobile & IoT",
+        title: "SMARTBRAIL — web, mobile & IoT",
         place: "BRAIL · Politeknik Negeri Batam",
-        text: "Fingerprint attendance and lab lockers in one chain: a Laravel API, staff dashboard, public React site, Flutter app, and local-first ESP32 firmware. Includes Afis Fingerprint Analyzer (C#) to audit templates — not the attendance matcher.",
+        text: "Smart laboratory management: fingerprint attendance, RFID/PIN room access, room approvals, and PBL — a Laravel API, Inertia/React admin panel, public site, Flutter app, and offline-first ESP32-S3 firmware. Includes Afis Fingerprint Analyzer (C#) to audit templates — not the attendance matcher.",
         stack: ["Laravel", "Flutter", "ESP32", "MySQL", "React", "C#"],
       },
       {
         year: "2025",
         range: "Aug 2025 – Jan 2026",
         tag: "Mechanical",
-        title: "SIMALAS — physical build",
+        title: "SMARTBRAIL — physical build",
         place: "Polibatam laboratory",
-        text: "Locker frame, housings for the fingerprint module, keypad, and display; cable routing so boards stay serviceable. The first attendance enclosure was an early prototype — then mounts and layout were iterated after assembly.",
+        text: "Housings for the fingerprint module, keypad, display, and door-control unit; cable routing so boards stay serviceable. The first access enclosure was an early prototype — then mounts and layout were iterated after assembly.",
         stack: ["SolidWorks", "Fabrication"],
       },
       {
@@ -742,26 +746,28 @@ const en: Copy = {
   },
   projects: [
     {
-      slug: "simalas",
-      name: "Simalas",
+      slug: "smartbrail",
+      name: "SmartBrail",
       role: "Full-stack & IoT",
       status: "live",
       summary:
-        "Lab attendance and locker system: a web admin for staff and lecturers, a student mobile app, and ESP32 fingerprint machines with a local-first design. Offline writes go to flash; online they sync to the server.",
+        "Smart laboratory management for BRAIL at Politeknik Negeri Batam — fingerprint/RFID/PIN attendance, schedule- and permission-based room access, room approvals, PBL team management, and realtime monitoring. Live at smartbrail.com for admins, lab staff, lecturers, and students.",
       features: [
-        "Fingerprint attendance with sessions and lateness policy",
-        "Lab lockers: slots, photo proof, and team history",
-        "Per-menu roles and permissions (staff, lecturer, student)",
-        "Machine API kept separate from the mobile API",
-        "Hybrid sync: internal flash, then push to the server",
-        "Internal AI assistant for admins and a public helpdesk",
+        "Fingerprint attendance with sessions, lateness policy, and academic calendar",
+        "Room access via RFID / PIN / fingerprint — server-verified, keeps working offline through an on-device ACL cache",
+        "Room-usage approvals + per-room access history",
+        "Academic periods & semester promotion with leave/repeat review",
+        "Realtime operations monitoring (Laravel Reverb): telemetry, doors, device status",
+        "Admin audit trail + contextual AI assistant per role",
       ],
       contributionTitle: "My contribution",
       contribution:
-        "Designed and wrote every layer: database schema, Laravel API, staff dashboard (Blade + Tailwind), public React site, Flutter app, and ESP32 firmware. Including security (throttle, signed URLs, permission middleware) and the mechanical build.",
-      stack: ["Laravel", "Blade", "React", "Flutter", "C++ / FreeRTOS", "ESP32", "MySQL"],
-      repoUrl: "https://github.com/raldoputradev/aiot-simalas",
-      repoLabel: "raldoputradev/aiot-simalas",
+        "Designed and wrote every layer: database schema, Laravel API, Inertia/React admin panel, public site, Flutter app, and dual-unit ESP32-S3 firmware (front panel + back controller over encrypted ESP-NOW). Including security (throttle, permission middleware, HTTPS) and the offline-first access architecture.",
+      stack: ["Laravel", "Inertia", "React", "Flutter", "C++ / FreeRTOS", "ESP32-S3", "MySQL", "Reverb"],
+      repoUrl: "https://github.com/raldoputradev/smartbrail-showcase",
+      repoLabel: "raldoputradev/smartbrail-showcase",
+      liveUrl: "https://smartbrail.com",
+      liveLabel: "smartbrail.com",
       images: [
         { src: "/projects/simalas-dashboard.png", caption: "Staff dashboard: KPIs, IoT activity trend, role split", tag: "Web admin", width: 1024, height: 506 },
         { src: "/projects/simalas-ai.png", caption: "Internal AI assistant, confirmation required before data changes", tag: "AI assistant", width: 1024, height: 509 },
@@ -781,7 +787,7 @@ const en: Copy = {
       role: "Desktop · C#",
       status: "live",
       summary:
-        "A Windows desktop tool to audit the 512-byte DY50/R307 character templates used by Simalas, plus a separate tab for sensor images. Not a reconstructed fingerprint photo and not an attendance matcher.",
+        "A Windows desktop tool to audit the 512-byte DY50/R307 character templates used by SmartBrail, plus a separate tab for sensor images. Not a reconstructed fingerprint photo and not an attendance matcher.",
       features: [
         "32×16 byte map, histogram, hex, entropy score, and CRC32 for a 512-byte blob",
         "Image tab: grayscale, ridge skeleton, endings/bifurcations — only when an image file exists",
@@ -803,7 +809,7 @@ const en: Copy = {
     },
   ],
   architecture: {
-    kicker: "How Simalas is built",
+    kicker: "How SmartBrail is built",
     titleLead: "System",
     titleAccent: "Architecture",
     layers: [
@@ -819,13 +825,13 @@ const en: Copy = {
       },
       {
         name: "Web",
-        tech: "Blade · Tailwind · React",
-        text: "Staff dashboard in Blade + Tailwind: users, attendance, lockers, machines, announcements, internal AI assistant. The public site and APK download page use React.",
+        tech: "Inertia · React · Tailwind",
+        text: "Multi-role admin panel (admin, lab staff, lecturers) in Inertia + React: users, attendance, rooms, machines, realtime monitoring, audit, AI assistant. The public site and APK download page also use React.",
       },
       {
         name: "Mobile",
         tech: "Flutter · Dart · Gemini",
-        text: "Students: attendance, lockers, announcements, feedback. An AI helpdesk for operational questions.",
+        text: "Students: attendance, schedules, announcements, team room requests. An AI helpdesk for operational questions.",
       },
     ],
     decisionsTitle: "Design decisions",
@@ -835,8 +841,8 @@ const en: Copy = {
         text: "A tap is recorded on the machine first. The server receives a sync later. That is a lab constraint, not an architecture trend.",
       },
       {
-        title: "No student web portal",
-        text: "Student web routes redirect to an info page. Smaller attack surface, one source of truth in the app.",
+        title: "Two units per access machine",
+        text: "A front panel (RFID, keypad, display) separate from a back controller (door relay) — linked over encrypted ESP-NOW. Door-power wiring stays unreachable from outside.",
       },
       {
         title: "Machines are not users",
@@ -848,7 +854,7 @@ const en: Copy = {
       items: [
         "Machine API keys, tokens, and mail credentials",
         "Student records, fingerprint templates, and operational logs",
-        "The production Simalas repo (stays private)",
+        "The production SmartBrail repo (stays private)",
       ],
     },
   },
@@ -868,12 +874,12 @@ const en: Copy = {
         "Lab staff dashboard in Blade + Tailwind, public site in React",
         "Flutter app for students, including a Gemini assistant",
         "C++/FreeRTOS firmware and hybrid sync",
-        "C# / WinForms desktop auditor for Simalas fingerprint templates",
+        "C# / WinForms desktop auditor for SmartBrail fingerprint templates",
       ],
     },
     next: {
       title: "What I am preparing",
-      text: "Simalas and Afis Fingerprint Analyzer are public on GitHub. Next: test a sensor image from the lab machine after campus reopens, using my own enroll data — not lab photos.",
+      text: "SmartBrail and Afis Fingerprint Analyzer are public on GitHub. Next: test a sensor image from the lab machine after campus reopens, using my own enroll data — not lab photos.",
     },
   },
   contact: {

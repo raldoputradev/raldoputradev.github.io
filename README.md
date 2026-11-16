@@ -1,6 +1,6 @@
 # Portofolio — Rayendra Aldo Putra
 
-Situs portofolio Rayendra Aldo Putra, mahasiswa Teknik Robotika di Politeknik Negeri Batam. Simalas: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server. Bilingual **ID / EN**. Tidak berisi data laboratorium, API key, atau dummy production.
+Situs portofolio Rayendra Aldo Putra, mahasiswa Teknik Robotika di Politeknik Negeri Batam. SmartBrail: sidik jari, Laravel, Flutter, ESP32 — local-first, lalu sync ke server. Bilingual **ID / EN**. Tidak berisi data laboratorium, API key, atau dummy production.
 
 Live: [https://raldoputradev.github.io](https://raldoputradev.github.io)
 
@@ -41,13 +41,13 @@ Satu halaman panjang per bahasa (`/id/` dan `/en/`), navigasi lewat anchor:
 
 - `#home` — hero, statistik, marquee stack
 - `#skills` — keahlian teknis
-- `#projects` — Simalas dan Afis Fingerprint Analyzer
-- `#architecture` — lapisan Simalas dan keputusan desain
+- `#projects` — SmartBrail dan Afis Fingerprint Analyzer
+- `#architecture` — lapisan SmartBrail dan keputusan desain
 - `#about` · `#contact`
 
 ## Gambar proyek
 
-Simalas memakai tangkapan layar asli di `public/projects/simalas-*.png`. Semua gambar bisa diklik
+SmartBrail memakai tangkapan layar asli di `public/projects/simalas-*.png`. Semua gambar bisa diklik
 untuk diperbesar (tutup dengan klik atau Esc).
 
 Aturan yang dipakai saat memilih tangkapan layar: **tidak ada data pribadi**. Halaman yang memuat
@@ -77,8 +77,8 @@ jadi tidak akan ada link mati:
 - `whatsapp` + `whatsappLabel` (contoh: `https://wa.me/62812xxxxxxx` dan `+62 812-xxxx-xxxx`)
 - `instagram` + `instagramHandle`
 `sandboxRepo` sudah terisi ke https://github.com/raldoputradev/aiot-simalas. Repo itu dibuat dari
-`C:\xampp\htdocs\Simalas\export-showcase.ps1` ke folder `C:\xampp\htdocs\simalas-showcase`;
-jalankan skrip itu lagi setiap kode Simalas berubah, lalu commit dan push dari folder tersebut.
+`C:\xampp\htdocs\SmartBrail\export-showcase.ps1` ke folder `C:\xampp\htdocs\simalas-showcase`;
+jalankan skrip itu lagi setiap kode SmartBrail berubah, lalu commit dan push dari folder tersebut.
 
 Tombol CV disembunyikan selama `cv` di `lib/site.ts` bernilai `null`. Pasang lagi setelah ada PDF asli di `public/cv/rayendra-aldo-putra-cv.pdf`.
 
@@ -87,13 +87,13 @@ Tombol CV disembunyikan selama `cv` di `lib/site.ts` bernilai `null`. Pasang lag
 Jangan jalankan `npm run build` selagi `npm run dev` hidup. Keduanya menulis ke `.next` dan
 dev server akan error `Cannot find module './xxx.js'`. Matikan dev server dulu.
 
-Simalas **produksi** tetap private. Situs ini hanya menjelaskan arsitektur.
+SmartBrail **produksi** tetap private. Situs ini hanya menjelaskan arsitektur.
 
 ## Yang tidak masuk repo ini
 
 - `.env`, kunci mesin IoT, token Gemini, kredensial SMTP
 - Foto/data mahasiswa
-- Kode Laravel/Flutter Simalas
+- Kode Laravel/Flutter SmartBrail
 
 ## Hosting 2027 (catatan)
 

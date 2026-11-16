@@ -44,12 +44,12 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
             : "Robotics student, Politeknik Negeri Batam",
         disambiguatingDescription:
           locale === "id"
-            ? "Pengembang Simalas di Batam (raldoputradev). Mahasiswa Teknik Robotika, Politeknik Negeri Batam."
-            : "Simalas developer in Batam (raldoputradev). Robotics student at Politeknik Negeri Batam.",
+            ? "Pengembang SmartBrail di Batam (raldoputradev). Mahasiswa Teknik Robotika, Politeknik Negeri Batam."
+            : "SmartBrail developer in Batam (raldoputradev). Robotics student at Politeknik Negeri Batam.",
         description:
           locale === "id"
-            ? "Rayendra Aldo Putra, mahasiswa Teknik Robotika di Politeknik Negeri Batam. Merancang Simalas: mesin sidik jari ESP32, API Laravel, web admin, dan aplikasi Flutter. Local-first, lalu sync ke server."
-            : "Rayendra Aldo Putra, robotics student at Politeknik Negeri Batam. Builds Simalas: ESP32 fingerprint devices, Laravel API, admin web, and Flutter app. Local-first, then sync to the server.",
+            ? "Rayendra Aldo Putra, mahasiswa Teknik Robotika di Politeknik Negeri Batam. Merancang SmartBrail: mesin sidik jari ESP32, API Laravel, web admin, dan aplikasi Flutter. Local-first, lalu sync ke server."
+            : "Rayendra Aldo Putra, robotics student at Politeknik Negeri Batam. Builds SmartBrail: ESP32 fingerprint devices, Laravel API, admin web, and Flutter app. Local-first, then sync to the server.",
         nationality: "ID",
         homeLocation: {
           "@type": "Place",
@@ -66,7 +66,7 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
           name: site.campus,
         },
         knowsAbout: [
-          "Simalas",
+          "SmartBrail",
           "ESP32",
           "Laravel",
           "Flutter",
