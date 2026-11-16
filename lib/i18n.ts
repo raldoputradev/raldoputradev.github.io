@@ -183,10 +183,11 @@ const id = {
       role: "Perancang & pengembang end-to-end",
       status: "live",
       summary:
-        "Sistem kehadiran dan akses ruangan berbasis RFID + fingerprint untuk laboratorium BRAIL, Polibatam. Firmware ESP32-S3 dua unit, backend Laravel + Inertia, portal mahasiswa, laporan periodik, dan monitoring realtime — dipakai operasional sehari-hari.",
+        "Sistem kehadiran dan akses ruangan berbasis RFID + fingerprint untuk laboratorium BRAIL, Polibatam — proyek PBL-RET-07-02, manpro Naurah Nazhifah, S.Kom., M.C.S.(AI). Luaran tim: Smart Attendance Machine dan Building Management System (akses + monitoring daya ruang mekanikal & meeting). Firmware ESP32-S3 dua unit, backend Laravel + Inertia, portal mahasiswa, laporan periodik, dan monitoring realtime — dipakai operasional sehari-hari.",
       features: [
         "Absensi RFID + verifikasi fingerprint",
         "Akses ruangan dengan ACL offline",
+        "BMS — monitoring daya & kontrol fasilitas ruang mekanikal/meeting",
         "Portal mahasiswa & tim PBL",
         "Laporan periodik + monitoring realtime",
       ],
@@ -402,10 +403,11 @@ const en: typeof id = {
       ...id.projects[0],
       role: "End-to-end designer & developer",
       summary:
-        "RFID + fingerprint attendance and room-access system for the BRAIL lab at Polibatam. Two ESP32-S3 firmware units, Laravel + Inertia backend, student portal, periodic reports, and realtime monitoring — in daily operational use.",
+        "RFID + fingerprint attendance and room-access system for the BRAIL lab at Polibatam — PBL project RET-07-02, supervised by Naurah Nazhifah, S.Kom., M.C.S.(AI). Team deliverables: the Smart Attendance Machine and a Building Management System (access + power monitoring for the mechanical & meeting rooms). Two ESP32-S3 firmware units, Laravel + Inertia backend, student portal, periodic reports, and realtime monitoring — in daily operational use.",
       features: [
         "RFID attendance + fingerprint verification",
         "Room access with offline ACL",
+        "BMS — power monitoring & facility control for mechanical/meeting rooms",
         "Student & PBL team portal",
         "Periodic reports + realtime monitoring",
       ],
