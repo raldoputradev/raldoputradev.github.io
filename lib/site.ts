@@ -1,35 +1,26 @@
 export const locales = ["id", "en"] as const;
-
 export type Locale = (typeof locales)[number];
 
 export function isLocale(value: string): value is Locale {
-  return locales.includes(value as Locale);
+  return (locales as readonly string[]).includes(value);
 }
 
-/**
- * Nilai `null` sengaja dibiarkan kosong dan tampil sebagai "menyusul" di situs.
- * Isi kalau datanya sudah pasti; jangan pakai tautan atau nomor palsu.
- */
 export const site = {
   name: "Rayendra Aldo Putra",
-  origin: "https://raldoputradev.github.io",
-  photo: "/rayendra-aldo-putra.png",
-  ogImage: "/rayendra-aldo-putra.png",
-  splashRole: "Robotic Engineer · Full-Stack",
   shortName: "Aldo",
+  role: "Robotic Engineer · Full-Stack",
   email: "raldoputra.dev@gmail.com",
+  origin: "https://raldoputra.web.id",
+  ogImage: "/og-share.jpg",
   github: "https://github.com/raldoputradev",
-  githubHandle: "raldoputradev",
+  githubHandle: "@raldoputradev",
   linkedin: "https://www.linkedin.com/in/rayendra-aldo-putra-40399b400",
-  linkedinHandle: "rayendra-aldo-putra",
-  cv: null as string | null,
+  linkedinHandle: "Rayendra Aldo Putra",
   whatsapp: "https://wa.me/6289623078935",
   whatsappLabel: "+62 896-2307-8935",
   instagram: "https://www.instagram.com/_qldoo/",
-  instagramHandle: "_qldoo",
-  sandboxRepo: "https://github.com/raldoputradev/smartbrail-showcase" as string | null,
-  sandboxRepoLabel: "raldoputradev/smartbrail-showcase" as string | null,
-  location: "Batam, Kepulauan Riau",
-  campus: "Politeknik Negeri Batam",
-  domainHint: "portfolio-rayendra-aldo-putra",
-};
+  instagramHandle: "@_qldoo",
+  showcaseRepo: "https://github.com/raldoputradev/smartbrail-showcase",
+  showcaseRepoLabel: "smartbrail-showcase",
+  cv: "/cv/cv-ats-rayendra-aldo-putra.pdf",
+} as const;

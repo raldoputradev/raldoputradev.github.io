@@ -1,335 +1,368 @@
 import { notFound } from "next/navigation";
-import { DownloadIcon } from "@/components/Icons";
+import { CountUp } from "@/components/CountUp";
 import { Marquee } from "@/components/Marquee";
-import { HeroLanyard } from "@/components/HeroLanyard";
-import { ContactChannels } from "@/components/ContactChannels";
-import { CvSoonButton } from "@/components/CvSoonButton";
-import { RotateWords } from "@/components/RotateWords";
-import { Journey } from "@/components/Journey";
-import { WorkGallery } from "@/components/WorkGallery";
-import { TypewriterText } from "@/components/TypewriterText";
+import { ProjectTabs } from "@/components/ProjectTabs";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
-import { SkillGrid } from "@/components/SkillGrid";
-import { CodeCard } from "@/components/CodeCard";
+import { Rotator } from "@/components/Rotator";
+import { Tilt } from "@/components/Tilt";
 import { getCopy } from "@/lib/i18n";
 import { homeHref } from "@/lib/paths";
 import { isLocale, site } from "@/lib/site";
+import { stackIcon } from "@/lib/stack-icons";
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
+export function generateStaticParams() {
+  return [{ locale: "id" }, { locale: "en" }];
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  if (!isLocale(locale)) {
-    notFound();
-  }
+  if (!isLocale(locale)) notFound();
   const copy = getCopy(locale);
 
   const channels = [
-    {
-      label: "Email",
-      brand: "email",
-      value: site.email,
-      note: copy.contact.emailNote,
-      href: `mailto:${site.email}`,
-    },
-    {
-      label: "GitHub",
-      brand: "github",
-      value: site.githubHandle,
-      note: copy.contact.githubNote,
-      href: site.github,
-    },
-    {
-      label: "LinkedIn",
-      brand: "linkedin",
-      value: site.linkedinHandle,
-      note: copy.contact.linkedinNote,
-      href: site.linkedin,
-    },
-    {
-      label: "WhatsApp",
-      brand: "whatsapp",
-      value: site.whatsappLabel,
-      note: copy.contact.whatsappNote,
-      href: site.whatsapp,
-    },
-    {
-      label: "Instagram",
-      brand: "instagram",
-      value: site.instagramHandle,
-      note: copy.contact.instagramNote,
-      href: site.instagram,
-    },
-    {
-      label: "Repo SmartBrail",
-      brand: "repo",
-      value: site.sandboxRepoLabel,
-      note: copy.contact.sandboxNote,
-      href: site.sandboxRepo,
-    },
+    { label: "Email", value: site.email, note: copy.contact.emailNote, href: `mailto:${site.email}`, icon: "gmail.svg" },
+    { label: "GitHub", value: site.githubHandle, note: copy.contact.githubNote, href: site.github, icon: "github.svg" },
+    { label: "LinkedIn", value: site.linkedinHandle, note: copy.contact.linkedinNote, href: site.linkedin, icon: "linkedin.svg" },
+    { label: "WhatsApp", value: site.whatsappLabel, note: copy.contact.whatsappNote, href: site.whatsapp, icon: "whatsapp.svg" },
+    { label: "Instagram", value: site.instagramHandle, note: copy.contact.instagramNote, href: site.instagram, icon: "instagram.svg" },
   ];
+
+  const heads = [
+    { k: copy.about.kicker, lead: copy.about.titleLead, accent: copy.about.titleAccent },
+    { k: copy.focus.kicker, lead: copy.focus.titleLead, accent: copy.focus.titleAccent, blurb: copy.focus.blurb },
+    { k: copy.skills.kicker, lead: copy.skills.titleLead, accent: copy.skills.titleAccent, blurb: copy.skills.blurb },
+    { k: copy.work.kicker, lead: copy.work.titleLead, accent: copy.work.titleAccent, blurb: copy.work.blurb },
+    { k: copy.certs.kicker, lead: copy.certs.titleLead, accent: copy.certs.titleAccent, blurb: copy.certs.blurb },
+  ];
+
+  const Head = ({ n, h }: { n: number; h: (typeof heads)[number] }) => (
+    <Reveal>
+      <header className="sh">
+        <span className="sh-ghost" aria-hidden>{pad(n)}</span>
+        <p className="sh-kicker">{h.k}</p>
+        <h2 className="sh-title">
+          {h.lead} <em>{h.accent}</em>
+        </h2>
+        {h.blurb ? <p className="sh-blurb">{h.blurb}</p> : null}
+      </header>
+    </Reveal>
+  );
 
   return (
     <>
-      <section id="home" className="scroll-mt-8">
-        <div className="hero-banner">
-          <span className="hero-banner-hole is-left" aria-hidden />
-          <span className="hero-banner-hole is-right" aria-hidden />
-          <div className="hero-banner-mark" aria-hidden>
-            <div className="hero-banner-track">
-              <span>{`${site.splashRole}  ·  `.repeat(4)}</span>
-              <span>{`${site.splashRole}  ·  `.repeat(4)}</span>
-            </div>
+      {/* intro lives in layout — sits above navbar */}
+
+      {/* ————— 01 · HERO ————— */}
+      <section id="home" className="hero">
+        <div className="hero-in">
+          <div>
+            <Reveal variant="fade">
+              <p className="hero-status">
+                <span className="hero-dot" aria-hidden />
+                {copy.hero.status}
+              </p>
+            </Reveal>
+            <Reveal variant="fade" delay={90}>
+              <p className="hero-kicker">{copy.hero.kicker}</p>
+            </Reveal>
+            <h1 className="hero-name">
+              {site.name.split(" ").map((word, wi, arr) => (
+                <span key={wi} className={`hn-word${wi === arr.length - 1 ? " is-ghost" : ""}`}>
+                  {word.split("").map((ch, ci) => (
+                    <span
+                      key={ci}
+                      className="hn-letter"
+                      style={{ ["--i" as string]: wi * 10 + ci }}
+                    >
+                      {ch}
+                    </span>
+                  ))}
+                  {wi < arr.length - 1 ? "\u00A0" : ""}
+                </span>
+              ))}
+            </h1>
+            <Reveal delay={240}>
+              <p className="hero-role">
+                <Rotator words={copy.hero.roles} />
+              </p>
+            </Reveal>
+            <Reveal delay={320}>
+              <p className="hero-intro">{copy.hero.intro}</p>
+            </Reveal>
+            <Reveal delay={400}>
+              <div className="hero-btns">
+                <a href={homeHref(locale, "projects")} className="btn btn-solid">
+                  {copy.hero.primary} ↓
+                </a>
+                <a href={homeHref(locale, "contact")} className="btn btn-line">
+                  {copy.hero.contactCta}
+                </a>
+                {site.cv ? (
+                  <a href={site.cv} target="_blank" rel="noopener noreferrer" className="btn btn-line">
+                    {copy.hero.cv} ↗
+                  </a>
+                ) : null}
+              </div>
+            </Reveal>
+            <Reveal delay={480}>
+              <ul className="hero-stats">
+                {copy.stats.map((s) => (
+                  <li key={s.label}>
+                    <CountUp value={s.value} suffix={s.suffix} className="hs-num" />
+                    <span className="hs-label">{s.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
+
+          <Reveal variant="right" delay={260} className="hero-side">
+            <Tilt>
+            <figure className="ph">
+              <svg className="ph-ring" viewBox="0 0 100 100" aria-hidden>
+                <defs>
+                  <path id="ring-c" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" fill="none" />
+                </defs>
+                <text className="ph-ring-text">
+                  <textPath href="#ring-c">OPEN TO WORK · ROBOTIC ENGINEER · FULL-STACK ·</textPath>
+                </text>
+              </svg>
+              <img className="ph-img" src="/rayendra-aldo-putra-formal.jpg" alt={site.name} />
+              <figcaption className="ph-cap">
+                <span className="ph-cap-top">
+                  <span className="ph-cap-name">
+                    {site.name}
+                    <svg className="ph-verified" viewBox="0 0 24 24" aria-label="Verified">
+                      <circle className="ph-verified-orbit" cx="12" cy="12" r="11.2" />
+                      <g transform="translate(2.9 2.9) scale(0.76)">
+                        <path
+                          fill="#1d9bf1"
+                          d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"
+                        />
+                      </g>
+                    </svg>
+                  </span>
+                  <img className="ph-campus" src="/polibatam-logo.png" alt="Politeknik Negeri Batam" />
+                </span>
+                <span className="ph-cap-role">{site.role}</span>
+              </figcaption>
+            </figure>
+            </Tilt>
+          </Reveal>
         </div>
-        <div className="hero-panel mx-auto max-w-7xl px-3.5 sm:px-8">
-          <HeroLanyard />
-          <div className="hero-copy-block">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold sm:text-[11px]">
-              {copy.hero.kicker}
-            </p>
-            <p className="hero-hello mt-3">
-              <span className="hero-hello-lead">{copy.hero.hello}</span>
-              <RotateWords words={copy.hero.roles} />
-            </p>
-            <TypewriterText
-              as="h1"
-              loop
-              holdMs={2400}
-              phrases={[site.name]}
-              className="hero-name mt-1 font-display text-4xl leading-[1.08] text-ink sm:text-5xl lg:text-[3.35rem]"
-            />
-            <p className="mt-2 text-sm text-accent sm:text-base">{site.splashRole}</p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-muted">{copy.hero.intro}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <a href={homeHref(locale, "projects")} className="btn btn-primary">
-                {copy.hero.primary}
-              </a>
-              <a href={homeHref(locale, "contact")} className="btn btn-ghost">
-                {copy.hero.contactCta}
-              </a>
-              <CvSoonButton label={copy.hero.cv} soon={copy.hero.cvSoon} />
-            </div>
-          </div>
-        </div>
+        <a href={homeHref(locale, "about")} className="hero-cue" aria-hidden>
+          <span className="hero-cue-line" />
+        </a>
       </section>
 
       <Marquee items={copy.marquee} />
 
-      <section id="about" className="mx-auto max-w-6xl scroll-mt-8 px-2 pt-20 pb-[6.25rem] sm:px-8 sm:py-20">
-        <div className="band px-3.5 py-9 sm:px-10 sm:py-12">
-          <Reveal>
-            <SectionHeading
-              kicker={copy.about.kicker}
-              lead={copy.about.titleLead}
-              accent={copy.about.titleAccent}
-            />
-          </Reveal>
-
-          <div className="mt-9 grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-            <div>
-              <Reveal delay={60}>
-                <p className="font-display text-2xl leading-snug text-ink italic sm:text-[27px]">
-                  {copy.about.body[0]}
-                </p>
+      {/* ————— 02 · ABOUT ————— */}
+      <section id="about" className="pg">
+        <div className="pg-in">
+          <Head n={1} h={heads[0]} />
+          <div className="ab-grid">
+            <div className="ab-main">
+              <Reveal delay={60} variant="left">
+                <p className="ab-lead">{copy.about.body[0]}</p>
               </Reveal>
-              <Reveal delay={100}>
-                <div className="mt-6 space-y-4 border-l border-line pl-5 leading-relaxed text-muted">
-                  {copy.about.body.slice(1).map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+              <Reveal delay={120} variant="left">
+                <div className="ab-body">
+                  {copy.about.body.slice(1).map((p) => (
+                    <p key={p}>{p}</p>
                   ))}
                 </div>
               </Reveal>
-              <Reveal delay={140}>
-                <CodeCard caption={copy.hero.line} className="mt-6 max-w-xl" />
+            </div>
+            <div className="ab-side">
+              <Reveal delay={140} variant="right">
+                <div className="facts">
+                  <p className="facts-t">{copy.facts.title}</p>
+                  <dl>
+                    {copy.facts.items.map((f) => (
+                      <div key={f.label} className="fact">
+                        <dt>{f.label}</dt>
+                        <dd className={f.value ? "" : "is-wait"}>{f.value ?? copy.facts.pending}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </Reveal>
+              <Reveal delay={210} variant="right">
+                <div className="next">
+                  <span className="next-dot" aria-hidden />
+                  <h3 className="ab-sub">{copy.about.next.title}</h3>
+                  <p>{copy.about.next.text}</p>
+                </div>
               </Reveal>
             </div>
-
-            <Reveal delay={140}>
-              <div className="quiet-panel px-4 py-5 sm:px-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">
-                  {copy.facts.title}
-                </p>
-                <dl className="mt-3">
-                  {copy.facts.items.map((fact) => (
-                    <div key={fact.label} className="fact-row">
-                      <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-                        {fact.label}
-                      </dt>
-                      <dd
-                        className={`text-right text-sm ${fact.value ? "text-ink" : "text-muted italic"}`}
-                      >
-                        {fact.value ?? copy.facts.pending}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-              <ul className="hero-stats about-stats">
-                {copy.stats.map((stat) => (
-                  <li key={stat.label}>
-                    <span className="hero-stat-value">{stat.value}</span>
-                    <span className="hero-stat-label">{stat.label}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
           </div>
-
-          <div className="mt-11 grid gap-9 lg:grid-cols-[1.15fr_0.85fr]">
-            <Reveal>
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">
-                {copy.about.how.title}
-              </h3>
-              <ol className="mt-4 space-y-3">
-                {copy.about.how.items.map((item, index) => (
-                  <li key={item} className="flex gap-4 text-sm leading-relaxed text-muted">
-                    <span className="pt-0.5 font-mono text-[11px] text-accent">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+          <Reveal delay={180}>
+            <div className="ab-how-wrap">
+              <h3 className="ab-sub">{copy.about.how.title}</h3>
+              <ol className="ab-how">
+                {copy.about.how.items.map((item, i) => (
+                  <li key={item}>
+                    <span className="ab-num">{pad(i + 1)}</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ol>
-            </Reveal>
-            <Reveal delay={80}>
-              <div className="border-l-2 border-accent-dim pl-5">
-                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                  {copy.about.next.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{copy.about.next.text}</p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <Journey copy={copy.journey} />
-
-      <section id="skills" className="skills-band mx-auto max-w-6xl scroll-mt-8 px-3.5 py-20 sm:px-8">
-        <Reveal>
-          <SectionHeading
-            kicker={copy.skills.kicker}
-            lead={copy.skills.titleLead}
-            accent={copy.skills.titleAccent}
-            blurb={copy.skills.blurb}
-            center
-          />
-        </Reveal>
-        <div className="mt-10">
-          <SkillGrid
-            items={copy.skills.items}
-            filters={copy.skills.filters}
-            learningTitle={copy.skills.learningTitle}
-            learning={copy.skills.learning}
-          />
-        </div>
-      </section>
-
-      <section id="projects" className="work-band scroll-mt-8 py-20">
-        <div className="mx-auto max-w-6xl px-3.5 sm:px-8">
-          <Reveal>
-            <SectionHeading
-              kicker={copy.work.kicker}
-              lead={copy.work.titleLead}
-              accent={copy.work.titleAccent}
-              blurb={copy.work.blurb}
-              center
-            />
-          </Reveal>
-        </div>
-        <WorkGallery projects={copy.projects} locale={locale} work={copy.work} />
-      </section>
-
-      <section id="architecture" className="mx-auto max-w-6xl scroll-mt-8 px-3.5 py-20 sm:px-8">
-        <Reveal>
-          <SectionHeading
-            kicker={copy.architecture.kicker}
-            lead={copy.architecture.titleLead}
-            accent={copy.architecture.titleAccent}
-            center
-          />
-        </Reveal>
-
-        <ol className="mt-8 grid gap-4 md:grid-cols-2">
-          {copy.architecture.layers.map((layer, index) => (
-            <Reveal key={layer.name} as="li" delay={index * 60} className="card card-lift h-full p-5">
-              <p className="font-mono text-[11px] text-accent">
-                {String(index + 1).padStart(2, "0")} &middot; {layer.tech}
-              </p>
-              <h3 className="mt-2 font-display text-xl italic text-ink">{layer.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{layer.text}</p>
-            </Reveal>
-          ))}
-        </ol>
-
-        <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div>
-            <Reveal>
-              <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                {copy.architecture.decisionsTitle}
-              </h3>
-            </Reveal>
-            <ul className="mt-4 space-y-5">
-              {copy.architecture.decisions.map((item, index) => (
-                <Reveal
-                  key={item.title}
-                  as="li"
-                  delay={index * 60}
-                  className="rounded-r-xl border-l-2 border-accent-dim bg-raise/30 py-2 pl-4"
-                >
-                  <h4 className="font-medium text-ink">{item.title}</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
-                </Reveal>
-              ))}
-            </ul>
-          </div>
-          <Reveal delay={100}>
-            <div className="card h-full p-5">
-              <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-                {copy.architecture.notIncluded.title}
-              </h3>
-              <ul className="mt-4 space-y-2.5 text-sm text-muted">
-                {copy.architecture.notIncluded.items.map((item) => (
-                  <li key={item} className="flex gap-2.5">
-                    <span className="text-accent">&rarr;</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section id="contact" className="site-close mx-auto max-w-4xl scroll-mt-8 px-3.5 py-20 text-center sm:px-8">
-        <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">+ {copy.contact.kicker}</p>
-          <h2 className="mt-4 font-display text-3xl leading-tight sm:text-4xl">
-            {copy.contact.headlineLead}{" "}
-            <span className="text-gradient italic">{copy.contact.headlineAccent}</span>{" "}
-            {copy.contact.headlineTail}
-          </h2>
-          <div className="section-rule mx-auto mt-4" />
-          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-muted">{copy.contact.body}</p>
-        </Reveal>
-        <Reveal delay={80}>
-          <ContactChannels
-            channels={channels}
-            pending={copy.contact.pending}
-            ask={copy.contact.ask}
-            askOpen={copy.contact.askOpen}
-            askCancel={copy.contact.askCancel}
-          />
-        </Reveal>
+      {/* ————— 03 · FOCUS ————— */}
+      <section id="focus" className="pg">
+        <div className="pg-in">
+          <Head n={2} h={heads[1]} />
+          <ul className="fc-grid">
+            {copy.focus.items.map((item, i) => (
+              <Reveal as="li" key={item.title} delay={i * 90} variant="up">
+                <a href={homeHref(locale, "projects")} className="fc">
+                  <span className="fc-idx">{pad(i + 1)}</span>
+                  <h3 className="fc-t">{item.title}</h3>
+                  <p className="fc-x">{item.text}</p>
+                  <span className="fc-sheet">
+                    <span className="fc-sheet-t">Stack</span>
+                    <span className="fc-shots">
+                      {item.shots.map((s) => (
+                        <img key={s} src={s} alt="" loading="lazy" className="fc-shot" />
+                      ))}
+                    </span>
+                    {item.stack.map((t) => {
+                      const icon = stackIcon(t);
+                      return (
+                        <span key={t} className="fc-chip">
+                          {icon ? <img src={icon} alt="" className="fc-chip-icon" /> : null}
+                          {t}
+                        </span>
+                      );
+                    })}
+                    <span className="fc-sheet-cue" aria-hidden>↗</span>
+                  </span>
+                </a>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-        {site.cv ? (
-          <Reveal delay={140}>
-            <a href={site.cv} download className="btn btn-primary mt-8">
-              <DownloadIcon />
-              {copy.hero.cv}
-            </a>
+      {/* ————— 04 · SKILLS ————— */}
+      <section id="skills" className="pg">
+        <div className="pg-in">
+          <Head n={3} h={heads[2]} />
+          {(["embedded", "web", "craft"] as const).map((group, gi) => (
+            <Reveal key={group} delay={gi * 110}>
+              <div className="sk-group">
+                <p className="sk-group-t">{copy.skills.filters[group]}</p>
+                <ul className="sk-grid">
+                  {copy.skills.items
+                    .filter((s) => s.group === group)
+                    .map((s) => (
+                      <li key={s.name} className="skt">
+                        <img src={`/assets/skills/${s.icon}`} alt="" className="skt-icon" loading="lazy" />
+                        <span className="skt-name">{s.name}</span>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
+          <Reveal delay={220}>
+            <div className="sk-learn">
+              <span className="sk-learn-t">{copy.skills.learningTitle}</span>
+              {copy.skills.learning.map((s) => (
+                <span key={s.name} className="sk is-learn">
+                  <img src={`/assets/skills/${s.icon}`} alt="" className="sk-learn-icon" loading="lazy" />
+                  {s.name}
+                </span>
+              ))}
+            </div>
           </Reveal>
-        ) : null}
+        </div>
+      </section>
+
+      {/* ————— 05 · PROJECTS ————— */}
+      <section id="projects" className="pg">
+        <div className="pg-in">
+          <Head n={4} h={heads[3]} />
+          <Reveal delay={100}>
+            <ProjectTabs
+              projects={copy.projects}
+              locale={locale}
+              statusLive={copy.work.statusLive}
+              statusStudy={copy.work.statusStudy}
+              statusSoon={copy.work.statusSoon}
+              open={copy.work.open}
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ————— 06 · CERTS ————— */}
+      <section id="certs" className="pg">
+        <div className="pg-in">
+          <Head n={5} h={heads[4]} />
+          <ul className="ct-grid">
+            {[0, 1, 2].map((i) => (
+              <Reveal as="li" key={i} delay={i * 100} variant="zoom" className="ct">
+                <span className="ct-frame">
+                  <span className="ct-mark" aria-hidden />
+                  <span className="ct-label">{copy.certs.emptyLabel}</span>
+                </span>
+                <span className="ct-lines">
+                  <span className="ct-line" />
+                  <span className="ct-line is-short" />
+                </span>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ————— 07 · CONTACT ————— */}
+      <section id="contact" className="pg pg-contact">
+        <div className="pg-in pg-narrow">
+          <Reveal>
+            <header className="sh">
+              <span className="sh-ghost" aria-hidden>07</span>
+              <p className="sh-kicker">{copy.contact.kicker}</p>
+              <h2 className="sh-title">
+                {copy.contact.headlineLead} <em>{copy.contact.headlineAccent}</em>
+              </h2>
+              <p className="sh-blurb">{copy.contact.body}</p>
+            </header>
+          </Reveal>
+          <Reveal delay={120}>
+            <ul className="cn-list">
+              {channels.map((c) => (
+                <li key={c.label}>
+                  <a href={c.href} target="_blank" rel="noopener noreferrer" className="cn-row">
+                    <span className="cn-icon">
+                      <img src={`/assets/socials/${c.icon}`} alt="" />
+                    </span>
+                    <span className="cn-label">{c.label}</span>
+                    <span className="cn-value">{c.value}</span>
+                    <span className="cn-note">{c.note}</span>
+                    <span className="cn-arrow" aria-hidden>↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          {site.cv ? (
+            <Reveal delay={200}>
+              <a href={site.cv} target="_blank" rel="noopener noreferrer" className="cv-link">
+                {copy.hero.cv}
+                <span aria-hidden>↗</span>
+              </a>
+            </Reveal>
+          ) : null}
+        </div>
       </section>
     </>
   );
