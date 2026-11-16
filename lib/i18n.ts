@@ -209,9 +209,9 @@ const id = {
     {
       slug: "afis",
       name: "AFIS — Fingerprint Analyzer",
-      role: "Pengembang desktop tooling",
+      role: "Artikel paper skripsi — desktop tooling",
       status: "study",
-      semester: "Semester 7",
+      semester: "Artikel Skripsi",
       summary:
         "Tool desktop C#/.NET untuk eksperimen analisis sidik jari — memuat citra, membangkitkan template, dan membandingkan kualitas tipis/tebal. Dibangun untuk memahami pipeline AFIS sebelum integrasi ke SmartBrail.",
       features: ["Muat citra sidik jari", "Generate template", "Bandingkan kualitas citra"],
@@ -421,7 +421,7 @@ const en: typeof id = {
     },
     {
       ...id.projects[1],
-      role: "Desktop tooling developer",
+      role: "Thesis paper — desktop tooling",
       summary:
         "A C#/.NET desktop tool for fingerprint analysis experiments — loading images, generating templates, and comparing thin/thick quality. Built to understand the AFIS pipeline before integrating it into SmartBrail.",
       features: ["Load fingerprint images", "Generate templates", "Compare image quality"],

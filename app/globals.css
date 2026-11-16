@@ -1256,12 +1256,15 @@ body {
   color: var(--text);
 }
 .pj-sem {
-  padding: 0.2rem 0.6rem;
+  padding: 0.34rem 0.85rem;
   border: 1px solid transparent;
   border-radius: 999px;
   background: var(--text);
   color: var(--bg);
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .pj-name {
   font-family: var(--font-display-v), sans-serif;
