@@ -227,7 +227,7 @@ const id = {
       role: "Tim PBL-RE-044 — pengembangan web",
       status: "study",
       summary:
-        "System Management Attendance Lab and Classroom — proyek PBL terverifikasi kampus (SIAP PBL, Dosen Manpro Rifqi Amalya Fatekha, S.T.). Platform manajemen absensi dan akses lab/kelas: dashboard web, aplikasi mobile mahasiswa, helpdesk, dan laporan. Kontribusi saya: sisi web — dashboard admin dan integrasi backend — semester 6–7.",
+        "System Management Attendance Lab and Classroom — proyek PBL terverifikasi kampus (SIAP PBL, Dosen Manpro Rifqi Amalya Fatekha, S.T.). Platform manajemen absensi dan akses lab/kelas: dashboard web, aplikasi mobile mahasiswa, helpdesk, dan laporan. Kontribusi saya: semester 5 — desain box/mekanikal mesin absensi (210 × 160 × 50 mm); semester 6 — sisi fullstack: website dashboard admin, aplikasi mobile, dan integrasi backend.",
       features: [
         "Dashboard manajemen absensi lab & kelas",
         "Aplikasi mobile untuk mahasiswa",
@@ -426,7 +426,7 @@ const en: typeof id = {
       ...id.projects[2],
       role: "PBL team RE-044 — web development",
       summary:
-        "System Management Attendance Lab and Classroom — a campus-verified PBL project (SIAP PBL, supervised by Rifqi Amalya Fatekha, S.T.). A platform for lab/classroom attendance and access: web dashboard, student mobile app, helpdesk, and reporting. My contribution: the web side — admin dashboard and backend integration — semesters 6–7.",
+        "System Management Attendance Lab and Classroom — a campus-verified PBL project (SIAP PBL, supervised by Rifqi Amalya Fatekha, S.T.). A platform for lab/classroom attendance and access: web dashboard, student mobile app, helpdesk, and reporting. My contribution: semester 5 — mechanical/box design of the attendance machine (210 × 160 × 50 mm); semester 6 — the full-stack side: admin web dashboard, mobile app, and backend integration.",
       features: [
         "Lab & classroom attendance dashboard",
         "Student mobile app",
