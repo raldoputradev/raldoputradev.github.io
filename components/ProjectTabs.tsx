@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Project } from "@/lib/i18n";
 import type { Locale } from "@/lib/site";
+import { stackIcon } from "@/lib/stack-icons";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -101,10 +102,16 @@ export function ProjectTabs({
               <li key={f}>{f}</li>
             ))}
           </ul>
-          <ul className="pj-stack">
-            {p.stack.slice(0, 6).map((t) => (
-              <li key={t}>{t}</li>
-            ))}
+          <ul className="pj-stack is-icon">
+            {p.stack.slice(0, 6).map((t) => {
+              const icon = stackIcon(t);
+              return (
+                <li key={t}>
+                  {icon && <img src={icon} alt="" loading="lazy" />}
+                  {t}
+                </li>
+              );
+            })}
           </ul>
           <div className="pj-links">
             <Link href={href} className="btn btn-solid">
