@@ -108,7 +108,7 @@ const id = {
         title: "Embedded & Firmware",
         text: "Firmware ESP32-S3 dengan FreeRTOS: task, queue, dan sinkronisasi local-first yang tetap jalan saat jaringan putus.",
         stack: ["ESP32-S3", "FreeRTOS", "MQTT", "RFID", "Fingerprint"],
-        shots: ["/projects/smartbrail-dashboard.png", "/projects/smartbrail-teampbl.png"],
+        shots: ["/projects/smartbrail-mesin-design.jpg", "/projects/simalas-mesin-design.jpg"],
       },
       {
         title: "Full-Stack Web",
@@ -358,7 +358,7 @@ const en: typeof id = {
         title: "Embedded & Firmware",
         text: "ESP32-S3 firmware on FreeRTOS: tasks, queues, and local-first sync that keeps working when the network drops.",
         stack: ["ESP32-S3", "FreeRTOS", "MQTT", "RFID", "Fingerprint"],
-        shots: ["/projects/smartbrail-dashboard.png", "/projects/smartbrail-teampbl.png"],
+        shots: ["/projects/smartbrail-mesin-design.jpg", "/projects/simalas-mesin-design.jpg"],
       },
       {
         title: "Full-Stack Web",
