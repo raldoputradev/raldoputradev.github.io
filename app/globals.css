@@ -1257,9 +1257,10 @@ body {
 }
 .pj-sem {
   padding: 0.2rem 0.6rem;
-  border: 1px solid var(--accent, var(--line-strong));
+  border: 1px solid transparent;
   border-radius: 999px;
-  color: var(--accent, var(--text));
+  background: var(--text);
+  color: var(--bg);
   font-weight: 600;
 }
 .pj-name {
