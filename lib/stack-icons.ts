@@ -12,6 +12,7 @@ const MAP: Record<string, string> = {
   Flutter: "flutter.svg",
   Dart: "dart.svg",
   "REST API": "websockets.svg",
+  Gemini: "googlegemini.svg",
   "C#": "csharp.svg",
   ".NET": "csharp.svg",
   WinForms: "csharp.svg",
