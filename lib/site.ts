@@ -22,5 +22,7 @@ export const site = {
   instagramHandle: "@_qldoo",
   showcaseRepo: "https://github.com/raldoputradev/smartbrail-showcase",
   showcaseRepoLabel: "smartbrail-showcase",
-  cv: "/cv/cv-ats-rayendra-aldo-putra.pdf",
+  cv: "https://drive.google.com/file/d/1Of-cAOxZZJsHo7AMXWxMOS0SnSiuyZIS/view",
+  campusPbl:
+    "https://pbl.polibatam.ac.id/pamerin/detail.php?id=MTYxMw%3D%3D&id_tim=MjM2OA%3D%3D&ta=NA%3D%3D&title=robot-transporter-line-follower-kelas-c",
 } as const;

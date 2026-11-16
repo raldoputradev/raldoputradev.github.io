@@ -290,6 +290,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section id="projects" className="pg">
         <div className="pg-in">
           <Head n={4} h={heads[3]} />
+          <Reveal delay={60}>
+            <a
+              className="campus-verify"
+              href={site.campusPbl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="/polibatam-logo.png" alt="" aria-hidden />
+              {copy.work.campusVerified}
+            </a>
+          </Reveal>
           <Reveal delay={100}>
             <ProjectTabs
               projects={copy.projects}

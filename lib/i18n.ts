@@ -174,6 +174,7 @@ const id = {
     statusLive: "Live · dipakai",
     statusStudy: "Studi kasus",
     statusSoon: "Segera",
+    campusVerified: "Terverifikasi di situs resmi Polibatam ↗",
   },
   projects: [
     {
@@ -394,6 +395,7 @@ const en: typeof id = {
     statusLive: "Live · in use",
     statusStudy: "Case study",
     statusSoon: "Soon",
+    campusVerified: "Verified on the official Polibatam site ↗",
   },
   projects: [
     {
