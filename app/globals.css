@@ -1255,6 +1255,13 @@ body {
   border-radius: 999px;
   color: var(--text);
 }
+.pj-sem {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--accent, var(--line-strong));
+  border-radius: 999px;
+  color: var(--accent, var(--text));
+  font-weight: 600;
+}
 .pj-name {
   font-family: var(--font-display-v), sans-serif;
   font-size: 2rem;

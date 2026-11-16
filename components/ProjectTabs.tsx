@@ -91,6 +91,7 @@ export function ProjectTabs({
         <div className="pj-body">
           <p className="pj-meta">
             {p.role}
+            {p.semester && <span className="pj-sem">{p.semester}</span>}
             <span className="pj-status">{statusLabel}</span>
           </p>
           <h3 className="pj-name">{p.name}</h3>

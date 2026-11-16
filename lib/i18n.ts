@@ -7,6 +7,7 @@ export type Project = {
   name: string;
   role: string;
   status: "live" | "study" | "soon";
+  semester?: string;
   summary: string;
   features: string[];
   stack: string[];
@@ -182,6 +183,7 @@ const id = {
       name: "SmartBrail",
       role: "Perancang & pengembang end-to-end",
       status: "live",
+      semester: "Semester 7",
       summary:
         "Sistem kehadiran dan akses ruangan berbasis RFID + fingerprint untuk laboratorium BRAIL, Polibatam — proyek PBL-RET-07-02, manpro Naurah Nazhifah, S.Kom., M.C.S.(AI). Luaran tim: Smart Attendance Machine dan Building Management System (akses + monitoring daya ruang mekanikal & meeting). Firmware ESP32-S3 dua unit, backend Laravel + Inertia, portal mahasiswa, laporan periodik, dan monitoring realtime — dipakai operasional sehari-hari.",
       features: [
@@ -209,6 +211,7 @@ const id = {
       name: "AFIS — Fingerprint Analyzer",
       role: "Pengembang desktop tooling",
       status: "study",
+      semester: "Semester 7",
       summary:
         "Tool desktop C#/.NET untuk eksperimen analisis sidik jari — memuat citra, membangkitkan template, dan membandingkan kualitas tipis/tebal. Dibangun untuk memahami pipeline AFIS sebelum integrasi ke SmartBrail.",
       features: ["Muat citra sidik jari", "Generate template", "Bandingkan kualitas citra"],
@@ -226,6 +229,7 @@ const id = {
       name: "SiMalas",
       role: "Tim PBL-RE-044 — pengembangan web",
       status: "study",
+      semester: "Semester 5–6",
       summary:
         "System Management Attendance Lab and Classroom — proyek PBL terverifikasi kampus (SIAP PBL, Dosen Manpro Rifqi Amalya Fatekha, S.T.). Platform manajemen absensi dan akses lab/kelas: dashboard web, aplikasi mobile mahasiswa, helpdesk, dan laporan. Kontribusi saya: semester 5 — desain box/mekanikal mesin absensi (210 × 160 × 50 mm); semester 6 — sisi fullstack: website dashboard admin, aplikasi mobile, dan integrasi backend.",
       features: [

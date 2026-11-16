@@ -62,6 +62,7 @@ export default async function WorkPage({
             <p className="pd-meta">
               <span className="pd-idx">{pad(idx + 1)}</span>
               {p.role}
+              {p.semester && <span className="pj-sem">{p.semester}</span>}
               <span className="pj-status">{statusLabel}</span>
             </p>
           </Reveal>
