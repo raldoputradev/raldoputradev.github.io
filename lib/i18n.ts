@@ -194,6 +194,7 @@ const id = {
       stack: ["ESP32-S3", "FreeRTOS", "Laravel", "Inertia", "React", "MySQL", "MQTT", "Nginx"],
       images: [
         { src: "/projects/smartbrail-mesin-design.jpg", caption: "Desain hardware mesin — 110 × 215 × 44,5 mm, keypad 4×4 + fingerprint" },
+        { src: "/projects/simalas-mesin-design.jpg", caption: "Generasi sebelumnya (SiMalas) — 210 × 160 × 50 mm, evolusi ke desain baru" },
         { src: "/projects/smartbrail-dashboard.png", caption: "Dashboard admin — KPI dan status sistem" },
         { src: "/projects/smartbrail-akademik.png", caption: "Kenaikan semester — wizard tiga langkah" },
         { src: "/projects/smartbrail-report.png", caption: "Laporan periodik dengan filter" },
@@ -235,6 +236,7 @@ const id = {
       ],
       stack: ["Laravel", "MySQL", "Flutter", "REST API"],
       images: [
+        { src: "/projects/simalas-mesin-design.jpg", caption: "Desain mekanik mesin absensi — 210 × 160 × 50 mm" },
         { src: "/projects/simalas-landing.png", caption: "Landing page SiMalas" },
         { src: "/projects/simalas-dashboard.png", caption: "Dashboard admin" },
         { src: "/projects/simalas-app-home.png", caption: "Aplikasi mobile — beranda", mobile: true },
