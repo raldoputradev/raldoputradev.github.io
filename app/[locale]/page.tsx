@@ -299,6 +299,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             >
               <img src="/polibatam-logo.png" alt="" aria-hidden />
               {copy.work.campusVerified}
+              <svg className="campus-verify-check" viewBox="0 0 24 24" aria-label="Terverifikasi">
+                <circle cx="12" cy="12" r="11" fill="#22c55e" />
+                <path
+                  fill="#fff"
+                  d="M17.28 9.22a.75.75 0 0 0-1.06-.01l-5.47 5.14-2.53-2.4a.75.75 0 1 0-1.04 1.08l3.08 2.92c.29.28.76.27 1.04-.02l6.01-5.65c.29-.28.28-.76-.03-1.06z"
+                />
+              </svg>
+              <span aria-hidden>↗</span>
             </a>
           </Reveal>
           <Reveal delay={100}>

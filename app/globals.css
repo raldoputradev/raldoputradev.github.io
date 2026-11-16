@@ -2187,6 +2187,7 @@ body {
   transition: border-color 0.25s, color 0.25s, background 0.25s;
 }
 .campus-verify img { height: 18px; width: auto; opacity: 0.9; }
+.campus-verify-check { height: 14px; width: 14px; flex: none; margin-left: -2px; }
 .campus-verify:hover {
   border-color: rgba(255, 255, 255, 0.7);
   color: #fff;
