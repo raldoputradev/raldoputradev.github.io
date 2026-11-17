@@ -25,10 +25,13 @@ export function LikeButton({ locale }: { locale: Locale }) {
       : "Suka situs ini?";
 
   const fire = () => {
-    if (!liked) {
-      setLiked(true);
-      localStorage.setItem(KEY, "1");
+    if (liked) {
+      setLiked(false);
+      localStorage.removeItem(KEY);
+      return;
     }
+    setLiked(true);
+    localStorage.setItem(KEY, "1");
     const id = burst + 1;
     setBurst(id);
     timers.current.push(window.setTimeout(() => setBurst((b) => (b === id ? 0 : b)), 3200));
