@@ -34,14 +34,18 @@ export function LikeButton({ locale }: { locale: Locale }) {
     timers.current.push(window.setTimeout(() => setBurst((b) => (b === id ? 0 : b)), 900));
   };
 
-  const parts = Array.from({ length: 12 }, (_, i) => {
-    const a = (i / 12) * Math.PI * 2 + Math.random() * 0.4;
-    const d = 44 + Math.random() * 34;
+  const parts = Array.from({ length: 26 }, (_, i) => {
+    const spread = (i / 26) * Math.PI * 2 + Math.random() * 0.5;
+    const up = Math.random() < 0.7;
+    const dist = 60 + Math.random() * 150;
+    const colors = ["#f87171", "#ef4444", "#fb7185", "#fda4af", "#f472b6"];
     return {
-      "--dx": `${Math.cos(a) * d}px`,
-      "--dy": `${Math.sin(a) * d - 22}px`,
-      "--dl": `${Math.random() * 120}ms`,
-      "--rot": `${Math.random() * 120 - 60}deg`,
+      "--dx": `${Math.cos(spread) * dist}px`,
+      "--dy": `${up ? -Math.abs(Math.sin(spread)) * dist - 40 : Math.abs(Math.sin(spread)) * dist * 0.4}px`,
+      "--dl": `${Math.random() * 160}ms`,
+      "--rot": `${Math.random() * 240 - 120}deg`,
+      "--sz": `${9 + Math.random() * 13}px`,
+      "--c": colors[i % colors.length],
     } as React.CSSProperties;
   });
 
@@ -60,8 +64,25 @@ export function LikeButton({ locale }: { locale: Locale }) {
             fill="currentColor"
           />
         </svg>
-        {burst > 0 &&
-          parts.map((p, i) => <i key={`${burst}-${i}`} className="like-part" style={p} />)}
+        {burst > 0 && (
+          <>
+            <i key={`ring-${burst}`} className="like-ring" />
+            {parts.map((p, i) => (
+              <svg
+                key={`${burst}-${i}`}
+                className="like-part"
+                style={p}
+                viewBox="0 0 24 24"
+                aria-hidden
+              >
+                <path
+                  d="M12 21s-7.5-4.9-10-9.2C.4 8.6 2.3 5 5.7 5c2 0 3.4 1.1 4.3 2.4h4c.9-1.3 2.3-2.4 4.3-2.4 3.4 0 5.3 3.6 3.7 6.8C19.5 16.1 12 21 12 21z"
+                  fill="currentColor"
+                />
+              </svg>
+            ))}
+          </>
+        )}
       </span>
       <span className="like-label">{label}</span>
     </button>

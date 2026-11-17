@@ -1751,13 +1751,30 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 5px;
-  height: 5px;
-  margin: -2.5px 0 0 -2.5px;
-  border-radius: 50%;
-  background: #f87171;
-  animation: like-fly 0.8s ease-out var(--dl) forwards;
+  width: var(--sz);
+  height: var(--sz);
+  margin: calc(var(--sz) / -2) 0 0 calc(var(--sz) / -2);
+  color: var(--c);
+  animation: like-fly 1.15s cubic-bezier(0.16, 0.84, 0.44, 1) var(--dl) forwards;
   opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgb(248 113 113 / 0.5));
+}
+.like-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border: 2px solid rgb(248 113 113 / 0.8);
+  border-radius: 50%;
+  animation: like-ring 0.7s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes like-ring {
+  0% { transform: scale(0.4); opacity: 1; }
+  100% { transform: scale(3.2); opacity: 0; }
 }
 @keyframes like-pop {
   0% { transform: scale(0.5); }
@@ -1765,8 +1782,9 @@ body {
   100% { transform: scale(1); }
 }
 @keyframes like-fly {
-  0% { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
-  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.4); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(0) scale(0.6); }
+  15% { transform: translate(calc(var(--dx) * 0.4), calc(var(--dy) * 0.4)) rotate(calc(var(--rot) * 0.4)) scale(1.15); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.5); }
 }
 
 /* ---------- reduced motion ---------- */
