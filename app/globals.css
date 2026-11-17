@@ -1755,7 +1755,7 @@ body {
   height: var(--sz);
   margin: calc(var(--sz) / -2) 0 0 calc(var(--sz) / -2);
   color: var(--c);
-  animation: like-fly 1.15s cubic-bezier(0.16, 0.84, 0.44, 1) var(--dl) forwards;
+  animation: like-fly var(--dur) ease-out var(--dl) forwards;
   opacity: 0;
   pointer-events: none;
   filter: drop-shadow(0 0 6px rgb(248 113 113 / 0.5));
@@ -1782,9 +1782,10 @@ body {
   100% { transform: scale(1); }
 }
 @keyframes like-fly {
-  0% { opacity: 1; transform: translate(0, 0) rotate(0) scale(0.6); }
-  15% { transform: translate(calc(var(--dx) * 0.4), calc(var(--dy) * 0.4)) rotate(calc(var(--rot) * 0.4)) scale(1.15); }
-  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.5); }
+  0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(0.3); }
+  8% { opacity: 1; transform: translate(calc(var(--dx) * 0.15), calc(var(--dy) * 0.08)) rotate(calc(var(--rot) * 0.3)) scale(1); }
+  55% { opacity: 1; transform: translate(calc(var(--dx) * -0.6), calc(var(--dy) * 0.55)) rotate(calc(var(--rot) * -0.5)) scale(1.05); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.85); }
 }
 
 /* ---------- reduced motion ---------- */

@@ -31,20 +31,18 @@ export function LikeButton({ locale }: { locale: Locale }) {
     }
     const id = burst + 1;
     setBurst(id);
-    timers.current.push(window.setTimeout(() => setBurst((b) => (b === id ? 0 : b)), 900));
+    timers.current.push(window.setTimeout(() => setBurst((b) => (b === id ? 0 : b)), 3200));
   };
 
-  const parts = Array.from({ length: 26 }, (_, i) => {
-    const spread = (i / 26) * Math.PI * 2 + Math.random() * 0.5;
-    const up = Math.random() < 0.7;
-    const dist = 60 + Math.random() * 150;
+  const parts = Array.from({ length: 18 }, (_, i) => {
     const colors = ["#f87171", "#ef4444", "#fb7185", "#fda4af", "#f472b6"];
     return {
-      "--dx": `${Math.cos(spread) * dist}px`,
-      "--dy": `${up ? -Math.abs(Math.sin(spread)) * dist - 40 : Math.abs(Math.sin(spread)) * dist * 0.4}px`,
-      "--dl": `${Math.random() * 160}ms`,
-      "--rot": `${Math.random() * 240 - 120}deg`,
-      "--sz": `${9 + Math.random() * 13}px`,
+      "--dx": `${(Math.random() - 0.5) * 110}px`,
+      "--dy": `${-(140 + Math.random() * 220)}px`,
+      "--dl": `${i * 90 + Math.random() * 60}ms`,
+      "--dur": `${1.5 + Math.random() * 0.9}s`,
+      "--rot": `${Math.random() * 60 - 30}deg`,
+      "--sz": `${10 + Math.random() * 12}px`,
       "--c": colors[i % colors.length],
     } as React.CSSProperties;
   });
