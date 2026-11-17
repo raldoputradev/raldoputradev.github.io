@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { BackTop } from "@/components/BackTop";
+import { LikeButton } from "@/components/LikeButton";
 import { WaveField } from "@/components/WaveField";
 import { Footer } from "@/components/Footer";
 import { Intro } from "@/components/Intro";
@@ -59,6 +60,7 @@ export default async function LocaleLayout({
       <main id="main" className="relative z-[1]">{children}</main>
       <Footer locale={locale} />
       <BackTop />
+      <LikeButton locale={locale} />
     </>
   );
 }

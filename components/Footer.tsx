@@ -1,7 +1,6 @@
 import { site, type Locale } from "@/lib/site";
 import { getCopy } from "@/lib/i18n";
 import { homeHref } from "@/lib/paths";
-import { LikeButton } from "@/components/LikeButton";
 
 const links = ["home", "about", "skills", "projects", "contact"] as const;
 
@@ -41,7 +40,6 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="ftr-bot">
           <p>{copy.footer.line}</p>
-          <LikeButton locale={locale} />
           <p className="ft-mute">© {new Date().getFullYear()} {site.name}. {copy.footer.rights}</p>
         </div>
       </div>

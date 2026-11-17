@@ -29,7 +29,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
   background: var(--bg);
 }
 
@@ -1698,11 +1697,18 @@ body {
 
 /* ---------- like button ---------- */
 .like-btn {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 45;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.45rem 1rem;
   border: 1px solid rgb(248 113 113 / 0.45);
+  background: rgb(10 10 10 / 0.82);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 24px rgb(0 0 0 / 0.45);
   border-radius: 999px;
   background: rgb(248 113 113 / 0.08);
   color: var(--fg);
