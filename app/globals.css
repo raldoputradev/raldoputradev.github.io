@@ -1615,6 +1615,7 @@ body {
   z-index: 1;
   border-top: 1px solid var(--line);
   background: var(--bg);
+  scroll-snap-align: end;
 }
 .ftr-in {
   max-width: 64rem;
@@ -1701,17 +1702,30 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.9rem;
-  border: 1px dashed var(--line);
+  border: 1px solid rgb(248 113 113 / 0.45);
   border-radius: 999px;
-  background: transparent;
-  color: var(--muted);
+  background: rgb(248 113 113 / 0.08);
+  color: var(--fg);
   font-size: 0.8rem;
   cursor: pointer;
-  transition: color 0.25s, border-color 0.25s, transform 0.15s;
+  transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.15s;
 }
 .like-btn:hover {
-  color: var(--fg);
-  border-color: var(--fg);
+  border-color: #f87171;
+  background: rgb(248 113 113 / 0.16);
+}
+.like-btn .like-heart {
+  color: #f87171;
+}
+.like-btn:not(.is-liked) .like-heart svg {
+  animation: like-beat 2.4s ease-in-out infinite;
+}
+@keyframes like-beat {
+  0%, 100% { transform: scale(1); }
+  8% { transform: scale(1.18); }
+  16% { transform: scale(1); }
+  24% { transform: scale(1.12); }
+  32% { transform: scale(1); }
 }
 .like-btn:active {
   transform: scale(0.94);
@@ -1756,7 +1770,8 @@ body {
   .intro { display: none; }
   .rv { opacity: 1; transform: none; filter: none; transition: none; }
   .hn-letter { opacity: 1; transform: none; animation: none; }
-  .hero-dot, .hero-cue-line, .rot-word::after, .ph-ring { animation: none; }
+  .hero-dot, .hero-cue-line, .rot-word::after, .ph-ring,
+  .like-heart svg { animation: none; }
   .mq-track { animation-duration: 120s; }
 }
 
