@@ -34,18 +34,18 @@ export function LikeButton({ locale }: { locale: Locale }) {
     localStorage.setItem(KEY, "1");
     const id = burst + 1;
     setBurst(id);
-    timers.current.push(window.setTimeout(() => setBurst((b) => (b === id ? 0 : b)), 3200));
+    timers.current.push(window.setTimeout(() => setBurst((b) => (b === id ? 0 : b)), 6500));
   };
 
-  const parts = Array.from({ length: 18 }, (_, i) => {
+  const parts = Array.from({ length: 30 }, (_, i) => {
     const colors = ["#f87171", "#ef4444", "#fb7185", "#fda4af", "#f472b6"];
     return {
-      "--dx": `${(Math.random() - 0.5) * 110}px`,
-      "--dy": `${-(140 + Math.random() * 220)}px`,
-      "--dl": `${i * 90 + Math.random() * 60}ms`,
-      "--dur": `${1.5 + Math.random() * 0.9}s`,
+      "--dx": `${(Math.random() - 0.5) * 220}px`,
+      "--dy": `${-(220 + Math.random() * 380)}px`,
+      "--dl": `${i * 80 + Math.random() * 70}ms`,
+      "--dur": `${1.8 + Math.random() * 1.4}s`,
       "--rot": `${Math.random() * 60 - 30}deg`,
-      "--sz": `${10 + Math.random() * 12}px`,
+      "--sz": `${13 + Math.random() * 15}px`,
       "--c": colors[i % colors.length],
     } as React.CSSProperties;
   });
