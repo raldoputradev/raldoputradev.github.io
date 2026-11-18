@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Reveal } from "./Reveal";
 
 type CertItem = {
@@ -12,6 +12,8 @@ type CertItem = {
   fit?: "cover" | "contain";
 };
 
+const LOOPS = 3;
+
 export function CertSlider({
   items,
   verifyLabel,
@@ -22,12 +24,69 @@ export function CertSlider({
   emptyLabel: string;
 }) {
   const track = useRef<HTMLUListElement>(null);
+  const drag = useRef({ on: false, x: 0, sl: 0, moved: false });
+
+  const looped = useMemo(
+    () => (items.length ? Array.from({ length: LOOPS }, () => items).flat() : []),
+    [items]
+  );
+
+  // Start in the middle copy so both directions are immediately scrollable.
+  useEffect(() => {
+    const el = track.current;
+    if (!el || !items.length) return;
+    const id = requestAnimationFrame(() => {
+      el.scrollLeft = el.scrollWidth / LOOPS;
+    });
+    return () => cancelAnimationFrame(id);
+  }, [items]);
+
+  // Seamless wrap: near an edge, jump one full set invisibly (content is identical).
+  const onScroll = () => {
+    const el = track.current;
+    if (!el || !items.length) return;
+    const set = el.scrollWidth / LOOPS;
+    if (el.scrollLeft >= set * 2 - 4) el.scrollLeft -= set;
+    else if (el.scrollLeft <= 4) el.scrollLeft += set;
+  };
 
   const slide = (dir: number) => {
     const el = track.current;
     if (!el) return;
     const card = el.querySelector<HTMLElement>(".ct");
     el.scrollBy({ left: dir * ((card?.offsetWidth ?? 340) + 22), behavior: "smooth" });
+  };
+
+  const pointer = {
+    down: (e: React.PointerEvent<HTMLUListElement>) => {
+      const el = track.current;
+      if (!el) return;
+      drag.current = { on: true, x: e.clientX, sl: el.scrollLeft, moved: false };
+      el.setPointerCapture(e.pointerId);
+      el.classList.add("is-drag");
+    },
+    move: (e: React.PointerEvent<HTMLUListElement>) => {
+      const el = track.current;
+      const d = drag.current;
+      if (!el || !d.on) return;
+      const dx = e.clientX - d.x;
+      if (Math.abs(dx) > 5) d.moved = true;
+      el.scrollLeft = d.sl - dx;
+    },
+    up: (e: React.PointerEvent<HTMLUListElement>) => {
+      const el = track.current;
+      if (!el) return;
+      drag.current.on = false;
+      el.classList.remove("is-drag");
+      if (drag.current.moved) el.releasePointerCapture(e.pointerId);
+    },
+    clickCapture: (e: React.MouseEvent<HTMLUListElement>) => {
+      if (drag.current.moved) {
+        e.preventDefault();
+        e.stopPropagation();
+        drag.current.moved = false;
+      }
+    },
   };
 
   return (
@@ -42,10 +101,25 @@ export function CertSlider({
           </button>
         </div>
       )}
-      <ul className={`ct-grid${items.length ? " is-slider" : ""}`} ref={track}>
+      <ul
+        className={`ct-grid${items.length ? " is-slider is-infinite" : ""}`}
+        ref={track}
+        onScroll={onScroll}
+        onPointerDown={pointer.down}
+        onPointerMove={pointer.move}
+        onPointerUp={pointer.up}
+        onPointerCancel={pointer.up}
+        onClickCapture={pointer.clickCapture}
+      >
         {items.length > 0
-          ? items.map((c, i) => (
-              <Reveal as="li" key={i} delay={i * 80} variant="zoom" className="ct">
+          ? looped.map((c, i) => (
+              <Reveal
+                as="li"
+                key={i}
+                delay={(i % items.length) * 80}
+                variant="zoom"
+                className="ct"
+              >
                 <a className="ct-card" href={c.link} target="_blank" rel="noreferrer">
                   <span className="ct-frame has-img">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -54,6 +128,7 @@ export function CertSlider({
                       alt={c.title}
                       className={c.fit === "contain" ? "is-contain" : ""}
                       loading="lazy"
+                      draggable={false}
                     />
                   </span>
                   <span className="ct-info">
