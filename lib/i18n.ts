@@ -268,6 +268,14 @@ const id = {
         fit: "contain" as const,
       },
       {
+        title: "Artificial Intelligence Fundamentals",
+        issuer: "IBM SkillsBuild",
+        year: "2026",
+        image: "/certs/ibm-design.png",
+        link: "https://www.credly.com/badges/29dc2821-f5bc-4f84-831f-4b829f7cc483",
+        fit: "cover" as const,
+      },
+      {
         title: "Spec-Driven Development dengan Kiro",
         issuer: "Dicoding Indonesia",
         year: "2026 · berlaku s.d. 2029",
@@ -483,6 +491,14 @@ const en: typeof id = {
         image: "/certs/gcloud-gemini-badge.png",
         link: "https://www.credly.com/badges/6923d20c-89a9-44cd-abb5-357ea4d9c917/public_url",
         fit: "contain" as const,
+      },
+      {
+        title: "Artificial Intelligence Fundamentals",
+        issuer: "IBM SkillsBuild",
+        year: "2026",
+        image: "/certs/ibm-design.png",
+        link: "https://www.credly.com/badges/29dc2821-f5bc-4f84-831f-4b829f7cc483",
+        fit: "cover" as const,
       },
       {
         title: "Spec-Driven Development with Kiro",
