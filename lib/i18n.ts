@@ -255,7 +255,7 @@ const id = {
     kicker: "Sertifikat",
     titleLead: "Kredensial &",
     titleAccent: "sertifikat.",
-    blurb: "Pendukung — sertifikat & badge resmi yang menemani praktik langsung di proyek nyata.",
+    blurb: "Sertifikat & badge resmi dari kelas dan program eksternal — pembelajaran mandiri di luar proyek.",
     emptyLabel: "Sertifikat menyusul",
     verifyLabel: "Verifikasi",
     items: [
@@ -480,7 +480,7 @@ const en: typeof id = {
     kicker: "Certificates",
     titleLead: "Credentials &",
     titleAccent: "certificates.",
-    blurb: "Supporting credentials — official certificates & badges alongside hands-on project work.",
+    blurb: "Official certificates & badges from external courses and programs — self-driven learning beyond projects.",
     emptyLabel: "Certificate coming soon",
     verifyLabel: "Verify",
     items: [
