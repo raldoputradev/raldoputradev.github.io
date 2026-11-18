@@ -280,7 +280,7 @@ const id = {
         issuer: "IBM SkillsBuild",
         year: "2026",
         image: "/certs/ibm-prompts.png",
-        link: "https://www.credly.com/go/DsWU5wc9",
+        link: "https://www.credly.com/go/nL8J3YPV",
         fit: "cover" as const,
       },
       {
@@ -513,7 +513,7 @@ const en: typeof id = {
         issuer: "IBM SkillsBuild",
         year: "2026",
         image: "/certs/ibm-prompts.png",
-        link: "https://www.credly.com/go/DsWU5wc9",
+        link: "https://www.credly.com/go/nL8J3YPV",
         fit: "cover" as const,
       },
       {

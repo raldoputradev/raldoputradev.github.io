@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { CertSlider } from "@/components/CertSlider";
 import { Lightbox } from "@/components/Lightbox";
 import { CountUp } from "@/components/CountUp";
 import { Marquee } from "@/components/Marquee";
@@ -328,11 +327,55 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section id="certs" className="pg">
         <div className="pg-in">
           <Head n={5} h={heads[4]} />
-          <CertSlider
-            items={copy.certs.items}
-            verifyLabel={copy.certs.verifyLabel}
-            emptyLabel={copy.certs.emptyLabel}
-          />
+          <ul className="ct-grid">
+            {copy.certs.items.length > 0
+              ? copy.certs.items.map((c, i) => (
+                  <Reveal as="li" key={i} delay={i * 80} variant="zoom" className="ct">
+                    <a
+                      className="ct-card"
+                      href={c.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <span
+                        className="ct-frame has-img"
+                        data-cap={`${c.title} — ${c.issuer} · ${c.year}`}
+                        data-href={c.link}
+                        data-vlabel={copy.certs.verifyLabel}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={c.image}
+                          alt={c.title}
+                          className={c.fit === "contain" ? "is-contain" : ""}
+                          loading="lazy"
+                          draggable={false}
+                        />
+                      </span>
+                      <span className="ct-info">
+                        <span className="ct-title">{c.title}</span>
+                        <span className="ct-meta">
+                          {c.issuer} · {c.year}
+                        </span>
+                        <span className="ct-verify">{copy.certs.verifyLabel} ↗</span>
+                      </span>
+                    </a>
+                  </Reveal>
+                ))
+              : [0, 1, 2].map((i) => (
+                  <Reveal as="li" key={i} delay={i * 100} variant="zoom" className="ct">
+                    <span className="ct-frame">
+                      <span className="ct-mark" aria-hidden />
+                      <span className="ct-label">{copy.certs.emptyLabel}</span>
+                    </span>
+                    <span className="ct-lines">
+                      <span className="ct-line" />
+                      <span className="ct-line is-short" />
+                    </span>
+                  </Reveal>
+                ))}
+          </ul>
         </div>
       </section>
 

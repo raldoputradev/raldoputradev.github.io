@@ -1437,19 +1437,21 @@ body {
 /* ---------- certificates ---------- */
 
 .ct-grid {
-  display: grid;
-  gap: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.6rem;
   margin: 4.5rem 0 0;
   padding: 0;
   list-style: none;
-}
-@media (min-width: 720px) {
-  .ct-grid { grid-template-columns: repeat(3, 1fr); }
 }
 .ct {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+  flex: 0 1 300px;
+  max-width: 340px;
+  min-width: 240px;
 }
 .ct-frame {
   position: relative;
@@ -1498,81 +1500,6 @@ body {
   background: var(--line);
 }
 .ct-line.is-short { width: 55%; }
-
-.ct-slider {
-  position: relative;
-  margin-top: 4.5rem;
-}
-.ct-nav {
-  position: absolute;
-  top: -3.4rem;
-  right: 0;
-  display: flex;
-  gap: 0.5rem;
-}
-.ct-nav button {
-  width: 2.4rem;
-  height: 2.4rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 0.5rem;
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: color 0.25s, border-color 0.25s, transform 0.25s;
-}
-.ct-nav button:hover {
-  color: var(--text);
-  border-color: var(--muted);
-  transform: translateY(-2px);
-}
-.ct-grid.is-slider {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 1.4rem;
-  margin: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-strong) transparent;
-  padding-bottom: 0.9rem;
-  cursor: grab;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
-}
-.ct-grid.is-slider.is-drag {
-  cursor: grabbing;
-  scroll-snap-type: none;
-  scroll-behavior: auto;
-}
-.ct-grid.is-slider.is-drag * {
-  user-select: none;
-  pointer-events: none;
-}
-@media (min-width: 720px) {
-  .ct-grid.is-slider { grid-template-columns: none; }
-}
-.ct-grid.is-slider .ct {
-  flex: 0 0 min(340px, 82vw);
-  scroll-snap-align: start;
-}
-.ct-grid.is-slider.is-infinite {
-  scrollbar-width: none;
-}
-.ct-grid.is-slider.is-infinite::-webkit-scrollbar {
-  display: none;
-}
-.ct-grid.is-slider::-webkit-scrollbar {
-  height: 5px;
-}
-.ct-grid.is-slider::-webkit-scrollbar-thumb {
-  background: var(--line-strong);
-  border-radius: 3px;
-}
-.ct-grid.is-slider::-webkit-scrollbar-track {
-  background: transparent;
-}
 
 .ct-card {
   display: flex;
