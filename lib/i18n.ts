@@ -276,6 +276,14 @@ const id = {
         fit: "cover" as const,
       },
       {
+        title: "Craft Precise Prompts for AI Models",
+        issuer: "IBM SkillsBuild",
+        year: "2026",
+        image: "/certs/ibm-prompts.png",
+        link: "https://www.credly.com/go/DsWU5wc9",
+        fit: "cover" as const,
+      },
+      {
         title: "Spec-Driven Development dengan Kiro",
         issuer: "Dicoding Indonesia",
         year: "2026 · berlaku s.d. 2029",
@@ -498,6 +506,14 @@ const en: typeof id = {
         year: "2026",
         image: "/certs/ibm-design.png",
         link: "https://www.credly.com/badges/29dc2821-f5bc-4f84-831f-4b829f7cc483",
+        fit: "cover" as const,
+      },
+      {
+        title: "Craft Precise Prompts for AI Models",
+        issuer: "IBM SkillsBuild",
+        year: "2026",
+        image: "/certs/ibm-prompts.png",
+        link: "https://www.credly.com/go/DsWU5wc9",
         fit: "cover" as const,
       },
       {
