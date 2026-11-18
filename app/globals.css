@@ -1630,6 +1630,27 @@ body {
   color: var(--ok);
   margin-top: 0.2rem;
 }
+.ct-frame.has-img {
+  cursor: zoom-in;
+}
+
+.lb-verify {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-family: var(--font-mono-v), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ok);
+  text-decoration: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  transition: border-color 0.25s, color 0.25s;
+}
+.lb-verify:hover {
+  border-color: var(--ok);
+}
 
 /* ---------- contact ---------- */
 

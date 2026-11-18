@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { CertSlider } from "@/components/CertSlider";
+import { Lightbox } from "@/components/Lightbox";
 import { CountUp } from "@/components/CountUp";
 import { Marquee } from "@/components/Marquee";
 import { ProjectTabs } from "@/components/ProjectTabs";
@@ -375,6 +376,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           ) : null}
         </div>
       </section>
+      <Lightbox />
     </>
   );
 }

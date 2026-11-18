@@ -120,8 +120,19 @@ export function CertSlider({
                 variant="zoom"
                 className="ct"
               >
-                <a className="ct-card" href={c.link} target="_blank" rel="noreferrer">
-                  <span className="ct-frame has-img">
+                <a
+                  className="ct-card"
+                  href={c.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <span
+                    className="ct-frame has-img"
+                    data-cap={`${c.title} — ${c.issuer} · ${c.year}`}
+                    data-href={c.link}
+                    data-vlabel={verifyLabel}
+                  >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={c.image}
