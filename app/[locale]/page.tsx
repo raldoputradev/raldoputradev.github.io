@@ -331,13 +331,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {copy.certs.items.length > 0
               ? copy.certs.items.map((c, i) => (
                   <Reveal as="li" key={i} delay={i * 80} variant="zoom" className="ct">
-                    <a
-                      className="ct-card"
-                      href={c.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.preventDefault()}
-                    >
+                    <a className="ct-card" href={c.link} target="_blank" rel="noreferrer">
                       <span
                         className="ct-frame has-img"
                         data-cap={`${c.title} — ${c.issuer} · ${c.year}`}

@@ -8,17 +8,21 @@ export function Lightbox() {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const fig = (e.target as HTMLElement).closest?.(
-        "figure.pd-shot, figure.pd-hero, .ct-frame.has-img"
+      const el = (e.target as HTMLElement).closest?.(
+        "figure.pd-shot, figure.pd-hero, .ct-card"
       ) as HTMLElement | null;
-      if (!fig) return;
-      const img = fig.querySelector("img");
-      if (!img?.getAttribute("src")) return;
+      if (!el) return;
+      const frame = (
+        el.classList.contains("ct-card") ? el.querySelector(".ct-frame.has-img") : el
+      ) as HTMLElement | null;
+      const img = frame?.querySelector("img");
+      if (!frame || !img?.getAttribute("src")) return;
+      if (el.classList.contains("ct-card")) e.preventDefault();
       setShot({
         src: img.getAttribute("src")!,
-        cap: fig.getAttribute("data-cap") ?? fig.querySelector("figcaption")?.textContent ?? "",
-        href: fig.getAttribute("data-href") ?? undefined,
-        vlabel: fig.getAttribute("data-vlabel") ?? undefined,
+        cap: frame.getAttribute("data-cap") ?? frame.querySelector("figcaption")?.textContent ?? "",
+        href: frame.getAttribute("data-href") ?? undefined,
+        vlabel: frame.getAttribute("data-vlabel") ?? undefined,
       });
       setZoom(false);
     };
