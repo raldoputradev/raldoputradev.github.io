@@ -2334,10 +2334,15 @@ body {
   cursor: zoom-in;
   transition: transform 0.3s var(--ease);
 }
+.lb-fig.is-zoom {
+  align-items: flex-start;
+}
 .lb-fig.is-zoom img {
-  transform: scale(1.7);
-  transform-origin: center;
+  max-width: none;
+  max-height: none;
+  width: auto;
   cursor: zoom-out;
+  transform: none;
 }
 .lb-fig figcaption {
   font-family: var(--font-mono-v), monospace;

@@ -62,23 +62,25 @@ export function CertSlider({
       const el = track.current;
       if (!el) return;
       drag.current = { on: true, x: e.clientX, sl: el.scrollLeft, moved: false };
-      el.setPointerCapture(e.pointerId);
-      el.classList.add("is-drag");
     },
     move: (e: React.PointerEvent<HTMLUListElement>) => {
       const el = track.current;
       const d = drag.current;
       if (!el || !d.on) return;
       const dx = e.clientX - d.x;
-      if (Math.abs(dx) > 5) d.moved = true;
-      el.scrollLeft = d.sl - dx;
+      if (!d.moved && Math.abs(dx) > 5) {
+        d.moved = true;
+        el.setPointerCapture(e.pointerId);
+        el.classList.add("is-drag");
+      }
+      if (d.moved) el.scrollLeft = d.sl - dx;
     },
     up: (e: React.PointerEvent<HTMLUListElement>) => {
       const el = track.current;
       if (!el) return;
       drag.current.on = false;
       el.classList.remove("is-drag");
-      if (drag.current.moved) el.releasePointerCapture(e.pointerId);
+      if (el.hasPointerCapture?.(e.pointerId)) el.releasePointerCapture(e.pointerId);
     },
     clickCapture: (e: React.MouseEvent<HTMLUListElement>) => {
       if (drag.current.moved) {
