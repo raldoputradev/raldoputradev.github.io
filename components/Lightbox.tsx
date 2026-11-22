@@ -11,7 +11,7 @@ export function Lightbox() {
       const t = e.target as HTMLElement;
       // Link verifikasi di dalam baris file -> biarkan navigasi normal
       if (t.closest?.(".ct-file a")) return;
-      const el = t.closest?.("figure.pd-shot, figure.pd-hero, .ct-card, .ct-file") as
+      const el = t.closest?.("figure.pd-shot, figure.pd-hero, .ct-card, .ct-file, .cf-paper") as
         | HTMLElement
         | null;
       if (!el) return;
