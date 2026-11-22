@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Reveal } from "./Reveal";
 
 type CertItem = {
@@ -29,6 +29,16 @@ export function CertExplorer({
   emptyLabel: string;
 }) {
   const [open, setOpen] = useState<number>(-1);
+
+  // Klik di mana pun di luar folder -> folder menutup
+  useEffect(() => {
+    if (open < 0) return;
+    const onDoc = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(".cf")) setOpen(-1);
+    };
+    document.addEventListener("click", onDoc);
+    return () => document.removeEventListener("click", onDoc);
+  }, [open]);
 
   if (!groups.length) {
     return <p className="cx-empty">{emptyLabel}</p>;
@@ -93,7 +103,7 @@ export function CertExplorer({
                     ))}
                   </span>
                 ) : null}
-                <span className="cf-hint">{open === gi ? "tutup ↓" : "buka ↑"}</span>
+
               </div>
               <p className="cf-label">
                 <span>{g.label}</span>

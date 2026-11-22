@@ -1580,6 +1580,31 @@ body {
 .cf-stage:focus-visible .cf-back {
   border-color: var(--muted);
 }
+/* pancaran warna di belakang folder */
+.cf-stage::before {
+  content: "";
+  position: absolute;
+  inset: -14% -10%;
+  background: radial-gradient(
+    ellipse 55% 50% at 50% 60%,
+    rgb(217 173 99 / 0.22),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.45s;
+  pointer-events: none;
+}
+.cf-stage:hover::before,
+.cf.is-open .cf-stage::before {
+  opacity: 1;
+}
+.cf.is-open .cf-stage::before {
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 58%,
+    rgb(226 178 96 / 0.34),
+    transparent 72%
+  );
+}
 
 /* cangkang belakang + tab folder */
 .cf-back {
@@ -1702,8 +1727,9 @@ body {
 /* stempel/logo institusi di flap */
 .cf-stamp {
   position: absolute;
-  right: 7%;
-  bottom: 9%;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%) rotate(-3deg);
   z-index: 4;
   display: inline-flex;
   align-items: center;
@@ -1714,7 +1740,6 @@ body {
   border: 1px solid rgb(212 168 92 / 0.55);
   border-radius: 0.35rem;
   background: rgb(240 230 214 / 0.92);
-  transform: rotate(-3deg);
   font-family: var(--font-mono-v), monospace;
   font-size: 9px;
   letter-spacing: 0.14em;
@@ -1728,22 +1753,6 @@ body {
   max-width: 84px;
   max-height: 20px;
   object-fit: contain;
-}
-.cf-hint {
-  position: absolute;
-  left: 8%;
-  bottom: 9%;
-  z-index: 4;
-  font-family: var(--font-mono-v), monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgb(66 47 17 / 0.75);
-  pointer-events: none;
-  transition: color 0.25s;
-}
-.cf-stage:hover .cf-hint {
-  color: rgb(56 39 12);
 }
 
 /* label di bawah folder */
