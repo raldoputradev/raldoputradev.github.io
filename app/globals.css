@@ -1588,9 +1588,9 @@ body {
   right: 3%;
   top: 9%;
   bottom: 6%;
-  border: 1px solid rgb(212 168 92 / 0.4);
+  border: 1px solid #8a6a34;
   border-radius: 0.9rem;
-  background: linear-gradient(180deg, rgb(212 168 92 / 0.16), rgb(186 142 66 / 0.07));
+  background: linear-gradient(180deg, #b8894a, #a3773a);
   transition: border-color 0.3s;
 }
 .cf-back::before {
@@ -1600,10 +1600,10 @@ body {
   left: 7%;
   width: 36%;
   height: 13px;
-  border: 1px solid rgb(212 168 92 / 0.4);
+  border: 1px solid #8a6a34;
   border-bottom: none;
   border-radius: 0.55rem 0.55rem 0 0;
-  background: rgb(212 168 92 / 0.16);
+  background: #b8894a;
 }
 
 /* tumpukan kertas di dalam folder */
@@ -1614,9 +1614,9 @@ body {
 }
 .cf-paper {
   position: absolute;
-  left: 14%;
-  right: 14%;
-  top: 11%;
+  left: 10%;
+  right: 10%;
+  top: 10%;
   aspect-ratio: 1210 / 935;
   padding: 0;
   border: 1px solid var(--line-strong);
@@ -1682,14 +1682,13 @@ body {
   top: 46%;
   bottom: 2%;
   z-index: 3;
-  border: 1px solid rgb(212 168 92 / 0.38);
+  border: 1px solid #8a6a34;
   border-radius: 0.9rem;
-  background: rgb(58 44 22 / 0.55);
-  backdrop-filter: blur(5px);
+  background: linear-gradient(180deg, #d9ad63, #c99a51);
   transition: background 0.3s;
 }
 .cf.is-open .cf-front {
-  background: rgb(58 44 22 / 0.42);
+  background: linear-gradient(180deg, #cfa356, #bf9047);
 }
 
 /* stempel/logo institusi di flap */
@@ -1724,20 +1723,19 @@ body {
 }
 .cf-hint {
   position: absolute;
-  left: 50%;
-  bottom: 8%;
-  transform: translateX(-50%);
+  left: 8%;
+  bottom: 9%;
   z-index: 4;
   font-family: var(--font-mono-v), monospace;
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: rgb(66 47 17 / 0.75);
   pointer-events: none;
   transition: color 0.25s;
 }
 .cf-stage:hover .cf-hint {
-  color: var(--muted);
+  color: rgb(56 39 12);
 }
 
 /* label di bawah folder */
