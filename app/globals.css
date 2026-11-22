@@ -1637,6 +1637,13 @@ body {
   display: block;
   pointer-events: none;
 }
+/* folder tertutup: kertas cuma pajangan — klik jatuh ke folder */
+.cf:not(.is-open) .cf-paper {
+  pointer-events: none;
+}
+.cf-paper.is-note {
+  pointer-events: none !important;
+}
 /* hover folder tertutup: kertas mengintip */
 .cf:not(.is-open) .cf-stage:hover .cf-paper {
   transform: translateY(calc(-12% + var(--i) * -3px))
@@ -1655,13 +1662,13 @@ body {
     rotate(calc((var(--i) - (var(--n) - 1) / 2) * 8deg)) scale(1.04);
 }
 
-/* kertas pending (Epson RC+) */
+/* kertas pending (Epson RC+) — tampak seperti dokumen krem */
 .cf-paper.is-note {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface);
-  border-style: dashed;
+  background: #f0e8d6;
+  border: 1px dashed #8a6a34;
   cursor: default;
 }
 .cf-note-txt {
@@ -1669,9 +1676,10 @@ body {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ok);
+  color: #6b4e1e;
   text-align: center;
   padding: 0.6rem;
+  line-height: 1.6;
 }
 
 /* flap depan transparan */
