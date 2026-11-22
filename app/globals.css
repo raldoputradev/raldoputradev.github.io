@@ -1701,8 +1701,9 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  max-width: 40%;
-  padding: 0.4rem 0.7rem;
+  gap: 0.55rem;
+  max-width: 55%;
+  padding: 0.45rem 0.75rem;
   border: 1px solid rgb(212 168 92 / 0.55);
   border-radius: 0.35rem;
   background: rgb(240 230 214 / 0.92);
@@ -1717,8 +1718,8 @@ body {
 }
 .cf-stamp img {
   display: block;
-  max-width: 110px;
-  max-height: 22px;
+  max-width: 84px;
+  max-height: 20px;
   object-fit: contain;
 }
 .cf-hint {

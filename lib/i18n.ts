@@ -262,13 +262,13 @@ const id = {
       {
         label: "Tier 01 — Sertifikasi Industri",
         note: "Epson RC+ dalam proses",
-        logo: "/polibatam-logo.png",
+        logos: ["/polibatam-logo.png"],
         items: [
         ],
       },
       {
         label: "Tier 02 — Vendor & Universitas",
-        stamp: "IBM · Meta · UIUC",
+        logos: ["/brands/ibm.png", "/brands/meta.png", "/brands/uiuc.png"],
         items: [
           {
             title: "Artificial Intelligence Fundamentals",
@@ -306,7 +306,7 @@ const id = {
       },
       {
         label: "Tier 03 — Kursus Daring",
-        stamp: "Dicoding",
+        logos: ["/brands/dicoding.png"],
         items: [
           {
             title: "Spec-Driven Development dengan Kiro",
@@ -329,8 +329,7 @@ const id = {
     ] as {
       label: string;
       note?: string;
-      logo?: string;
-      stamp?: string;
+      logos?: string[];
       items: { title: string; issuer: string; year: string; image?: string; link?: string; fit?: "cover" | "contain" }[];
     }[],
   },
@@ -528,13 +527,13 @@ const en: typeof id = {
       {
         label: "Tier 01 — Industry Certification",
         note: "Epson RC+ in progress",
-        logo: "/polibatam-logo.png",
+        logos: ["/polibatam-logo.png"],
         items: [
         ],
       },
       {
         label: "Tier 02 — Vendors & Universities",
-        stamp: "IBM · Meta · UIUC",
+        logos: ["/brands/ibm.png", "/brands/meta.png", "/brands/uiuc.png"],
         items: [
           {
             title: "Artificial Intelligence Fundamentals",
@@ -572,7 +571,7 @@ const en: typeof id = {
       },
       {
         label: "Tier 03 — Online Courses",
-        stamp: "Dicoding",
+        logos: ["/brands/dicoding.png"],
         items: [
           {
             title: "Spec-Driven Development with Kiro",
