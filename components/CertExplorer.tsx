@@ -31,6 +31,7 @@ export function CertExplorer({
   emptyLabel: string;
 }) {
   const [open, setOpen] = useState<number>(-1);
+  const [top, setTop] = useState<number>(-1);
   const track = useRef<HTMLDivElement>(null);
   const drag = useRef({ on: false, x: 0, sl: 0, moved: false });
 
@@ -68,7 +69,10 @@ export function CertExplorer({
   useEffect(() => {
     if (open < 0) return;
     const onDoc = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest(".cf")) setOpen(-1);
+      if (!(e.target as HTMLElement).closest(".cf")) {
+        setOpen(-1);
+        setTop(-1);
+      }
     };
     document.addEventListener("click", onDoc);
     return () => document.removeEventListener("click", onDoc);
@@ -152,11 +156,13 @@ export function CertExplorer({
                 onClick={(e) => {
                   if ((e.target as HTMLElement).closest(".cf-paper")) return;
                   setOpen(open === gi ? -1 : gi);
+                  setTop(-1);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     setOpen(open === gi ? -1 : gi);
+                    setTop(-1);
                   }
                 }}
               >
@@ -166,8 +172,23 @@ export function CertExplorer({
                     <button
                       type="button"
                       key={c.title}
-                      className="cf-paper"
-                      style={{ "--i": i, "--n": n } as React.CSSProperties}
+                      className={`cf-paper${i === top ? " is-top" : ""}`}
+                      style={
+                        {
+                          "--i": i,
+                          "--n": n,
+                          zIndex: i === top ? 20 : undefined,
+                        } as React.CSSProperties
+                      }
+                      onClick={(e) => {
+                        // Kertas belakang: klik 1x = tarik ke depan, klik lagi = lightbox
+                        const front = top < 0 ? g.items.length - 1 : top;
+                        if (i !== front) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setTop(i);
+                        }
+                      }}
                       data-src={c.image}
                       data-cap={`${c.title} — ${c.issuer} · ${c.year}`}
                       data-href={c.link}

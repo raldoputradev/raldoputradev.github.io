@@ -1727,15 +1727,22 @@ body {
 }
 /* folder terbuka: kertas keluar berkipas */
 .cf.is-open .cf-paper {
-  transform: translateX(calc((var(--i) - (var(--n) - 1) / 2) * 30px))
+  transform: translateX(calc((var(--i) - (var(--n) - 1) / 2) * 38px))
     translateY(calc(-34% - var(--i) * 10px))
-    rotate(calc((var(--i) - (var(--n) - 1) / 2) * 8deg));
+    rotate(calc((var(--i) - (var(--n) - 1) / 2) * 9deg));
 }
 .cf.is-open .cf-paper:hover {
   border-color: var(--ok);
-  transform: translateX(calc((var(--i) - (var(--n) - 1) / 2) * 30px))
+  transform: translateX(calc((var(--i) - (var(--n) - 1) / 2) * 38px))
     translateY(calc(-40% - var(--i) * 10px))
-    rotate(calc((var(--i) - (var(--n) - 1) / 2) * 8deg)) scale(1.04);
+    rotate(calc((var(--i) - (var(--n) - 1) / 2) * 9deg)) scale(1.04);
+}
+/* kertas yang diklik -> ditarik ke depan: lurus, center, paling atas */
+.cf.is-open .cf-paper.is-top,
+.cf.is-open .cf-paper.is-top:hover {
+  border-color: var(--ok);
+  box-shadow: 0 22px 50px rgb(0 0 0 / 0.62), 0 0 0 1px rgb(52 211 153 / 0.4);
+  transform: translateX(0) translateY(-46%) rotate(0deg) scale(1.07);
 }
 
 /* kertas pending (Epson RC+) — tampak seperti dokumen krem */
