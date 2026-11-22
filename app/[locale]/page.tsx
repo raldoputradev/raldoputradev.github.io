@@ -341,7 +341,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="pg-in pg-narrow">
           <Reveal>
             <header className="sh">
-              <span className="sh-ghost" aria-hidden>07</span>
+              <span className="sh-ghost" aria-hidden>06</span>
               <p className="sh-kicker">{copy.contact.kicker}</p>
               <h2 className="sh-title">
                 {copy.contact.headlineLead} <em>{copy.contact.headlineAccent}</em>

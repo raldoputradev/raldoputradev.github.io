@@ -12,7 +12,7 @@ type CertItem = {
   fit?: "cover" | "contain";
 };
 
-type CertGroup = { label: string; note?: string; items: CertItem[] };
+type CertGroup = { label: string; note?: string; logo?: string; stamp?: string; items: CertItem[] };
 
 export function CertExplorer({
   groups,
@@ -80,6 +80,16 @@ export function CertExplorer({
                   ) : null}
                 </span>
                 <span className="cf-front" aria-hidden />
+                {g.logo || g.stamp ? (
+                  <span className="cf-stamp" aria-hidden>
+                    {g.logo ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={g.logo} alt="" />
+                    ) : (
+                      g.stamp
+                    )}
+                  </span>
+                ) : null}
                 <span className="cf-hint">{open === gi ? "tutup ↓" : "buka ↑"}</span>
               </div>
               <p className="cf-label">
