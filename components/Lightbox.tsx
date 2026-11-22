@@ -8,18 +8,22 @@ export function Lightbox() {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const el = (e.target as HTMLElement).closest?.(
-        "figure.pd-shot, figure.pd-hero, .ct-card"
-      ) as HTMLElement | null;
+      const t = e.target as HTMLElement;
+      // Link verifikasi di dalam baris file -> biarkan navigasi normal
+      if (t.closest?.(".ct-file a")) return;
+      const el = t.closest?.("figure.pd-shot, figure.pd-hero, .ct-card, .ct-file") as
+        | HTMLElement
+        | null;
       if (!el) return;
       const frame = (
         el.classList.contains("ct-card") ? el.querySelector(".ct-frame.has-img") : el
       ) as HTMLElement | null;
-      const img = frame?.querySelector("img");
-      if (!frame || !img?.getAttribute("src")) return;
+      if (!frame) return;
+      const src = frame.querySelector("img")?.getAttribute("src") ?? frame.getAttribute("data-src");
+      if (!src) return;
       if (el.classList.contains("ct-card")) e.preventDefault();
       setShot({
-        src: img.getAttribute("src")!,
+        src,
         cap: frame.getAttribute("data-cap") ?? frame.querySelector("figcaption")?.textContent ?? "",
         href: frame.getAttribute("data-href") ?? undefined,
         vlabel: frame.getAttribute("data-vlabel") ?? undefined,

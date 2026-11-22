@@ -263,14 +263,6 @@ const id = {
         label: "Tier 01 — Sertifikasi Industri",
         note: "Epson RC+ dalam proses",
         items: [
-          {
-            title: "Orchestrate Multi-Agent Workflows with Gemini Enterprise",
-            issuer: "Google Cloud · Skill Badge",
-            year: "2026 · Advanced",
-            image: "/certs/gcloud-gemini-badge.png",
-            link: "https://www.credly.com/badges/6923d20c-89a9-44cd-abb5-357ea4d9c917/public_url",
-            fit: "contain" as const,
-          },
         ],
       },
       {
@@ -532,14 +524,6 @@ const en: typeof id = {
         label: "Tier 01 — Industry Certification",
         note: "Epson RC+ in progress",
         items: [
-          {
-            title: "Orchestrate Multi-Agent Workflows with Gemini Enterprise",
-            issuer: "Google Cloud · Skill Badge",
-            year: "2026 · Advanced",
-            image: "/certs/gcloud-gemini-badge.png",
-            link: "https://www.credly.com/badges/6923d20c-89a9-44cd-abb5-357ea4d9c917/public_url",
-            fit: "contain" as const,
-          },
         ],
       },
       {
