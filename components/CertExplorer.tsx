@@ -74,6 +74,13 @@ export function CertExplorer({
     return () => document.removeEventListener("click", onDoc);
   }, [open]);
 
+  const slide = (dir: number) => {
+    const el = track.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>(".cf-wrap");
+    el.scrollBy({ left: dir * ((card?.offsetWidth ?? 340) + 38), behavior: "smooth" });
+  };
+
   const pointer = {
     down: (e: React.PointerEvent<HTMLDivElement>) => {
       const el = track.current;
@@ -113,9 +120,18 @@ export function CertExplorer({
   }
 
   return (
-    <div
-      className="cf-grid is-loop"
-      ref={track}
+    <div className="cf-zone">
+      <div className="cf-nav">
+        <button type="button" onClick={() => slide(-1)} aria-label="Geser kiri">
+          ←
+        </button>
+        <button type="button" onClick={() => slide(1)} aria-label="Geser kanan">
+          →
+        </button>
+      </div>
+      <div
+        className="cf-grid is-loop"
+        ref={track}
       onScroll={onScroll}
       onPointerDown={pointer.down}
       onPointerMove={pointer.move}
@@ -192,6 +208,7 @@ export function CertExplorer({
           </Reveal>
         );
       })}
+      </div>
     </div>
   );
 }

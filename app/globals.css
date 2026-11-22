@@ -1595,28 +1595,64 @@ body {
 .cf-stage:focus-visible .cf-back {
   border-color: var(--muted);
 }
-/* pancaran warna di belakang folder — redup sejak awal, terang saat hover/terbuka */
+/* tombol geser kiri/kanan */
+.cf-zone {
+  position: relative;
+}
+.cf-nav {
+  position: absolute;
+  top: 1.2rem;
+  right: 0.5rem;
+  z-index: 6;
+  display: flex;
+  gap: 0.5rem;
+}
+.cf-nav button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.6rem;
+  background: rgb(18 18 20 / 0.85);
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: color 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.cf-nav button:hover {
+  color: var(--text);
+  border-color: var(--muted);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.4);
+}
+
+/* pancaran cahaya di belakang folder — gaya hover button */
 .cf-stage::before {
   content: "";
   position: absolute;
-  inset: -14% -10%;
+  inset: -16% -12%;
   background: radial-gradient(
-    ellipse 55% 50% at 50% 60%,
-    rgb(217 173 99 / 0.24),
+    ellipse 55% 52% at 50% 62%,
+    rgb(255 255 255 / 0.1),
     transparent 70%
   );
-  opacity: 0.35;
+  opacity: 0.3;
   transition: opacity 0.45s;
   pointer-events: none;
 }
 .cf-stage:hover::before {
-  opacity: 0.8;
+  opacity: 0.9;
+  background: radial-gradient(
+    ellipse 58% 54% at 50% 60%,
+    rgb(255 255 255 / 0.16),
+    transparent 72%
+  );
 }
 .cf.is-open .cf-stage::before {
   opacity: 1;
   background: radial-gradient(
-    ellipse 62% 56% at 50% 58%,
-    rgb(232 185 100 / 0.42),
+    ellipse 64% 58% at 50% 58%,
+    rgb(110 231 183 / 0.3),
     transparent 72%
   );
 }
@@ -1777,9 +1813,10 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.7rem;
-  max-width: 66%;
-  padding: 0.65rem 0.95rem;
+  gap: 0.6rem;
+  width: max-content;
+  max-width: 86%;
+  padding: 0.6rem 0.9rem;
   border: 1px solid rgb(212 168 92 / 0.55);
   border-radius: 0.35rem;
   background: rgb(240 230 214 / 0.92);
@@ -1793,8 +1830,8 @@ body {
 }
 .cf-stamp img {
   display: block;
-  max-width: 96px;
-  max-height: 24px;
+  max-width: 76px;
+  max-height: 22px;
   object-fit: contain;
 }
 /* badge terverifikasi di kertas */

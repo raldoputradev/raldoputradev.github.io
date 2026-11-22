@@ -58,7 +58,7 @@ export function Lightbox() {
         {shot.cap ? <figcaption>{shot.cap}</figcaption> : null}
         {shot.href ? (
           <a className="lb-verify" href={shot.href} target="_blank" rel="noreferrer">
-            {shot.vlabel ?? "Verifikasi"} ↗
+            ✓ {shot.vlabel ?? "Verifikasi"} ↗
           </a>
         ) : null}
         <span className="lb-hint">{zoom ? "klik gambar untuk perkecil" : "klik gambar untuk zoom"} · esc untuk tutup</span>
