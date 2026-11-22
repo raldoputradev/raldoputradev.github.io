@@ -257,7 +257,7 @@ const id = {
     titleAccent: "sertifikat.",
     blurb: "Sertifikat & badge resmi dari kelas dan program eksternal — pembelajaran mandiri di luar proyek.",
     emptyLabel: "Sertifikat menyusul",
-    verifyLabel: "Verifikasi",
+    verifyLabel: "Cek Situs Resmi",
     groups: [
       {
         label: "Tier 01 — Sertifikasi Industri",
@@ -522,7 +522,7 @@ const en: typeof id = {
     titleAccent: "certificates.",
     blurb: "Official certificates & badges from external courses and programs — self-driven learning beyond projects.",
     emptyLabel: "Certificate coming soon",
-    verifyLabel: "Verify",
+    verifyLabel: "Check Official Site",
     groups: [
       {
         label: "Tier 01 — Industry Certification",
