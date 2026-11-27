@@ -22,7 +22,7 @@ export const site = {
   instagramHandle: "@_qldoo",
   showcaseRepo: "https://github.com/raldoputradev/smartbrail-showcase",
   showcaseRepoLabel: "smartbrail-showcase",
-  cv: "https://drive.google.com/file/d/1Of-cAOxZZJsHo7AMXWxMOS0SnSiuyZIS/view",
+  cv: "https://drive.google.com/file/d/1gCnsV52biwCmGYU90pkg8oI4wDW9zfny/view?usp=sharing",
   // TODO: kembalikan ke URL detail pamerin pbl.polibatam.ac.id setelah blokir server kampus dibuka
   campusPbl:
     "https://talenthub.polibatam.ac.id/students/4222301064",

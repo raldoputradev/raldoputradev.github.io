@@ -2531,17 +2531,21 @@ body {
   align-items: center;
   gap: 0.6rem;
   margin-top: 2.4rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid var(--line-strong);
+  padding: 0.8rem 1.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
   font-family: var(--font-mono-v), monospace;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
-  transition: color 0.25s ease, border-color 0.25s ease;
+  color: var(--text);
+  background: rgb(255 255 255 / 0.04);
+  transition: transform 0.25s var(--ease), color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 .cv-link:hover {
-  color: var(--text);
+  transform: translateY(-2px);
+  color: var(--bg);
+  background: var(--text);
   border-color: var(--text);
 }
 .cv-link span {
