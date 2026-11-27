@@ -267,7 +267,53 @@ const id = {
         ],
       },
       {
-        label: "Tier 02 — Vendor & Universitas",
+        label: "Tier 02 — AWS Cloud",
+        logos: ["/brands/aws.png"],
+        items: [
+          {
+            title: "AWS Cloud Technical Essentials",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-essentials.png",
+            link: "https://coursera.org/verify/P46VARKA8EX4",
+            fit: "cover" as const,
+          },
+          {
+            title: "Architecting Solutions on AWS",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-architecting.png",
+            link: "https://coursera.org/verify/B8VQVSZ8TSON",
+            fit: "cover" as const,
+          },
+          {
+            title: "Building Data Lakes on AWS",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-data-lakes.png",
+            link: "https://coursera.org/verify/0FA4QW81J96L",
+            fit: "cover" as const,
+          },
+          {
+            title: "Exam Prep: AWS Certified Solutions Architect – Associate",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-exam-prep.png",
+            link: "https://coursera.org/verify/G7MUGDJ0A1SR",
+            fit: "cover" as const,
+          },
+          {
+            title: "AWS Cloud Solutions Architect — Professional Certificate",
+            issuer: "AWS · Coursera · 4 kursus",
+            year: "2026",
+            image: "/certs/aws-professional.png",
+            link: "https://coursera.org/verify/professional-cert/7GS5G3OSIPCG",
+            fit: "cover" as const,
+          },
+        ],
+      },
+      {
+        label: "Tier 03 — Vendor & Universitas",
         logos: ["/brands/ibm.png", "/brands/meta.png", "/brands/uiuc.png"],
         items: [
           {
@@ -305,7 +351,7 @@ const id = {
         ],
       },
       {
-        label: "Tier 03 — Kursus Daring",
+        label: "Tier 04 — Kursus Daring",
         logos: ["/brands/dicoding.png"],
         items: [
           {
@@ -532,7 +578,53 @@ const en: typeof id = {
         ],
       },
       {
-        label: "Tier 02 — Vendors & Universities",
+        label: "Tier 02 — AWS Cloud",
+        logos: ["/brands/aws.png"],
+        items: [
+          {
+            title: "AWS Cloud Technical Essentials",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-essentials.png",
+            link: "https://coursera.org/verify/P46VARKA8EX4",
+            fit: "cover" as const,
+          },
+          {
+            title: "Architecting Solutions on AWS",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-architecting.png",
+            link: "https://coursera.org/verify/B8VQVSZ8TSON",
+            fit: "cover" as const,
+          },
+          {
+            title: "Building Data Lakes on AWS",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-data-lakes.png",
+            link: "https://coursera.org/verify/0FA4QW81J96L",
+            fit: "cover" as const,
+          },
+          {
+            title: "Exam Prep: AWS Certified Solutions Architect – Associate",
+            issuer: "AWS · Coursera",
+            year: "2026",
+            image: "/certs/aws-exam-prep.png",
+            link: "https://coursera.org/verify/G7MUGDJ0A1SR",
+            fit: "cover" as const,
+          },
+          {
+            title: "AWS Cloud Solutions Architect — Professional Certificate",
+            issuer: "AWS · Coursera · 4-course program",
+            year: "2026",
+            image: "/certs/aws-professional.png",
+            link: "https://coursera.org/verify/professional-cert/7GS5G3OSIPCG",
+            fit: "cover" as const,
+          },
+        ],
+      },
+      {
+        label: "Tier 03 — Vendors & Universities",
         logos: ["/brands/ibm.png", "/brands/meta.png", "/brands/uiuc.png"],
         items: [
           {
@@ -570,7 +662,7 @@ const en: typeof id = {
         ],
       },
       {
-        label: "Tier 03 — Online Courses",
+        label: "Tier 04 — Online Courses",
         logos: ["/brands/dicoding.png"],
         items: [
           {
