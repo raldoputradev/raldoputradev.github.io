@@ -397,6 +397,10 @@ const id = {
     askCancel: "Batal",
   },
   footer: {
+    tagline: "Mahasiswa Teknik Robotika — Embedded Systems & IoT",
+    loc: "Batam, Kepulauan Riau, Indonesia",
+    navTitle: "Navigasi",
+    contactTitle: "Kontak & CV",
     line: "Dibangun dengan Next.js — di-deploy ke GitHub Pages.",
     rights: "Semua hak dilindungi.",
   },
@@ -703,6 +707,10 @@ const en: typeof id = {
     askCancel: "Cancel",
   },
   footer: {
+    tagline: "Robotics Engineering Student — Embedded Systems & IoT",
+    loc: "Batam, Kepulauan Riau, Indonesia",
+    navTitle: "Navigate",
+    contactTitle: "Contact & CV",
     line: "Built with Next.js — deployed on GitHub Pages.",
     rights: "All rights reserved.",
   },

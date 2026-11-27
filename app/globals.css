@@ -2032,39 +2032,92 @@ body {
   margin: 0 auto;
   padding: 2.4rem 1.5rem 2rem;
 }
-.ftr-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.4rem;
+.ftr-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.8rem;
+}
+@media (min-width: 720px) {
+  .ftr-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2.2rem;
+  }
+}
+.ftr-col {
+  min-width: 0;
 }
 .ftr-brand {
+  display: inline-block;
   font-family: var(--font-display-v), sans-serif;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
+}
+.ftr-role {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  opacity: 0.9;
+}
+.ftr-loc {
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.ftr-h {
+  font-family: var(--font-mono-v), monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0.6rem;
 }
 .ftr-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.2rem;
-  margin-inline: auto;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .ftr-link {
-  padding: 0.4rem 0.7rem;
-  font-family: var(--font-mono-v), monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: inline-block;
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
   color: var(--muted);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s var(--ease);
 }
 .ftr-link:hover {
   color: var(--text);
+  transform: translateX(3px);
+}
+.ftr-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-family: var(--font-mono-v), monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgb(255 255 255 / 0.04);
+  transition: transform 0.25s var(--ease), background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.ftr-cv:hover {
+  transform: translateY(-2px);
+  color: var(--bg);
+  background: var(--text);
+  border-color: var(--text);
 }
 .ftr-socials {
   display: flex;
   gap: 0.45rem;
-  margin: 0;
+  margin: 1.2rem 0 0;
   padding: 0;
   list-style: none;
 }
