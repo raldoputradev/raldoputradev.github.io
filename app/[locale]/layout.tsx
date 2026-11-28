@@ -42,6 +42,58 @@ export async function generateMetadata({
   };
 }
 
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  alternateName: ["Aldo Putra", "Aldo", "RAP", "Rayendra Aldo", "raldoputradev"],
+  url: site.origin,
+  image: `${site.origin}/rayendra-aldo-putra.png`,
+  email: `mailto:${site.email}`,
+  jobTitle: "Robotics Engineering Student",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Batam",
+    addressRegion: "Kepulauan Riau",
+    addressCountry: "ID",
+  },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "Politeknik Negeri Batam" },
+    { "@type": "HighSchool", name: "SMK Negeri 7 Batam" },
+  ],
+  memberOf: {
+    "@type": "Organization",
+    name: "BRAIL — Barelang Robotics of Artificial Intelligence Lab",
+  },
+  knowsAbout: [
+    "Robotics",
+    "Internet of Things",
+    "Embedded Systems",
+    "ESP32",
+    "Laravel",
+    "React",
+    "Flutter",
+    "AWS",
+    "Fingerprint Access Systems",
+  ],
+  sameAs: [
+    site.linkedin,
+    site.github,
+    site.instagram,
+    site.campusPbl,
+    "https://smartbrail.com",
+  ],
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: `${site.name} — Portofolio`,
+  alternateName: ["Portofolio Aldo Putra", "RAP Portfolio", "raldoputra.web.id"],
+  url: site.origin,
+  author: { "@type": "Person", name: site.name },
+};
+
 export default async function LocaleLayout({
   children,
   params,
@@ -54,6 +106,14 @@ export default async function LocaleLayout({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
+      />
       <Intro name={site.name} />
       <WaveField />
       <Navbar locale={locale} />

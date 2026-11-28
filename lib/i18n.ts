@@ -21,7 +21,7 @@ const id = {
   meta: {
     title: "Rayendra Aldo Putra — Robotic Engineer & Full-Stack Developer",
     description:
-      "Portofolio Rayendra Aldo Putra, mahasiswa D4 Teknik Robotika Politeknik Negeri Batam. Membangun sistem end-to-end: firmware ESP32, backend Laravel, aplikasi Flutter, hingga deployment.",
+      "Portofolio Rayendra Aldo Putra (Aldo / RAP), mahasiswa D4 Teknik Robotika Politeknik Negeri Batam. Membangun sistem end-to-end: firmware ESP32, backend Laravel, aplikasi Flutter, hingga deployment.",
   },
   nav: {
     home: "Beranda",
@@ -410,7 +410,7 @@ const en: typeof id = {
   meta: {
     title: "Rayendra Aldo Putra — Robotic Engineer & Full-Stack Developer",
     description:
-      "Portfolio of Rayendra Aldo Putra, Robotics Engineering student at Politeknik Negeri Batam. Building end-to-end systems: ESP32 firmware, Laravel backends, Flutter apps, to deployment.",
+      "Portfolio of Rayendra Aldo Putra (Aldo / RAP), Robotics Engineering student at Politeknik Negeri Batam. Building end-to-end systems: ESP32 firmware, Laravel backends, Flutter apps, to deployment.",
   },
   nav: {
     home: "Home",
