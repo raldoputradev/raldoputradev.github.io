@@ -78,7 +78,9 @@ export function Navbar({ locale }: { locale: Locale }) {
       <span ref={barRef} className="nv-progress" aria-hidden />
       <div className="nv-inner">
         <a href={homeHref(locale, "home")} className="nv-brand" onClick={() => goTo("home")}>
-          {site.name}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brands/rap-logo.png" alt={site.name} className="nv-logo" />
+          <span className="sr-only">{site.name}</span>
         </a>
         <nav className="nv-links" aria-label="Primary">
           {items}

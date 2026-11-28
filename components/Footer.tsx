@@ -20,7 +20,9 @@ export function Footer({ locale }: { locale: Locale }) {
         <div className="ftr-grid">
           <div className="ftr-col">
             <a href={homeHref(locale, "home")} className="ftr-brand">
-              {site.name}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brands/rap-logo.png" alt={site.name} className="ftr-logo" />
+              <span className="sr-only">{site.name}</span>
             </a>
             <p className="ftr-role">{copy.footer.tagline}</p>
             <p className="ftr-loc">{copy.footer.loc}</p>
